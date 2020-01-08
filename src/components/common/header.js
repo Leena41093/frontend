@@ -931,7 +931,7 @@ class Header extends Component {
       <div className="c-header">
         <ToastContainer />
         <div className="c-left-sect" style={{ width: "60%" }}>
-          <a><img src="/./logo3.jpg" alt="logo" style={{ width: "24%", maxHeight: "36px", display: "inline-block" }} /></a>
+          <a><img src="/./logo1.svg" alt="logo" style={{ width: "24%", maxHeight: "36px", display: "inline-block" }} /></a>
         </div>
         <div className="c-right-sect">
           <ul>
