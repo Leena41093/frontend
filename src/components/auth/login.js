@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-//import { push } from 'connected-react-router'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 import { errorToste } from '../../constant/util';
 import { ToastContainer } from 'react-toastify';
 import { loginStudent, storeStudentToken, checkAuth } from '../../actions/authAction';
-// import './bootstrap.css'
-// import './signin.css'
 import './bootstrap-spacing.css'
 import $ from 'jquery'
 class Login extends Component {
@@ -174,8 +171,6 @@ class Login extends Component {
             }
 
           })
-
-          // errorToste("Invalid User,Please Check Username and Password")
         }
 
       })
@@ -190,39 +185,20 @@ class Login extends Component {
         <div className="spacer d-none d-md-block"></div>
         <div className="container">
           <div className="cg-card row justify-content-center ">
-            <div className="col-12 col-md-6 col-lg-8 bg-maroon p-4">
-              <img src="/images/img/logo.svg" height="30" />
+            <div style={{background:"#FFFFFF"}} className="col-12 col-md-6 col-lg-8 bg-maroon p-4">
+              <img src="/images/img/logo1.svg" height="30" />
 
-              <img className="illustration mt-4" src="/images/img/illustration-large.png" />
+              <img className="illustration mt-4" src="/images/img/splashScreen.jpeg" />
             </div>
             <div className="col-12 col-md-6 col-lg-4 bg-white p-4">
               <h2>
                 Welcome!
                 </h2>
               <p className="d-none d-md-block">
-                Please login to your CleverGround account.
-                </p>
-              <p className="d-sm-block d-md-none">
-                Please download the apps to use CleverGround.
-                    </p>
+                Please login to your  account.
+              </p>
               <div className="d-none d-md-block">
-                <div className="mt-3 pt-2">
-                  <label>Role</label>
-                  <div className="d-flex text-center">
-                    <div className="select active p-3">
-                      <img src="/images/img/ecosystem_students.png" />
-                      <div className="mt-2">
-                        Student
-                                </div>
-                    </div>
-                    <div className="select active p-3 ml-3">
-                      <img src="/images/img/ecosystem_prof.png" />
-                      <div className="mt-2">
-                        Professor
-                                </div>
-                    </div>
-                  </div>
-                </div>
+                
                 <form className="mt-3">
                   <div className="form-group">
                     <label htmlFor="email">Email</label>
@@ -236,33 +212,9 @@ class Login extends Component {
                   </div>
                 </form>
 
-                <button className="btn btn-primary btn-block mt-4" onClick={this.handelSubmit.bind(this)}>Login</button>
+                <button  className="btn btn-primary btn-block mt-4" onClick={this.handelSubmit.bind(this)}>Login</button>
                 <div className="mt-2">
-                  <a className="linkbtn hover-pointer" onClick={this.getForgotPasswordPage.bind(this)}>Forgot Password?</a>
-                </div>
-              </div>
-              <div className="mt-3 pb-3 border-bottom">
-                <label>Student App</label>
-                <div className="d-flex">
-                  <img src="/images/img/app_student.png" height="36" />
-                  <a onClick={() => window.open('https://play.google.com/store/apps/details?id=com.cleverground_student_app&hl=en')} className="ml-auto linkbtn hover-pointer">
-                    <img src="/images/img/playstore.png" height="36" />
-                  </a>
-                  <a className="ml-2">
-                    <img src="/images/img/applestore.png" height="36" />
-                  </a>
-                </div>
-              </div>
-              <div className="mt-3">
-                <label>Professor App</label>
-                <div className="d-flex">
-                  <img src="/images/img/app_prof.png" height="36" />
-                  <a onClick={() => window.open('https://play.google.com/store/apps/details?id=com.cleverground_professor_app&hl=en')} className="ml-auto linkbtn hover-pointer">
-                    <img src="/images/img/playstore.png" height="36" />
-                  </a>
-                  <a className="ml-2">
-                    <img src="/images/img/applestore.png" height="36" />
-                  </a>
+                  <a className="linkbtn hover-pointer"  onClick={this.getForgotPasswordPage.bind(this)}>Forgot Password?</a>
                 </div>
               </div>
             </div>

@@ -1003,7 +1003,7 @@ class Header extends Component {
                   </div>
                   <div className="clearfix notify-scroll" style={{ overflow: "auto", height: "300px" }}>
                     <ul className="notify--opts">
-                      {/* {this.renderProfSubmissionNotifications()} */}
+                      {this.renderProfSubmissionNotifications()}
                     </ul>
                   </div>
                 </div>
