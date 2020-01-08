@@ -154,13 +154,13 @@ input[type="search"]:focus {
 }
 
 .imageselection:hover {
-    border: 1px solid #990000;
+    border: 1px solid #39CCCC;
     border-radius: 8px;
     margin: 2px;
 }
 
 .imageactive {
-    border: 1px solid #990000;
+    border: 1px solid #39CCCC;
     border-radius: 8px;
     margin: 2px;
 }
@@ -181,7 +181,7 @@ input[type="search"]:focus {
 }
 
 .attendance_statusabsent {
-    color: #990000;
+    color: #39CCCC;
     position: relative;
     display: inline-block;
     padding-left: 18px;
@@ -190,8 +190,8 @@ input[type="search"]:focus {
 }
 
 .attendance_statusabsent:before {
-    border: 1px solid #990000;
-    color: #990000;
+    border: 1px solid #39CCCC;
+    color: #39CCCC;
     font-family: "cleverground";
     content: "\33";
     position: absolute;
@@ -235,7 +235,7 @@ input[type="search"]:focus {
 .c-btn-white:hover {
     background: #FFFFFF;
     border: 0;
-    color: #990000;
+    color: #39CCCC;
     display: block;
     font-size: 13px;
     font-weight: 700;

@@ -347,7 +347,7 @@ button, a {
 	line-height: 27px;
 }
 .c-infoBlock .c-heading.col-red,
-.c-infoBlock .c-number.col-red{color: #990000;}
+.c-infoBlock .c-number.col-red{color: #39CCCC;}
 .c-infoBlock .c-heading.col-orange,
 .c-infoBlock .c-number.col-orange{color: #FF831C;}
 .c-infoBlock .c-heading.col-green,
@@ -411,7 +411,7 @@ button, a {
 .c-actionBtn{
 	background-color:transparent;
 	border:0;
-	color:#990000;
+	color:#39CCCC;
 	display:inline-block;
 	font-size:16px;
 	line-height:16px;
@@ -445,11 +445,11 @@ button, a {
 }
 
 .c-btn-large:hover {
-    background: #990000;
+    background: #39CCCC;
 }
 
 .c-btn-large.primary {
-    background: #990000;
+    background: #39CCCC;
 }
 
 .c-btn-large.clean {
@@ -466,7 +466,7 @@ button, a {
 }
 
 .c-btn, .c-btn-bordered {
-    background: #990000;
+    background: #39CCCC;
     border: 0;
     color: #FFFFFF;
     display: inline-block;
@@ -496,8 +496,8 @@ button, a {
 .c-btn.colorYellow{background-color:#FFBA00; color: #3D3F61;}
 .c-btn-bordered {
     background-color: transparent;
-    border: 1px solid #990000;
-    color: #990000;
+    border: 1px solid #39CCCC;
+    color: #39CCCC;
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -506,7 +506,7 @@ button, a {
 .link--btn {
     background-color: transparent;
     border: 0;
-    color: #990000;
+    color: #39CCCC;
     padding: 0;
     display: inline-block;
     font-size: 13px;
@@ -542,7 +542,7 @@ button, a {
 .c-btn-white {
     background: #FFFFFF;
     border: 0;
-    color: #990000;
+    color: #39CCCC;
     display: block;
     font-size: 13px;
     font-weight: 700;
@@ -598,7 +598,7 @@ button, a {
 }
 
 .c-heading-sm.card--title .c-count.filled {
-    background-color: #990000;
+    background-color: #39CCCC;
 }
 
 .cust--dd li a {
@@ -608,7 +608,7 @@ button, a {
 }
 
 .no--prof {
-    background-color: #990000;
+    background-color: #39CCCC;
     display: inline-block;
     font-style: normal;
     height: 8px;
@@ -686,7 +686,7 @@ button, a {
 }
 
 .form-group.static-fld .info-type.st-alert {
-    color: #990000;
+    color: #39CCCC;
     font-size: 13px;
 }
 
@@ -761,7 +761,7 @@ button, a {
 }
 
 .cust-m-info.color-red {
-    color: #990000;
+    color: #39CCCC;
 }
 
 .form-group.cust-fld .inline-formfld .form-control {
@@ -857,7 +857,7 @@ button, a {
 }
 
 .weekDays-selector>button.st-selected {
-    background-color: #990000;
+    background-color: #39CCCC;
     color: #FFFFFF;
 }
 
@@ -949,7 +949,7 @@ button, a {
 .c-btnRadio {
     display: block;
     height: 53px;
-    border: 1px solid #990000;
+    border: 1px solid #39CCCC;
     border-radius: 4px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -983,7 +983,7 @@ button, a {
 }
 
 .c-btnRadio>button.st-active {
-    background-color: #990000;
+    background-color: #39CCCC;
     color: #FFFFFF;
 }
 
@@ -1004,7 +1004,7 @@ button, a {
 ---------------------------------*/
 
 .c-header {
-    background-color: #990000;
+    background-color: #39CCCC;
     position: fixed;
     height: 70px;
     padding: 14px 25px;
@@ -1047,7 +1047,7 @@ button, a {
     font-family: "cleverground";
     font-size: 20px;
     display: inline-block;
-    color: #990000;
+    color: #39CCCC;
 }
 
 .c-searchBar .search__fld .txt-srch {
@@ -1610,7 +1610,7 @@ button, a {
 
 .c-card__items .card__elem.st-selected {
     background-color: #F2F2F5;
-    border-color: #990000;
+    border-color: #39CCCC;
 }
 
 .c-card__items .card__elem.st-alert {
@@ -1628,7 +1628,7 @@ button, a {
     content: '\73';
     font-size: 17px;
     line-height: 15px;
-    color: #990000;
+    color: #39CCCC;
 }
 
 .c-card__items .card__elem:not(.st-alert):hover .card__elem__setting, .c-card__items .card__elem.st-selected .card__elem__setting, .c-card__items.batch--list .card__elem .card__elem__setting {
@@ -1668,7 +1668,7 @@ button, a {
 }
 
 .sect_num .sect_num_prime {
-    color: #990000;
+    color: #39CCCC;
     display: block;
     font-size: 24px;
     font-weight: bold;
@@ -1715,7 +1715,7 @@ button, a {
 }
 
 .custome-modal .custome-modal__heading {
-    color: #990000;
+    color: #39CCCC;
     display: block;
     font-size: 12px;
     font-weight: 700;
@@ -1878,7 +1878,7 @@ label.field-checkbox input[type="checkbox"]+i:before {
 
 label.field-checkbox input[type="checkbox"]:checked+i:before {
     content: "\4b";
-    color: #990000;
+    color: #39CCCC;
 }
 
 label.field-radiobtn i {
@@ -1895,7 +1895,7 @@ label.field-radiobtn input[type="radio"]+i:before {
 
 label.field-radiobtn input[type="radio"]:checked+i:before {
     content: "\41";
-    color: #990000;
+    color: #39CCCC;
 }
 
 label input[type="radio"], label input[type="checkbox"] {
@@ -1985,7 +1985,7 @@ label.single-lined {
     content: '\73';
     font-size: 15px;
     line-height: 15px;
-    color: #990000;
+    color: #39CCCC;
 }
 
 .c-table .table td .c-state {
@@ -2057,7 +2057,7 @@ label.single-lined {
 }
 
 .c-table .bottom .pagination>.active>a {
-    background-color: #990000;
+    background-color: #39CCCC;
     height: 30px;
     width: 30px;
     padding: 5px;
@@ -2075,7 +2075,7 @@ label.single-lined {
 }
 
 .c-table .bottom .pagination>li>a {
-    color: #990000;
+    color: #39CCCC;
 }
 
 .c-table .bottom .pagination>li:not(.active)>a:hover {
@@ -2302,7 +2302,7 @@ label.single-lined {
     width: 15px;
     font-family: "cleverground";
     content: "\79";
-    color: #990000;
+    color: #39CCCC;
     font-size: 15px;
     line-height: 15px;
 }
@@ -2347,7 +2347,7 @@ label.single-lined {
 }
 
 .block-title.st-colored {
-    color: #990000;
+    color: #39CCCC;
     text-transform: uppercase;
     font-size: 13px;
 }
@@ -2425,7 +2425,7 @@ label.single-lined {
 }
 
 .item-listing.st-coloured li span {
-    color: #990000;
+    color: #39CCCC;
     font-size: 12px;
     letter-spacing: 0.12px;
     line-height: 17px;
@@ -2505,7 +2505,7 @@ label.single-lined {
 }
 
 .btn--listing .linkbtn {
-    color: #990000;
+    color: #39CCCC;
     display: block;
     padding: 4px 0;
     font-weight: 700;
@@ -2588,7 +2588,7 @@ label.single-lined {
 .h-with-btn>h3 {
     display: inline-block;
     float: left;
-    color: #990000;
+    color: #39CCCC;
     text-transform: uppercase;
     font-size: 13px;
     font-weight: 700;
@@ -2602,7 +2602,7 @@ label.single-lined {
     border: 0;
     background-color: transparent;
     float: right;
-    color: #990000;
+    color: #39CCCC;
     text-transform: uppercase;
     font-size: 11px;
     font-weight: 700;
@@ -2633,7 +2633,7 @@ label.single-lined {
 
 .c-notice-card>h3 {
     display: block;
-    color: #990000;
+    color: #39CCCC;
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.17px;
@@ -2739,7 +2739,7 @@ label.single-lined {
 .c-file-uploader .uploader__btn {
     border: 0;
     background-color: transparent;
-    color: #990000;
+    color: #39CCCC;
     display: block;
     letter-spacing: 0.17px;
     font-size: 13px;
@@ -2902,7 +2902,7 @@ label.single-lined {
 }
 
 .numberPad .num--row>button.eb-btn {
-    background-color: #990000;
+    background-color: #39CCCC;
     color: #FFFFFF;
 }
 
@@ -2930,7 +2930,7 @@ label.single-lined {
     background-color: #FFFFFF;
     height: 40px;
     line-height: 16px;
-    color: #990000;
+    color: #39CCCC;
     font-size: 14px;
     font-weight: 600;
     outline: none;
@@ -2997,7 +2997,7 @@ label.single-lined {
     display: inline-block;
     border: 0;
     background-color: transparent;
-    color: #990000;
+    color: #39CCCC;
     outline: none;
 }
 
@@ -3067,7 +3067,7 @@ label.single-lined {
 }
 
 .c-queList__sect__num {
-    background-color: #990000;
+    background-color: #39CCCC;
     position: absolute;
     height: 35px;
     width: 35px;
@@ -3503,7 +3503,7 @@ label.single-lined {
     background-color: transparent;
     border: 0;
     border-bottom: 4px solid transparent;
-    color: #990000;
+    color: #39CCCC;
     display: inline-block;
     font-size: 13px;
     font-weight: 600;
@@ -3518,10 +3518,10 @@ label.single-lined {
 }
 
 .drive_dataSect__tabs .nav-tabs>li.active>a, .drive_dataSect__tabs .nav-tabs>li.active>a:focus, .drive_dataSect__tabs .nav-tabs>li.active>a:hover {
-    color: #990000;
+    color: #39CCCC;
     border: 0;
     background-color: transparent;
-    border-bottom: 4px solid #990000;
+    border-bottom: 4px solid #39CCCC;
 }
 
 .stud_activities ul {
@@ -3549,7 +3549,7 @@ label.single-lined {
 }
 
 .stud_activities ul li .msg__info span {
-    color: #990000;
+    color: #39CCCC;
     font-weight: 600;
 }
 
@@ -3617,7 +3617,7 @@ label.single-lined {
 }
 
 .c-studcard-01.col-red {
-    background-color: #990000;
+    background-color: #39CCCC;
 }
 
 .c-studcard-01.col-orange {
@@ -3864,7 +3864,7 @@ label.single-lined {
     border: 0;
     background-color: transparent;
     display: block;
-    color: #990000;
+    color: #39CCCC;
     font-size: 13px;
     letter-spacing: 0.17px;
     line-height: 18px;
@@ -4146,7 +4146,7 @@ label.single-lined {
 }
 
 .sub_commentField__votes ul li .likeBtn.st-active .icon {
-    color: #990000;
+    color: #39CCCC;
 }
 
 .sub_commentField__votes ul li .likeBtn .icon {
@@ -4182,7 +4182,7 @@ label.single-lined {
     display: block;
     background: transparent;
     border: 0;
-    color: #990000;
+    color: #39CCCC;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.15px;
@@ -4210,7 +4210,7 @@ label.single-lined {
     display: block;
     border: 0;
     border-radius: 2px;
-    background-color: #990000;
+    background-color: #39CCCC;
     padding: 15px 30px;
     resize: none;
     float: left;
@@ -4293,7 +4293,7 @@ label.single-lined {
     padding: 0;
     line-height: 14px;
     font-size: 11px;
-    color: #990000;
+    color: #39CCCC;
     background-color: transparent;
     border: 0;
     outline: none;
@@ -4438,7 +4438,7 @@ label.single-lined {
 
 .notify--opts .notify-type.t-homework .notifi-img {
     background-color: rgba(153, 0, 0, 0.1);
-    color: #990000;
+    color: #39CCCC;
 }
 
 .notify--opts .notify-type.t-homework .notifi-img:before {
@@ -4472,7 +4472,7 @@ label.single-lined {
 }
 
 .notify-scroll .mCS-dark.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
-    background-color: #990000;
+    background-color: #39CCCC;
 }
 
 /* ------------------------------
@@ -4605,7 +4605,7 @@ label.single-lined {
 }
 
 .c-list.type-2 .st-defaulter .batch_p {
-    color: #990000;
+    color: #39CCCC;
 }
 
 /* ------------------------------
@@ -4723,11 +4723,11 @@ label.single-lined {
 
 .leftNav-navPanel .leftNav-link:hover, .leftNav-navPanel .leftNav-link.st-active {
     background-color: #DEDEE8;
-    border-right-color: #990000;
+    border-right-color: #39CCCC;
 }
 
 .leftNav-navPanel .leftNav-link .navHeading {
-    color: #990000;
+    color: #39CCCC;
     display: block;
     font-size: 13px;
     font-weight: 600;
@@ -4787,7 +4787,7 @@ label.single-lined {
     border: 0;
     border-top: 1px solid #EDEDF3;
     background-color: #F2F2F5;
-    color: #990000;
+    color: #39CCCC;
     display: block;
     height: 31px;
     padding: 6px;
@@ -4844,7 +4844,7 @@ label.single-lined {
 .tabPanel_H .nav-tabs li .tabLink:hover, .tabPanel_H .nav-tabs li.active .tabLink {
     background-color: #F3F3F7;
     border: 0;
-    border-right: 2px solid #990000;
+    border-right: 2px solid #39CCCC;
     border-radius: 0;
 }
 
@@ -4865,7 +4865,7 @@ label.single-lined {
 }
 
 .tabLink .tabText.st-red {
-    color: #990000;
+    color: #39CCCC;
 }
 
 .tabPanel_H .tab-pane {
@@ -4950,12 +4950,12 @@ label.single-lined {
 }
 
 .st-absent .attendance_status, .st-absent .attendance_status:before {
-    color: #990000;
+    color: #39CCCC;
 }
 
 .st-absent .attendance_status:before {
     content: "\33";
-    border: 1px solid #990000;
+    border: 1px solid #39CCCC;
 }
 
 .c-divTable {
@@ -5011,7 +5011,7 @@ label.single-lined {
 }
 
 .c-attendanceStatus.st-absent:before {
-    color: #990000;
+    color: #39CCCC;
     content: '\24';
 }
 
@@ -5025,7 +5025,7 @@ label.single-lined {
 ---------------------------------*/
 
 .text-colored {
-    color: #990000;
+    color: #39CCCC;
 }
 
 .text-bold {
@@ -6658,7 +6658,7 @@ input.timepicki-input {
 }
 
 .marks-list .icon {
-    color: #990000;
+    color: #39CCCC;
     position: relative;
     display: inline-block;
     font-size: 20px;
@@ -6715,7 +6715,7 @@ input.timepicki-input {
 }
 
 .c-repoCard__tabs .nav-tabs li.active a, .c-repoCard__tabs .nav-tabs li a:hover {
-    background-color: #990000 !important;
+    background-color: #39CCCC !important;
     color: #FFFFFF;
 }
 
@@ -6777,7 +6777,7 @@ input.timepicki-input {
 }
 
 .text-colored {
-    color: #990000 !important;
+    color: #39CCCC !important;
 }
 
 .text-bold {
@@ -6899,16 +6899,16 @@ input.timepicki-input {
 }
 
 .c-formWizard .st-active .lineContainer .line {
-    background-color: #990000;
+    background-color: #39CCCC;
 }
 
 .c-formWizard .st-active .lineContainer .circle {
-    border-color: #990000;
+    border-color: #39CCCC;
 }
 
 .c-formWizard .st-active .lineContainer .circle::before {
     content: '';
-    background-color: #990000;
+    background-color: #39CCCC;
     ;
     position: absolute;
     top: 50%;
@@ -6920,7 +6920,7 @@ input.timepicki-input {
 }
 
 .c-formWizard .st-active .titleContainer {
-    color: #990000;
+    color: #39CCCC;
 }
 
 /* ------------------------------
@@ -6975,7 +6975,7 @@ input.timepicki-input {
 }
 
 .c-financeContainer .financeCard .btnSelect {
-    background-color: #990000;
+    background-color: #39CCCC;
     border: 0;
     color: #FFFFFF;
     display: inline-block;
@@ -6993,11 +6993,11 @@ input.timepicki-input {
 
 .financeCard.st-selected {
     background-color: #FFEBEB;
-    border-color: #990000;
+    border-color: #39CCCC;
 }
 
 .financeCard.st-selected .title {
-    color: #990000;
+    color: #39CCCC;
 }
 
 .financeCard.st-selected .btnSelect::before {
@@ -7049,8 +7049,8 @@ input.timepicki-input {
 .btnGroup-cust .btn.c-btn.active {
     padding-left: 34px;
     background-color: #FFEBEB;
-    color: #990000;
-    border-color: #990000;
+    color: #39CCCC;
+    border-color: #39CCCC;
     box-shadow: none;
 }
 
@@ -7061,7 +7061,7 @@ input.timepicki-input {
     left: 15px;
     height: 15px;
     width: 15px;
-    color: #990000;
+    color: #39CCCC;
     font-size: 14px;
     line-height: 16px;
     content: "\31";
@@ -7240,7 +7240,7 @@ input.timepicki-input {
 .c-panelAccord .panel-title .mainTitle {
     position: relative;
     float: left;
-    color: #990000;
+    color: #39CCCC;
     font-size: 16px;
     font-weight: 700;
     letter-spacing: 0.21px;
@@ -7286,7 +7286,7 @@ input.timepicki-input {
     width: 10px;
     font-size: 16px;
     line-height: 9px;
-    color: #990000;
+    color: #39CCCC;
     font-family: "cleverground";
     content: "\74";
 }
@@ -7322,7 +7322,7 @@ input.timepicki-input {
     text-align: center;
     padding: 10px;
     line-height: 19px;
-    color: #990000;
+    color: #39CCCC;
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 0.18px;
@@ -7398,7 +7398,7 @@ input.timepicki-input {
 ---------------------------------*/
 
 .c-searchStrip {
-    background-color: #990000;
+    background-color: #39CCCC;
     padding: 17px 0;
     height: 82px;
     margin-bottom: 20px;
@@ -7407,7 +7407,7 @@ input.timepicki-input {
 }
 
 .c-searchStrip .stripImage {
-    background-color: #990000;
+    background-color: #39CCCC;
     height: 50px;
     width: 50px;
     float: left;
@@ -7471,7 +7471,7 @@ input.timepicki-input {
 }
 
 .c-searchStrip .btnBox {
-    background-color: #990000;
+    background-color: #39CCCC;
     border: 1px solid rgba(255, 255, 255, 0.3);
     box-sizing: border-box;
     color: #fff;
@@ -7499,8 +7499,8 @@ input.timepicki-input {
 
 .statusTag {
     background-color: #FFE0E0;
-    border: 1px solid #990000;
-    color: #990000;
+    border: 1px solid #39CCCC;
+    color: #39CCCC;
     display: inline-block;
     padding: 2px 12px;
     font-size: 11px;
@@ -7764,7 +7764,7 @@ input.timepicki-input {
 
 .invoiceDtls_due .dueHeading {
     display: block;
-    background-color: #990000;
+    background-color: #39CCCC;
     color: #fff;
     font-size: 14px;
     line-height: 19px;
@@ -7826,7 +7826,7 @@ input.timepicki-input {
 }
 
 .infoBox .infoBox_title {
-    color: #990000;
+    color: #39CCCC;
     display: block;
     text-transform: uppercase;
     font-size: 13px;
@@ -7897,7 +7897,7 @@ input.timepicki-input {
 }
 
 .invoiceTotalSect .invoiceDtls_list li.finalTotal .key, .invoiceTotalSect .invoiceDtls_list li.finalTotal .value {
-    color: #990000;
+    color: #39CCCC;
     font-size: 18px;
     font-weight: 700;
     line-height: 24px;
@@ -7943,11 +7943,11 @@ input.timepicki-input {
 }
 
 .borderColored {
-    border: 1px solid #990000 !important;
+    border: 1px solid #39CCCC !important;
 }
 
 .text-colored {
-    color: #990000 !important;
+    color: #39CCCC !important;
 }
 
 .text-bold {
