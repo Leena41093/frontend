@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="">
+    <link rel="shortcut icon" href="images/favicon.png">
+    <title>CleverGround - Learning Management System</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <style>
+        .form-group .form-control {
+            height: 50px !important;
+        }
+        
+        .text-over-img {
+            z-index: 1;
+            font-size: 1.2em;
+            margin-top: -100px;
+        }
+        
+        .table-wrapper-scroll-y {
+            display: block;
+            max-height: 1000px;
+            overflow-y: auto;
+            -ms-overflow-style: -ms-autohiding-scrollbar;
+        }
+        
+        .btn .btn-info .btn-block .submit {
+            color: brown;
+        }
+        
+        #messageAlert {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 17px;
+        }
+        
+        #messageAlert.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+        
+        @-webkit-keyframes fadein {
+            from {
+                bottom: 0;
+                opacity: 0;
+            }
+            to {
+                bottom: 30px;
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadein {
+            from {
+                bottom: 0;
+                opacity: 0;
+            }
+            to {
+                bottom: 30px;
+                opacity: 1;
+            }
+        }
+        
+        @-webkit-keyframes fadeout {
+            from {
+                bottom: 30px;
+                opacity: 1;
+            }
+            to {
+                bottom: 0;
+                opacity: 0;
+            }
+        }
+        
+        @keyframes fadeout {
+            from {
+                bottom: 30px;
+                opacity: 1;
+            }
+            to {
+                bottom: 0;
+                opacity: 0;
+            }
+        }
+    </style>
+
+    <script type="text/javascript">
+        function validate() {
+            var isValidForm = 0;
+
+            var numericExpression = /^[0-9]+$/;
+            if (registration.firstname.value.length == 0) {
+                document.getElementById('errfirstname').innerHTML = "Please Enter Valid FirstName";
+                document.registration.firstname.focus();
+                isValidForm = 1;
+            } else {
+                document.getElementById('errfirstname').innerHTML = "";
+            }
+            if (registration.lastname.value.length == 0) {
+                document.getElementById('errlastname').innerHTML = "Please Enter Valid LastName";
+                document.registration.lastname.focus();
+                isValidForm = 1;
+            } else {
+                document.getElementById('errlastname').innerHTML = "";
+            }
+            var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if (!document.registration.email.value.match(mailformat)) {
+                document.getElementById('erremail').innerHTML = "Please Enter Valid Email";
+                document.registration.email.focus()
+                isValidForm = 1;
+            } else {
+                document.getElementById('erremail').innerHTML = "";
+            }
+            if (document.getElementById('emergencycontact').value) {
+                if (document.getElementById('emergencycontact').value.length != 10) {
+
+                    document.getElementById('errEmergencyContact').innerHTML = "Please Enter 10 Digit Number";
+                    isValidForm = 1;
+                } else {
+                    document.getElementById('errEmergencyContact').innerHTML = "";
+                }
+            }
+            if (document.getElementById('pwd').value == "") {
+                document.getElementById('errpassword').innerHTML = "Please Enter Valid Password";
+                document.getElementById('pwd').focus();
+                isValidForm = 1;
+            } else {
+                document.getElementById('errpassword').innerHTML = "";
+            }
+            var x = document.getElementById("acknowledgement").checked;
+            if (x == false) {
+                document.getElementById('errAcknowledgement').innerHTML = "Please Check Terms of Use";
+                document.getElementById('acknowledgement').focus();
+                isValidForm = 1;
+            } else if (x == true) {
+                document.getElementById('errAcknowledgement').innerHTML = "";
+            }
+            if (isValidForm == 1) {
+                return false;
+            }
+            return (true);
+        }
+
+        function clearMessages() {
+
+            if (registration.firstname.value.length != 0) {
+                document.getElementById('errfirstname').innerHTML = "";
+            }
+            if (registration.lastname.value.length != 0) {
+                document.getElementById('errlastname').innerHTML = "";
+            }
+            if (registration.email.value.length != 0) {
+
+                document.getElementById('erremail').innerHTML = "";
+            }
+            if (registration.emergencycontact.value != 0) {
+
+                document.getElementById('errEmergencyContact').innerHTML = "";
+            }
+            if (document.getElementById('pwd').value != "") {
+
+                document.getElementById('errpassword').innerHTML = "";
+            }
+            var x = document.getElementById("acknowledgement").checked;
+            if (x == true) {
+
+                document.getElementById('errAcknowledgement').innerHTML = "";
+            }
+        }
+
+        function myFunction() {
+            if (!validate()) {
+                return false;
+            }
+            var firstname = document.getElementById("firstname").value;
+
+            var lastname = document.getElementById("lastname").value;
+            var email = document.getElementById("email").value;
+            // var number = document.getElementById("number").value;
+            var password = document.getElementById("pwd").value;
+            var dob = document.getElementById("dob").value;
+            var college = document.getElementById("college").value;
+            var address = document.getElementById("address").value;
+            var emergencycontact = document.getElementById("emergencycontact").value;
+            var emergencycontactname = document.getElementById("contactname").value;
+
+
+            var dateString = dob;
+            var n;
+
+            if (dateString) {
+                var dateObject = new Date(dateString)
+                n = dateObject.toISOString();
+            } else {
+                nn = new Date();
+                y = nn.getFullYear();
+                m = nn.getMonth() + 1;
+                d = nn.getDate();
+                document.getElementById("dob").innerHTML = m + "/" + d + "/" + y;
+                n = nn.toISOString();
+
+
+            }
+
+
+            function setAlert(message) {
+                var x = document.getElementById("messageAlert");
+                document.getElementById("messageAlert").innerHTML = message
+                x.className = "show";
+                setTimeout(function() {
+                    x.className = x.className.replace("show", "");
+                }, 5000);
+            }
+
+
+            var baseUrl = document.URL;
+            var str = baseUrl;
+            var str2 = str.indexOf("/registration");
+            var res = baseUrl.substring(0, str2);
+
+
+            var url = new URL(baseUrl);
+
+            var institude_id = url.searchParams.get("institude_id");
+            var branch_id = url.searchParams.get("branch_id");
+            var user_type = url.searchParams.get("user_type");
+            var mobile = url.searchParams.get("mobile")
+            var firstname = url.searchParams.get("firstName");
+            var lastname = url.searchParams.get("lastName");
+
+            firstname = document.getElementById("firstname").value;
+
+            lastname = document.getElementById("lastname").value;
+            var email = document.getElementById("email").value;
+            // var number = document.getElementById("number").value;
+            var password = document.getElementById("pwd").value;
+            var dob = document.getElementById("dob").value;
+            var college = document.getElementById("college").value;
+            var address = document.getElementById("address").value;
+            var emergencycontact = document.getElementById("emergencycontact").value;
+            var emergencycontactname = document.getElementById("contactname").value;
+            var regUrl = res + '/institude/' + institude_id + '/branch/' + branch_id + '/registerProfessor/';
+
+            let data = {
+                "firstname": firstname,
+                "lastname": lastname,
+                "username": "",
+                "email": email,
+                "mobile": mobile,
+                "address": address,
+                "DOB": n,
+                "emergency_contact_name": emergencycontactname,
+                "emergency_contact": emergencycontact,
+                "college": college,
+                "designation": "",
+                "user_type": user_type,
+                // "role_type": "INSTITUTE",
+                // "isProfessorAdmin": false,
+                "password": password
+            }
+
+
+            $.ajax({
+                type: 'POST',
+                url: regUrl,
+                data: JSON.stringify(data),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function(data) {
+
+                    if (data && data.status == 200) {
+                        if (user_type == 'PROFESSOR') {
+                            var type = 'faculty'
+                            location.href = "registrationSuccessfull2.html?type=" + encodeURIComponent(type);
+                        } else {
+                            location.href = "registrationSuccessfull2.html";
+                        }
+
+                    } else if (data && data.status == 500) {
+                        setAlert(data.message);
+
+                    }
+                },
+                error: function(data) {
+
+                },
+            });
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- <nav class="navbar navbar-expand-sm bg-light navbar-light" style="background-color: darkred;margin-bottom: -3px;min-height: 30px;">
+
+    </nav> -->
+
+    <div class="container-fluid" style="padding-right: 0px;padding-left: 0px;">
+        <img src="images/bg_pattern_dark.png" alt="uuuu" class="img-responsive" style=" background-color: brown;width:100%;margin: 0 auto;position:relative;">
+        <div style="position:absolute; 
+           top: 25%;
+           left: 40%;
+           
+          
+           transform: translate(-50%, -50%);">
+            <h4 style="font-size: 25px; color:white;margin-top: -41%;margin-bottom: 25%">Register On</h4>
+            <div tyle="margin-top:-20px;">
+                <img src="images/logo5.png" alt="uuu" id="image2" class="img-responsive" style=" max-height: 150px;max-width: 200px; margin-left: -2px!important;margin: 0 auto;margin-top:-20px;position:absolute;">
+            </div>
+
+        </div>
+    </div>
+
+    <div>
+        <div class="container-fluid center-div " style="padding-right: 0px; padding-left:0px;">
+
+            <form method='POST' id='registration' name='registration' class="table-wrapper-scroll-y" style=" padding-right: 20px;padding-left: 20px;background-color: white;border: 2px;margin: 25px auto;  ">
+                <!-- <div id="messageAlert"></div> -->
+                <div class="form-group">
+                    <label for="name">First Name<sup style="color:red;">*</sup></label>
+                    <input type="text" class="form-control" id="firstname" placeholder="First Name" name="firstname" onkeyup="clearMessages()">
+                    <span id="errfirstname" style="color: red"></span>
+
+                </div>
+                <div class="form-group">
+                    <label for="name">Last Name<sup style="color:red;">*</sup></label>
+                    <input type="text" class="form-control" id="lastname" placeholder="Last Name" name="lastname" onkeyup="clearMessages()">
+                    <span id="errlastname" style="color: red"></span>
+
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Email Id<sup style="color:red;">*</sup> <span style="font-weight:1">(User Name)</span></label>
+                    <input type="email" class="form-control" id="email" placeholder=" Email" name="email" onkeyup="clearMessages()">
+                    <span id="erremail" style="color: red"></span>
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Phone No<sup style="color:red;">*</sup></label>
+                    <input type="number" class="form-control" id="number" placeholder=" Number" name="number">
+                    <span id="errnumber" style="color: red"></span>
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Password<sup style="color:red;">*</sup></label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Password" name="pwd" onkeyup="clearMessages()">
+                    <span id="errpassword" style="color: red"></span>
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Date Of Birth</label>
+                    <input type="date" class="form-control" id="dob" placeholder=" DOB" name="dob">
+                </div>
+                <div class="form-group">
+                    <label for="pwd">College</label>
+                    <input type="text" class="form-control" id="college" placeholder=" College" name="college">
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Address</label>
+                    <input type="text" class="form-control" id="address" placeholder=" Address" name="Address">
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Emergency Contact Name</label>
+                    <input type="text" class="form-control" id="contactname" placeholder="Emergency Contact Name" name="guardian name">
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Emergency Contact</label>
+                    <input type="number" class="form-control" id="emergencycontact" placeholder="Emergency Contact" name="Emergency Contact" onkeyup="clearMessages()">
+                    <span id="errEmergencyContact" style="color: red"></span>
+                </div>
+                <div class="text-center">
+                    <span><input type="checkbox" style="font-size: 18px;" id="acknowledgement" onchange="clearMessages()" name="termandconditions"> I have read and accept <a id="termsofusepageforprofessor" href="termsofuseforacknowledgement.html">Terms of Use</a></span>
+                    <br/>
+                    <span id="errAcknowledgement" style="color: red"></span>
+                </div>
+
+
+
+            </form>
+
+            <div class="container-fluid bg-danger text-center " onclick="myFunction();" style="background-color: darkred;margin-bottom: -2px;height: 50px;">
+                <p style="color:white;margin-top: 15px;">Register</p>
+
+
+            </div>
+            <div id="messageAlert"></div>
+        </div>
+    </div>
+    <script>
+        var baseUrl = document.URL;
+        document.getElementById('termsofusepageforprofessor').setAttribute('href', 'termsofuseforacknowledgement.html?baseurl=' + baseUrl);
+        var url = new URL(baseUrl);
+
+        var mobile = url.searchParams.get("mobile")
+        var firstname = url.searchParams.get("firstName");
+        var lastname = url.searchParams.get("lastName");
+        document.getElementById("number").value = mobile;
+        document.getElementById("firstname").value = firstname;
+        document.getElementById("lastname").value = lastname;
+    </script>
+
+
+</body>

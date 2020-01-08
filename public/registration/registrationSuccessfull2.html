@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="">
+    <link rel="shortcut icon" href="images/favicon.png">
+    <title>CleverGround - Learning Management System</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script id="script_id">
+        window.onload = function() {
+            var url = document.location.href,
+                params = url.split('?')[1].split('&'),
+                data = {},
+                tmp;
+            for (var i = 0, l = params.length; i < l; i++) {
+                tmp = params[i].split('=');
+                data[tmp[0]] = tmp[1];
+            }
+            var type = data.type;
+
+            document.getElementById("usertype").value = type;
+
+            if (type == 'student') {
+                var url = 'https://play.google.com/store/apps/details?id=com.cleverground_student_app&hl=en'
+                document.getElementById('hreflink').href = url
+            } else if (type == 'faculty') {
+                var url1 = 'https://play.google.com/store/apps/details?id=com.cleverground_professor_app&hl=en'
+                document.getElementById('hreflink').href = url1
+            }
+        }
+    </script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <input type="text" id="usertype" hidden>
+
+    <!-- <nav class="navbar navbar-expand-sm bg-light navbar-light" style="background-color: darkred;margin-bottom: -3px; min-height: 30px;">
+
+    </nav> -->
+    <div class="container-fluid" style="padding-right: 0px;padding-left: 0px;">
+        <img src="images/bg_pattern_dark.png" alt="uuuu" class="img-responsive" style=" background-color: brown;width:100%;margin: 0 auto;position:relative;">
+        <div style="position:absolute; 
+           top: 25%;
+           left: 40%;
+         
+           transform: translate(-50%, -50%);">
+
+            <!-- <p style="font-size: 35px; color:white; "> Clever<span style="font-size: 35px; color:gold; font-weight:bold">Ground</span>
+            </p> -->
+            <div>
+                <img src="images/logo4.png" alt="uuu" id="image2" class="img-responsive" style=" max-height: 150px;max-width: 200px; margin-left: -20px!important;margin-top: -20px; margin: 0 auto;position:absolute;">
+            </div>
+            <div style="margin-top: 60px">
+
+                <p style="font-size: 20px;color:white;"><span>Registration Successful!</span></p>
+                <h5 style="font-size: 15px;color:white;padding-bottom: 25px;">Please download the cleverground app to start using the platform</h5>
+            </div>
+
+        </div>
+
+        <div style="margin-bottom: 50px;">
+
+
+            <a id="hreflink"><img src="images/download.png" alt="uuuu" class="img-responsive" style=" background-color: white;margin: 0 auto;height:70px;position:relative;margin-top: 20px;width:250px;"></a>
+            <a id="play-store-link1"><img src="images/apple.png" alt="uuuu" class="img-responsive" style=" background-color: white;margin: 0 auto;height:70px;position:relative;margin-top: 25px;width:250px;"></a>
+
+        </div>
+    </div>
+
+</body>

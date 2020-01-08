@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+html {
+    --maroon: #990001;
+    --yellow: #FECC04;
+    --darkmaroon: #7A090B;
+    --darkyellow: #FFB727;
+    --text: #3D3F61;
+    --grey-text: #7577A2;
+    --white: #fff;
+    --grey: #B9BAC9;
+    --primary: var(--maroon);
+}
+
+body, html {
+    margin: 0;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Montserrat', sans-serif; */
+    font-size: 13px;
+    text-rendering: optimizeLegibility;
+    font-weight: 300;
+    letter-spacing: 0.2px;
+    background: var(--white);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.75;
+    width: 100%;
+    height: 100%;
+}
+
+.pattern-bg {
+    background: url(/images/img/pattern.png) repeat;
+}
+
+.cg-card {
+    border-radius: 5px;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.07);
+    border: none;
+    overflow: hidden;
+}
+
+@media (max-width: 992px) {
+    .cg-card {
+        border-radius: 0;
+    }
+}
+
+.bg-maroon {
+    background: var(--maroon);
+}
+
+.bg-white {
+    background: var(--white);
+}
+
+.spacer {
+    width: 100%;
+    height: 50px;
+}
+
+.select {
+    flex-grow: 1;
+    border: 1px solid var(--grey);
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--grey-text);
+    border-radius: 4px;
+}
+
+.select.active {
+    border: 1px solid var(--maroon);
+    color: var(--maroon);
+}
+
+.select img {
+    filter: grayscale(1);
+    opacity: 0.5;
+}
+
+.select.active img {
+    filter: grayscale(0);
+    opacity: 1;
+}
+
+.form-group {
+    margin-bottom: 0;
+    margin-top: 16px;
+}
+
+.form-control {
+    font-size: 14px;
+}
+
+label {
+    margin-bottom: 4px;
+    color: var(--grey-text);
+}
+
+.btn-primary {
+    background: var(--maroon);
+    border-color: var(--maroon);
+    color: var(--white);
+    font-weight: 400;
+    outline: none;
+    font-size: 14px;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary:visited, .btn-primary:active:focus {
+    background: var(--darkmaroon) !important;
+    border-color: var(--darkmaroon) !important;
+    color: var(--white) !important;
+}
+
+a {
+    color: var(--grey-text);
+}
+
+a:hover, a:focus, a:active {
+    color: var(--text);
+}
+
+.illustration {
+    width: 100%;
+}
