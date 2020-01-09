@@ -16,7 +16,6 @@ class Login extends Component {
       isEmailVisible: false,
       isPasswordVisible: false,
       flag: true
-
     }
   }
 
@@ -180,7 +179,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="pattern-bg">
+      <div >
         <ToastContainer />
         <div className="spacer d-none d-md-block"></div>
         <div className="container">
@@ -211,7 +210,6 @@ class Login extends Component {
                     {this.state.isPasswordVisible ? <label className="help-block" style={{ color: "red" }} >Please Enter Valid Password</label> : <div></div>}
                   </div>
                 </form>
-
                 <button  className="btn btn-primary btn-block mt-4" onClick={this.handelSubmit.bind(this)}>Login</button>
                 <div className="mt-2">
                   <a className="linkbtn hover-pointer"  onClick={this.getForgotPasswordPage.bind(this)}>Forgot Password?</a>
