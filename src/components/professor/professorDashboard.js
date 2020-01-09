@@ -7,11 +7,14 @@ import { getBranches } from '../../actions/sidebarAction';
 import moment from 'moment';
 import { ProfilePicModal } from '../common/profilepic';
 import { ToastContainer } from 'react-toastify';
+import Highcharts from "highcharts";
+import dataModule from "highcharts/modules/data";
 import $ from 'jquery';
 import 'bootstrap-datepicker';
 import { successToste } from '../../constant/util';
 import { ClipLoader } from 'react-spinners';
 import { css } from 'react-emotion';
+dataModule(Highcharts);
 const override = css`
     display: block;
     margin: 0 auto;
@@ -60,41 +63,43 @@ class ProfessorDashboard extends Component {
   }
 
   componentDidMount() {
-    this.setState({ instituteId: this.props.instituteId },()=>{
-      if(this.props.instituteId != null){
-    const data = {
-      institudeId: this.props.instituteId,
-      branchId: this.props.branchId,
-      token: this.props.token,
-    }
-    this.props.checkProfileSelectedOrNot(data).then(() => {
-      var res = this.props.profileSelectedOrNot;
-      if (res && res.data.status == 200) {
-        if (res.data.response.profileIncomplete == true) {
-          $(document).ready(function () {
-            $("#openmodal").click();
-          });
+    this.renderIncomeExpenceGraph();
+    this.renderPieGraph();
+    this.setState({ instituteId: this.props.instituteId }, () => {
+      if (this.props.instituteId != null) {
+        const data = {
+          institudeId: this.props.instituteId,
+          branchId: this.props.branchId,
+          token: this.props.token,
         }
-      }
-    })
-    if (this.props.branchId) {
-      this.getDashbord(this.props.branchId)
-    }
+        this.props.checkProfileSelectedOrNot(data).then(() => {
+          var res = this.props.profileSelectedOrNot;
+          if (res && res.data.status == 200) {
+            if (res.data.response.profileIncomplete == true) {
+              $(document).ready(function () {
+                $("#openmodal").click();
+              });
+            }
+          }
+        })
+        if (this.props.branchId) {
+          this.getDashbord(this.props.branchId)
+        }
 
-    else {
-      const data = {
-        instituteId: this.props.instituteId,
-        token: this.props.token,
-      }
-      this.props.getBranches(data).then(() => {
-        if (this.props.branches && this.props.branches.length > 0) {
-          const branch = this.props.branches[0];
-          this.getDashbord(branch.branch_id)
+        else {
+          const data = {
+            instituteId: this.props.instituteId,
+            token: this.props.token,
+          }
+          this.props.getBranches(data).then(() => {
+            if (this.props.branches && this.props.branches.length > 0) {
+              const branch = this.props.branches[0];
+              this.getDashbord(branch.branch_id)
+            }
+          })
         }
-      })
-    }
-  }
-  });
+      }
+    });
     if ($(".c-inline-calender").length) {
       $('.c-inline-calender').datepicker({
         startDate: new Date()
@@ -103,7 +108,7 @@ class ProfessorDashboard extends Component {
     $('#myDatePicker').datepicker().on('changeDate', function (date) {
 
     })
-    
+
   }
 
   getDashbord(branchId) {
@@ -225,53 +230,74 @@ class ProfessorDashboard extends Component {
   }
 
   renderProfessorbatchDashbord() {
-    let batchDetail = this.state.professorDashboard;
-
-    if (batchDetail && batchDetail.length > 0) {
-      return batchDetail.map((cls, index) => {
-
-        return (<div key={"key" + index} className="grid-block" >
-          <div className="block-title">{cls.class_name}</div>
-          <div className="block-cardGrid">
-            {cls.batches.map((batch, index) => {
-              return (<div key={"batchkey" + index} className="cardgrid--item" onClick={this.professorBatchDashboardPage.bind(this, batch)}>
-                <div className="cardgrid--item-header">
-                  <h2 className="c-heading-sm card--title">
-                    {batch.subject_name}
-                    {batch.homeWorkSubmissionCount || batch.quizSubmissionCount > 0 ? <span className="c-count pull-right st-colored">NEW</span> : ''}
+    return (
+      <div className="row">
+        <div className="col-sm-4">
+          <div className="card">
+            <div className="row">
+              <div className="cardgrid--item" onClick={this.professorBatchDashboardPage.bind(this)}>
+                <div className="col-sm-4" style={{ paddingLeft: "0px" }}>
+                  <img src="./../images/employee.png" width="60px" height="60px" />
+                </div>
+                <div className="col-sm-8">
+                  <div className="cardgrid--item-header pull-right">
+                    <h2 className="c-heading-sm card--title">
+                      Employees
                   </h2>
-                  <span>{batch.batch_name}</span>
-                </div>
-
-                <div className="cardgrid--item-section">
-                  <ul className="item-listing">
-                    <li>
-                      <i className="icon cg-users"></i>
-                      <span>{batch.studentCount} Students</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="cardgrid--item-section">
-                  <ul className="item-listing st-coloured">
-                    <li>
-                      {batch.homeWorkSubmissionCount != 0 ? <i className="icon cg-glasses-with-circular-lenses"></i> : ""}
-                      {batch.homeWorkSubmissionCount != 0 ? <span>{batch.homeWorkSubmissionCount} New Homeworks Submitted</span> : ""}
-                    </li>
-                    <li>
-                      {batch.quizSubmissionCount != 0 ? <i className="icon cg-bulb"></i> : ""}
-                      {batch.quizSubmissionCount != 0 ? <span>{batch.quizSubmissionCount} New Quizzes Submitted</span> : ""}
-                    </li>
-                  </ul>
+                    <h1 style={{ fontWeight: "40px", fontSize: "40px", margin: "0px" }}>80</h1>
+                  </div>
                 </div>
               </div>
-              )
-            })
-            }
+            </div>
           </div>
+
         </div>
-        )
-      });
-    }
+        <div className="col-sm-4">
+          <div className="card">
+            <div className="row">
+              <div className="cardgrid--item" onClick={this.professorBatchDashboardPage.bind(this)}>
+                <div className="col-sm-4" style={{ paddingLeft: "0px" }}>
+                  <img src="./../images/analytics.png" width="60px" height="60px" />
+                </div>
+                <div className="col-sm-8">
+                  <div className="cardgrid--item-header pull-right">
+                    <h2 className="c-heading-sm card--title">
+                      Projects
+                </h2>
+                    <h1 style={{ fontWeight: "40px", fontSize: "40px", margin: "0px" }}>80</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div className="col-sm-4">
+          <div className="card">
+            <div className="row">
+              <div className="cardgrid--item" onClick={this.professorBatchDashboardPage.bind(this)}>
+                <div className="col-sm-4" style={{ paddingLeft: "0px" }}>
+                  <img src="./../images/complaints.png" width="60px" height="60px" />
+                </div>
+                <div className="col-sm-8">
+                  <div className="cardgrid--item-header pull-right">
+                    <h2 className="c-heading-sm card--title">
+                      Complaints
+                </h2>
+                    <h1 style={{ fontWeight: "40px", fontSize: "40px", margin: "0px" }}>80</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    )
+
+
   }
 
   renderTimetable() {
@@ -294,32 +320,250 @@ class ProfessorDashboard extends Component {
     }
   }
 
+  renderPieGraph() {
+    // Make monochrome colors
+    var pieColors = (function() {
+      var colors = [],
+        base = Highcharts.getOptions().colors[0],
+        i;
+
+      for (i = 0; i < 10; i += 1) {
+        // Start out with a darkened base color (negative brighten), and end
+        // up with a much brighter color
+        colors.push(
+          Highcharts.Color(base)
+            .brighten((i - 3) / 7)
+            .get()
+        );
+      }
+      return colors;
+    })();
+
+    // Build the chart
+    Highcharts.chart("pieGraph", {
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: "pie"
+      },
+      title: {
+        text: ""
+      },
+      tooltip: {
+        pointFormat: "<b>Rs.{point.y}</b> <p>({point.percentage:.1f}%)</p>"
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: "pointer",
+          colors: pieColors,
+          dataLabels: {
+            enabled: true,
+            format: "<b>{point.name}</b><br>Rs.{point.y}",
+            distance: -50,
+            filter: {
+              property: "percentage",
+              operator: ">",
+              value: 4
+            }
+          }
+        }
+      },
+      series: [
+        {
+          name: "Share",
+          data: [
+            { name: "Income", y: 11000 },
+            { name: "Expense", y: 4000}
+          ]
+        }
+      ]
+    });
+  }
+
+  renderIncomeExpenceGraph() {
+    let { barGraphData } = this.state;
+    Highcharts.chart({
+      chart: {
+        type: "column",
+        renderTo: "ResorcesGraph"
+      },
+      title: {
+        text: ""
+      },
+
+      xAxis: {
+        type: "category"
+      },
+      yAxis: {
+        title: {
+          text: ""
+        }
+      },
+      legend: {
+        enabled: false
+      },
+      plotOptions: {
+        series: {
+          borderWidth: 0,
+          dataLabels: {
+            enabled: true,
+            format: "{point.name}"
+          }
+        }
+      },
+
+      tooltip: {
+        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+        pointFormat:
+          '<span style="color:{point.color}">{point.name}</span>: <b>Rs.{point.y:.2f}</b> of total<br/>'
+      },
+
+      series: [
+        {
+          name: "",
+          colorByPoint: false,
+          data: [
+            {
+              name: "Assign Employees",
+              y: 14
+
+            },
+            {
+              name: "Free Employees",
+              y: 10
+            }
+          ]
+        }
+      ]
+    });
+  }
+
   render() {
     return (
       <div>
         <button id="openmodal" data-toggle="modal" data-target="#newprofilepic" hidden></button>
         <ToastContainer />
         <div className="c-container clearfix">
-          <div className="clearfix">
-            <div className="divider-container">
-              <div className="divider-block text--left">
-                <span className="c-heading-sm">Professor</span>
-                <span className="c-heading-lg">Dashboard</span>
-              </div>
-            </div>
-          </div>
-
           <div className="c-container__data st--blank">
-            <div className="clearfix row">
-              <div className="col-md-8 col-sm-6 col-xs-12">
-                {this.renderProfessorbatchDashbord()}
-              </div>
-            </div>
+            {this.renderProfessorbatchDashbord()}
+          </div>
+        </div>
+        <div className="c-container">
+        <div className="row">
+          <div className="col-sm-6">
+          <div className="card">
+          <h2 className="c-heading-sm card--title">
+              Resorces Data
+          </h2>
+            <div id="ResorcesGraph" style={{ height: "200px" }}></div>
+          </div>
+        </div>
+        <div className="col-sm-6">
+        <div className="card">
+          <h2 className="c-heading-sm card--title">
+              Income Expense Data
+          </h2>
+            <div id="pieGraph" style={{ height: "200px" }}></div>
           </div>
 
+        {/* <div className="divider-block" id="pieGraph" /> */}
         </div>
-        <ProfilePicModal onSelectProfile={(data) => this.saveProfile(data)} userType={this.props.userType} {...this.props} />
+        </div>
       </div>
+      <div className="c-container">
+        <div className="row">
+          <div className="col-sm-6">
+          <div className="card">
+          <h2 className="c-heading-sm card--title">
+             Pending Complaints
+          </h2>
+          <div className="news--listing">
+            <ul style={{height:"200px",overflowY:"auto"}}>
+          <li>
+              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
+              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Lorem Ipsum is simply d"}</span>
+              <span className="news__info"></span>
+            </li>
+            <li>
+              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
+              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
+              <span className="news__info"></span>
+            </li>
+            <li>
+              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
+              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
+              <span className="news__info"></span>
+            </li>
+            <li>
+              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
+              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
+              <span className="news__info"></span>
+            </li>
+            <li>
+              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
+              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
+              <span className="news__info"></span>
+            </li>
+            <li>
+              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
+              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
+              <span className="news__info"></span>
+            </li>
+            <li>
+              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
+              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
+              <span className="news__info"></span>
+            </li>
+            <li>
+              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
+              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
+              <span className="news__info"></span>
+            </li>
+            <li>
+              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
+              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
+              <span className="news__info"></span>
+            </li>
+            <li>
+              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
+              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
+              <span className="news__info"></span>
+            </li>
+            <li>
+              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
+              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
+              <span className="news__info"></span>
+            </li>
+            <li>
+              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
+              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
+              <span className="news__info"></span>
+            </li>
+            <li>
+              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
+              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
+              <span className="news__info"></span>
+            </li>
+            <li>
+              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
+              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
+              <span className="news__info"></span>
+            </li>
+            <li>
+              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
+              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
+              <span className="news__info"></span>
+            </li>
+            </ul>
+          </div>
+        </div>
+        </div>
+      </div>
+      </div>
+      <ProfilePicModal onSelectProfile={(data) => this.saveProfile(data)} userType={this.props.userType} {...this.props} />
+      </div >
     )
   }
 }
