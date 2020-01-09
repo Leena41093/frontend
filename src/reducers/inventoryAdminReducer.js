@@ -21,6 +21,7 @@ import {
       }
       case GET_ADMINDASHBOARDDETAILS:{
         return{
+          ...state,
           adminDashboardDetail: action.payload
         }
       }
