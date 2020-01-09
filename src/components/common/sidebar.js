@@ -544,123 +544,12 @@ class Sidebar extends Component {
       if (this.state.isProfessorAdmin) {
         return (
           <div>
-
-            <div className="sidebar__dd dropdown">
-              <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {this.state.currentInstitute.slice(0, 5) + "..." + this.getCurrentBranchName()}
-                <i className="icon cg-angle-down"></i>
-              </button>
-              <ul className="dropdown-menu cust--dd" aria-labelledby="dLabel">
-                {this.renderBranchOption()}
-              </ul>
-            </div>
-
-            <div className="menu--accord">
-              <div className="panel-group" id="Administrator" role="tablist">
-                <div className="panel panel-default">
-                  <div className="panel-heading" role="tab">
-                  </div>
-                  <div id="menuDrive" className="panel-collapse collapse in" role="tabpanel">
-                    <div className="panel-body">
-                      <ul className="sidebar--submenus">
-                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'Drive')}>
-                          <a className={this.getLiCss('adminBoard')}>
-                            <i className="icon cg-line-chart"></i>Clever Drive
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div  className="scrollbar hover-pointer" id="style1" >
-            
-            <div className="menu--accord ">
-              <div className="panel-group" id="Professor" role="tablist">
-                <div className="panel panel-default">
-                  <div className="panel-heading" role="tab">
-                    <a role="button" className="panel-title" data-toggle="collapse" data-parent="#Professor" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      Professor <i className="icon cg-angle-down"></i>
-                    </a>
-                  </div>
-                  <div id="collapseOne" className="panel-collapse collapse in" role="tabpanel">
-                    <div className="panel-body">
-                      <ul className="sidebar--submenus">
-                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'dashboard')}>
-                          <a className={this.getLiCss('dashboard')}>
-                            <i className="icon cg-dashboard"></i>Dashboard
-                          </a>
-                        </li>
-                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'timetable')}>
-                          <a className={this.getLiCss('timetable')}>
-                            <i className="icon cg-calendar"></i>Timetable
-                          </a>
-                        </li>
-                        
-                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'profattendance')}>
-                          <a className={this.getLiCss('profattendance')}>
-                            <i className="icon cg-notebook"></i>Attendance
-                          </a>
-                        </li>
-                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'pastyear')}>
-                          <a className={this.getLiCss('pastyear')}>
-                            <i className="icon cg-clock"></i>PastYear
-                          </a>
-                        </li>
-
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-           
-             {/* </Scrollbars > */}
-            </div>
-          </div>
-        )
-      } else {
-        return (
-          <div>
-
-            <div className="sidebar__dd dropdown">
-              <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {this.state.currentInstitute.slice(0, 5) + "..." + this.getCurrentBranchName()}
-                <i className="icon cg-angle-down"></i>
-              </button>
-              <ul className="dropdown-menu cust--dd" aria-labelledby="dLabel">
-                {this.renderBranchOption()}
-              </ul>
-            </div>
-
-            <div className="menu--accord">
-              <div className="panel-group" id="Administrator" role="tablist">
-                <div className="panel panel-default">
-                  <div className="panel-heading" role="tab">
-                  </div>
-                  <div id="menuDrive" className="panel-collapse collapse in" role="tabpanel">
-                    <div className="panel-body">
-                      <ul className="sidebar--submenus">
-                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'Drive')}>
-                          <a className={this.getLiCss('adminBoard')}>
-                            <i className="icon cg-line-chart"></i>Clever Drive
-                      </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
             <div className="menu--accord st-opened">
               <div className="panel-group" id="Professor" role="tablist">
                 <div className="panel panel-default">
                   <div className="panel-heading" role="tab">
                     <a role="button" className="panel-title" data-toggle="collapse" data-parent="#Professor" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      Professor <i className="icon cg-angle-down"></i>
+                      Admin <i className="icon cg-angle-down"></i>
                     </a>
                   </div>
                   <div id="collapseOne" className="panel-collapse collapse in" role="tabpanel">
@@ -673,21 +562,85 @@ class Sidebar extends Component {
                         </li>
                         <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'timetable')}>
                           <a className={this.getLiCss('timetable')}>
-                            <i className="icon cg-calendar"></i>Timetable
+                            <i className="icon cg-calendar"></i>Employee Management
                           </a>
                         </li>
                         
                         <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'profattendance')}>
                           <a className={this.getLiCss('profattendance')}>
-                            <i className="icon cg-notebook"></i>Attendance
+                            <i className="icon cg-notebook"></i>Accessories
                           </a>
                         </li>
                         <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'pastyear')}>
                           <a className={this.getLiCss('pastyear')}>
-                            <i className="icon cg-clock"></i>PastYear
+                            <i className="icon cg-clock"></i>Projects
                           </a>
                         </li>
+                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'pastyear')}>
+                          <a className={this.getLiCss('pastyear')}>
+                            <i className="icon cg-clock"></i>Finance
+                          </a>
+                        </li>
+                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'pastyear')}>
+                          <a className={this.getLiCss('pastyear')}>
+                            <i className="icon cg-clock"></i>Complaints
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
+        )
+      } else {
+        return (
+          <div>
+
+            <div className="menu--accord st-opened">
+              <div className="panel-group" id="Professor" role="tablist">
+                <div className="panel panel-default">
+                  <div className="panel-heading" role="tab">
+                    <a role="button" className="panel-title" data-toggle="collapse" data-parent="#Professor" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Admin <i className="icon cg-angle-down"></i>
+                    </a>
+                  </div>
+                  <div id="collapseOne" className="panel-collapse collapse in" role="tabpanel">
+                    <div className="panel-body">
+                      <ul className="sidebar--submenus">
+                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'dashboard')}>
+                          <a className={this.getLiCss('dashboard')}>
+                            <i className="icon cg-dashboard"></i>Dashboard
+                          </a>
+                        </li>
+                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'timetable')}>
+                          <a className={this.getLiCss('timetable')}>
+                            <i className="icon cg-calendar"></i>Employee Management
+                          </a>
+                        </li>
+                        
+                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'profattendance')}>
+                          <a className={this.getLiCss('profattendance')}>
+                            <i className="icon cg-notebook"></i>Accessories
+                          </a>
+                        </li>
+                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'pastyear')}>
+                          <a className={this.getLiCss('pastyear')}>
+                            <i className="icon cg-clock"></i>Projects
+                          </a>
+                        </li>
+                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'pastyear')}>
+                          <a className={this.getLiCss('pastyear')}>
+                            <i className="icon cg-clock"></i>Finance
+                          </a>
+                        </li>
+                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'pastyear')}>
+                          <a className={this.getLiCss('pastyear')}>
+                            <i className="icon cg-clock"></i>Complaints
+                          </a>
+                        </li>
                       </ul>
                     </div>
                   </div>

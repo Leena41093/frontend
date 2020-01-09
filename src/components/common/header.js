@@ -961,53 +961,9 @@ class Header extends Component {
               </div>
             </li>
 
-            {(this.props.userType != "ADMIN" && this.props.userType != "INSTITUTE") ?
-              <li className="dropdown">
+           
 
-                {this.state.totalCount ?
-                  <div style={{
-                    color: '#FF0000', position: 'absolute', top: 1, right: 1, margin: -1, minWidth: 18, height: 18, borderRadius: 9,
-                    alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFCC01', textAlign: "center", fontSize: 12
-                  }}>
-                    <label style={{ color: "white", textAlign: "center" }}>{this.state.totalCount}</label>
-                  </div>
-                  : ""}
-                <button onClick={this.renderOnclick.bind(this)} className="user-notify" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="icon cg-ring"></i></button>
-
-                <div className="dropdown-menu cust--dd notifications--dd" aria-labelledby="dLabel">
-                  <div className="notify--dd_header">
-
-                    <span>Notifications ({this.state.NotificationCount})</span>
-                  </div>
-                  <div className="clearfix notify-scroll" style={{ overflow: "auto", height: "300px" }}>
-                    <ul className="notify--opts" >
-                      {this.renderNotifications()}
-                    </ul>
-                  </div>
-                </div>
-              </li> : ""}
-
-            {(this.props.userType != "ADMIN" && this.props.userType != "INSTITUTE") ?
-              <li className="dropdown">
-                {this.state.totalNotiSubCount ? <div style={{
-                  color: '#FF0000', position: 'absolute', top: 1, right: 1, margin: -1, minWidth: 18, height: 18, borderRadius: 9,
-                  alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFCC01', textAlign: "center", fontSize: 12
-                }}>
-                  <label style={{ color: "white", textAlign: "center" }}>{this.state.totalNotiSubCount}</label>
-                </div> : ""}
-                <button onClick={this.onGetSubmission.bind(this)} className="user-notify" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="icon cg-controls"></i></button>
-
-                <div className="dropdown-menu cust--dd notifications--dd" aria-labelledby="dLabel">
-                  <div className="notify--dd_header">
-                    <span>Submission Notifications ({this.state.submissionNotiCount})</span>
-                  </div>
-                  <div className="clearfix notify-scroll" style={{ overflow: "auto", height: "300px" }}>
-                    <ul className="notify--opts">
-                      {this.renderProfSubmissionNotifications()}
-                    </ul>
-                  </div>
-                </div>
-              </li> : ""}
+            
 
             {/* {this.renderNewEnquiryButton()} */}
           </ul>

@@ -314,18 +314,6 @@ class ProfessorDashboard extends Component {
               <div className="col-md-8 col-sm-6 col-xs-12">
                 {this.renderProfessorbatchDashbord()}
               </div>
-
-              <div className="col-md-4 col-sm-6 col-xs-12" style={{ color: "black" }}>
-                <div className="block-title st-colored">TIMETABLE</div>
-
-                <div className="c-inline-calender" id="myDatePicker" ></div>
-                <div >
-                  <div className="clearfix">
-                    <div className="block-title-sm">{moment(this.state.timeTableDate).format('DD MMM YYYY')}</div>
-                    {this.renderTimetable()}
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
 
