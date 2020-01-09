@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getProfessorDashboard, professorTimeTableInfo } from '../../actions/professorActions';
 import { checkProfileSelectedOrNot, profilePicUpload, getProfilePic } from '../../actions/index';
+import {adminDashboardDetail} from '../../actions/inventoryAdminAction'
 import { getBranches } from '../../actions/sidebarAction';
 import moment from 'moment';
 import { ProfilePicModal } from '../common/profilepic';
@@ -445,6 +446,12 @@ class ProfessorDashboard extends Component {
       <div>
         <button id="openmodal" data-toggle="modal" data-target="#newprofilepic" hidden></button>
         <ToastContainer />
+        <div className="divider-container">
+            <div className="divider-block text--left">
+              <span className="c-heading-lg">Dashboard</span>
+              {/* {(this.state.studentBatch.length == 0&& this.state.commentActivities.length==0) ? <span style={{color:"red"}}>There is no data available</span>:""} */}
+            </div>
+          </div>
         <div className="c-container clearfix">
           <div className="c-container__data st--blank">
             {this.renderProfessorbatchDashbord()}
@@ -568,7 +575,7 @@ class ProfessorDashboard extends Component {
   }
 }
 
-const mapStateToProps = ({ app, professor, sidebar, auth }) => ({
+const mapStateToProps = ({ app, professor, sidebar, auth,inventoryAdmin }) => ({
   professorDashboard: professor.professorDashboard,
   branchId: app.branchId,
   instituteId: app.institudeId,
@@ -579,13 +586,14 @@ const mapStateToProps = ({ app, professor, sidebar, auth }) => ({
   token: auth.token,
   profileSelectedOrNot: app.profileSelectedOrNot,
   profileUpload: app.profileUpload,
-  getProfilePicture: app.getProfilePicture
+  getProfilePicture: app.getProfilePicture,
+  admindashboarddetailsData : inventoryAdmin.adminDashboardDetail
 })
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators({
     getProfessorDashboard, getBranches, professorTimeTableInfo, checkProfileSelectedOrNot,
-    profilePicUpload, getProfilePic
+    profilePicUpload, getProfilePic,adminDashboardDetail
   },
     dispatch
   )
