@@ -112,7 +112,9 @@ const initialState = {
 	professorEmailCheck: null,
 	studentEmailCheck: null,
 	classManagerFlow: null,
-	updateclasses: null
+	updateclasses: null,
+	companyId:null,
+	AdminbranchId:null,
 }
 
 export default function app(state = initialState, action) {
@@ -127,7 +129,9 @@ export default function app(state = initialState, action) {
 				subjects: [],
 				batches: [],
 				branchId: action.branchId,
-				institudeId: action.institudeId
+				institudeId: action.institudeId,
+				companyId:1,
+				AdminbranchId:1,
 			}
 		case GET_SUBJECTS:
 			return {

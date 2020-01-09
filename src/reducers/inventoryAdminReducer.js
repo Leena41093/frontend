@@ -6,7 +6,9 @@ import {
   
   const initialState = {
     financeInstituteDetail: null,
-    adminDashboardDetail:null
+    adminDashboardDetail:null,
+    companyId:1,
+    adminbranchId:1,    
   };
   
   export default function inventoryAdmin(state = initialState, action) {

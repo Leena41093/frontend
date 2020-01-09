@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getProfessorDashboard, professorTimeTableInfo } from '../../actions/professorActions';
 import { checkProfileSelectedOrNot, profilePicUpload, getProfilePic } from '../../actions/index';
-import {adminDashboardDetail} from '../../actions/inventoryAdminAction'
+import {getAdminDashboardData} from '../../actions/inventoryAdminAction'
 import { getBranches } from '../../actions/sidebarAction';
 import moment from 'moment';
 import { ProfilePicModal } from '../common/profilepic';
@@ -575,7 +575,7 @@ class ProfessorDashboard extends Component {
   }
 }
 
-const mapStateToProps = ({ app, professor, sidebar, auth,inventoryAdmin }) => ({
+const mapStateToProps = ({ app, professor, sidebar, auth, inventoryAdmin }) => ({
   professorDashboard: professor.professorDashboard,
   branchId: app.branchId,
   instituteId: app.institudeId,
@@ -593,7 +593,7 @@ const mapStateToProps = ({ app, professor, sidebar, auth,inventoryAdmin }) => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators({
     getProfessorDashboard, getBranches, professorTimeTableInfo, checkProfileSelectedOrNot,
-    profilePicUpload, getProfilePic,adminDashboardDetail
+    profilePicUpload, getProfilePic,getAdminDashboardData
   },
     dispatch
   )

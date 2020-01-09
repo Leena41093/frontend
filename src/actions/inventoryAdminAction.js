@@ -29,13 +29,14 @@ export function getFinanceClassData(data) {
 }
 
 export function getEmployeeList(data) {
+    console.log("da",data)
     const API_CONFIG = {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     // 'Authorization': 'JWT ' + data.token
-    //   }
+      headers: {
+        'Content-Type': 'application/json',
+        // 'Authorization': 'JWT ' + data.token
+      }
     };
-    let URL = `http://35.154.43.111:6000/company/1/branch/1/employeeList/`;
+    let URL = `http://35.154.43.111:9000/company/${data.companyId}/branch/${data.branch_id}/employeeList/`;
     let payload = data.payload
   
     return axios.post(URL, payload, API_CONFIG)
