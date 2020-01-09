@@ -647,7 +647,7 @@ class FacultyDetail extends Component {
             <div className="divider-block text--left">
 
 
-              <div className="form-group cust-fld">
+              {/* <div className="form-group cust-fld">
                 <label >Access Rights</label><br />
                 <label className="custome-field field-checkbox" style={{ marginRight: "10px", display: "inline-block" }}>
                   <input type="checkbox" name="check-one" id="check-Professor" value="checkone" checked={this.state.professor} />
@@ -660,7 +660,7 @@ class FacultyDetail extends Component {
                 </label>
                 <br />
                 {this.state.isRoleSelected ? <label className="help-block" style={{ color: "red" }}>Please Select Designation</label> : <br />}
-              </div>
+              </div> */}
             </div>
             <div class="divider-block text--right">
               <button class="c-btn grayshade" onClick={this.backButton.bind(this)}>Back</button>
@@ -686,7 +686,6 @@ class FacultyDetail extends Component {
                   // <div ><button style={{ color: "white", marginTop: "20px" }} className=" prime c-btn btn" onClick={this.onSaveChanges.bind(this)} ><i class="icon cg-envelope-o"></i>&nbsp;&nbsp;Invite Faculty</button></div>
                   // : <div ><button style={{ color: "white" }} className=" prime c-btn btn" onClick={this.onSendInivitationAgain.bind(this)} ><i class="icon cg-envelope-o"></i>Invite Again</button></div>
                 }
-
               </div>
             </div>
             {(this.state.professor) || (this.state.professor && this.state.admin) ? <div className="c-card">
@@ -702,7 +701,7 @@ class FacultyDetail extends Component {
               </div>
               <AddStudentBatchModel professorId={this.state.Professor.professorDetail.professor_id} onAddStudentBatch={(data) => { this.onProfessorBatchAdd(data) }} {...this.props} />
             </div> : ""}
-            {this.state.professor || (this.state.professor && this.state.admin) ? <div class="c-card">
+            {/* {this.state.professor || (this.state.professor && this.state.admin) ? <div class="c-card">
               <div class="c-card__title">
                 <span class="c-heading-sm card--title">
                   Activity
@@ -718,7 +717,7 @@ class FacultyDetail extends Component {
                   </div>
                 </div>
               </div>
-            </div> : ""}
+            </div> : ""} */}
           </div>
         </div>
         <DeleteModal flag={this.state.deleteObj} onDelete={(val) => { this.onDeleteEntry(val) }}   {...this.props} />

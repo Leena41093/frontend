@@ -159,7 +159,6 @@ class Sidebar extends Component {
         break;
       }
       case 'enquiry': {
-
         this.props.history.push('/app/enquiry-detail');
         break;
       }
@@ -182,6 +181,18 @@ class Sidebar extends Component {
   handleProfessorOptionClick(route) {
 
     switch (route) {
+      case 'facultyDirectory': {
+        this.props.history.push('/app/faculty-directory');
+        break;
+      }
+      case 'enquiry': {
+        this.props.history.push('/app/enquiry-detail');
+        break;
+      }
+      case 'studentDirectory': {
+        this.props.history.push('/app/student-directory');
+        break;
+      }
       case 'dashboard': {
         this.props.history.push('/app/dashboard');
         break;
@@ -200,6 +211,10 @@ class Sidebar extends Component {
       }
       case 'timetable': {
         this.props.history.push('/app/professor-timetable');
+        break;
+      }
+      case 'finance': {
+        this.props.history.push('/app/finance-dashboard')
         break;
       }
       case 'Drive': {
@@ -413,10 +428,10 @@ class Sidebar extends Component {
     //                   <li className="linkbtn hover-pointer" onClick={this.handleStudentOptionClick.bind(this, 'dashboard')}>
     //                     <a className={this.getLiCss('dashboard')}>
     //                       <i className="icon cg-dashboard"></i>Dashboard
-    //                   {/* <span className="c-count">5</span> */}
+    //                    <span className="c-count">5</span> 
     //                     </a>
     //                   </li>
-    //                   {/* <li className="linkbtn hover-pointer" onClick={this.handleStudentOptionClick.bind(this, 'homework')}>
+    //                    <li className="linkbtn hover-pointer" onClick={this.handleStudentOptionClick.bind(this, 'homework')}>
     //                     <a className={this.getLiCss('homework')}>
     //                       <i className="icon cg-glasses-with-circular-lenses"></i>Homework
     //                 </a>
@@ -430,7 +445,7 @@ class Sidebar extends Component {
     //                     <a className={this.getLiCss('notes')}>
     //                       <i className="icon cg-notebook"></i>Notes
     //                 </a>
-    //                   </li> */}
+    //                   </li> 
     //                   <li className="linkbtn hover-pointer" onClick={this.handleStudentOptionClick.bind(this, 'timetable')}>
     //                     <a className={this.getLiCss('timetable')}>
     //                       <i className="icon cg-calendar"></i>Timetable
@@ -489,11 +504,6 @@ class Sidebar extends Component {
                 <div id="menuAdministrator" className="panel-collapse collapse in" role="tabpanel">
                   <div className="panel-body">
                     <ul className="sidebar--submenus">
-                      {/* <li onClick={this.handleAdminOptionClick.bind(this, 'adminBoard')}>
-                      <a className={this.getLiCss('adminBoard')}>
-                        <i className="icon cg-line-chart"></i>Admin Board
-                    </a>
-                    </li> */}
                       <li className="linkbtn hover-pointer" onClick={this.handleAdminOptionClick.bind(this, 'classManager')}>
                         <a className={this.getLiCss('classManager')}>
                           <i className="icon cg-calendar"></i>Class Manager
@@ -560,13 +570,13 @@ class Sidebar extends Component {
                             <i className="icon cg-dashboard"></i>Dashboard
                           </a>
                         </li>
-                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'timetable')}>
+                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'facultyDirectory')}>
                           <a className={this.getLiCss('timetable')}>
                             <i className="icon cg-calendar"></i>Employee Management
                           </a>
                         </li>
                         
-                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'profattendance')}>
+                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'studentDirectory')}>
                           <a className={this.getLiCss('profattendance')}>
                             <i className="icon cg-notebook"></i>Accessories
                           </a>
@@ -576,12 +586,12 @@ class Sidebar extends Component {
                             <i className="icon cg-clock"></i>Projects
                           </a>
                         </li>
-                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'pastyear')}>
+                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, "finance")}>
                           <a className={this.getLiCss('pastyear')}>
                             <i className="icon cg-clock"></i>Finance
                           </a>
                         </li>
-                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'pastyear')}>
+                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'enquiry')}>
                           <a className={this.getLiCss('pastyear')}>
                             <i className="icon cg-clock"></i>Complaints
                           </a>
@@ -615,13 +625,13 @@ class Sidebar extends Component {
                             <i className="icon cg-dashboard"></i>Dashboard
                           </a>
                         </li>
-                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'timetable')}>
+                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'facultyDirectory')}>
                           <a className={this.getLiCss('timetable')}>
                             <i className="icon cg-calendar"></i>Employee Management
                           </a>
                         </li>
                         
-                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'profattendance')}>
+                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'studentDirectory')}>
                           <a className={this.getLiCss('profattendance')}>
                             <i className="icon cg-notebook"></i>Accessories
                           </a>
@@ -631,12 +641,12 @@ class Sidebar extends Component {
                             <i className="icon cg-clock"></i>Projects
                           </a>
                         </li>
-                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'pastyear')}>
+                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'finance')}>
                           <a className={this.getLiCss('pastyear')}>
                             <i className="icon cg-clock"></i>Finance
                           </a>
                         </li>
-                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'pastyear')}>
+                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'enquiry')}>
                           <a className={this.getLiCss('pastyear')}>
                             <i className="icon cg-clock"></i>Complaints
                           </a>

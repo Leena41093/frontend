@@ -7,13 +7,13 @@ import Sidebar from '../components/common/sidebar';
 // import FreshChat from '../components/common/freshchat';
 // import ClassManager from '../components/administration/classManager';
 // import BatchDetails from '../components/administration/batchDetails';
-// import StudentDirectory from '../components/administration/studentDirectory';
-// import StudentDetails from '../components/administration/studentDetails';
-// import FacultyDirectory from '../components/administration/facultyMgrDirectory';
-// import FacultyDetail from '../components/administration/facultyDetail';
-// import EnquiryDetails from '../components/administration/enquiryDetails';
-// import addNewFaculty from '../components/administration/addNewFaculty';
-// import addNewStudent from '../components/administration//addNewStudent';
+import StudentDirectory from '../components/administration/studentDirectory';
+import StudentDetails from '../components/administration/studentDetails';
+import FacultyDirectory from '../components/administration/facultyMgrDirectory';
+import FacultyDetail from '../components/administration/facultyDetail';
+import EnquiryDetails from '../components/administration/enquiryDetails';
+import addNewFaculty from '../components/administration/addNewFaculty';
+import addNewStudent from '../components/administration//addNewStudent';
 import HomeworkDirectory from '../components/professor/homeworkDirectory';
 import NewHomeworkDetails from '../components/professor/newHomeworkDetails';
 import HomeworkDetails from '../components/professor/homeworkDetails';
@@ -69,7 +69,7 @@ import AttendanceDirectory from '../components/administration/attendanceDirector
 // import StudentAttendanceDetails from '../components/student/studentAttendanceDetails';
 // import StudentReports from '../components/student/studentReport';
 import PdfView from '../components/professor/pdfView';
-// import FinanceDashboard from '../components/finance/financeDashboard/financeDashboard';
+import FinanceDashboard from '../components/finance/financeDashboard/financeDashboard';
 // import CreateNewInvoice from '../components/finance/financeDashboard/createNewInvoice';
 // import AllStudentsFinanceDirectory from '../components/finance/financeDashboard/allStudentsFinanceDirectory';
 // import StudentFinanceDetail from '../components/finance/financeDashboard/studentFinanceDetail'
@@ -93,15 +93,17 @@ export const App = ({ match, history }) => {
           {/* <ToastContainer /> */}
 
         <Route exact path={match.url} component={Dashboard}/>  
-        {/* <Route path={`${match.url}/class-manager`} component={ClassManager}/> */}
-        {/* <Route path={`${match.url}/batch-details`} component={BatchDetails}/> */}
-        {/* <Route path={`${match.url}/student-directory`} component={StudentDirectory}/> */}
-        {/* <Route path={`${match.url}/student-detail`} component={StudentDetails} />
         <Route path={`${match.url}/faculty-directory`} component={FacultyDirectory} />
         <Route path={`${match.url}/faculty-detail`} component={FacultyDetail} />
-        <Route path={`${match.url}/enquiry-detail`} component={EnquiryDetails} /> */}
-        {/* <Route path={`${match.url}/new-faculty`} component={addNewFaculty} />
-        <Route path={`${match.url}/new-student`} component={addNewStudent} /> */}
+        <Route path={`${match.url}/new-faculty`} component={addNewFaculty} />
+        {/* <Route path={`${match.url}/class-manager`} component={ClassManager}/> */}
+        {/* <Route path={`${match.url}/batch-details`} component={BatchDetails}/> */}
+        <Route path={`${match.url}/student-directory`} component={StudentDirectory}/>
+        <Route path={`${match.url}/student-detail`} component={StudentDetails} />
+        
+        
+        <Route path={`${match.url}/enquiry-detail`} component={EnquiryDetails} /> 
+        <Route path={`${match.url}/new-student`} component={addNewStudent} />
         <Route path={`${match.url}/homework-directory`} component={HomeworkDirectory} />
         <Route path={`${match.url}/newhomework-detail`} component={NewHomeworkDetails } />
         <Route path={`${match.url}/homework-detail`} component={HomeworkDetails } />
@@ -156,17 +158,17 @@ export const App = ({ match, history }) => {
         {/* <Route path={`${match.url}/student-attendance`} component={StudentAttendanceDetails} />
         <Route path={`${match.url}/student-report`} component={StudentReports} />  */}
         <Route path={`${match.url}/pdf-view`} component={PdfView} />  
-        {/* <Route path={`${match.url}/finance-dashboard`} component={FinanceDashboard} />
-        <Route path={`${match.url}/create-new-invoices`} component={CreateNewInvoice} /> */}
-        {/* <Route path={`${match.url}/all-student-finance-directory`} component={AllStudentsFinanceDirectory} /> */}
-        {/* <Route path={`${match.url}/student-finance-detail`} component={StudentFinanceDetail} /> */}
-        {/* <Route path={`${match.url}/finance-feestructureselection`} component={FinanceFeeStructureSelection} /> */}
-        {/* <Route path={`${match.url}/create-financefee`} component={CreateFinanceFee} /> */}
-        {/* <Route path={`${match.url}/finance-information`} component={FinanceInforamtion} /> */}
-        {/* <Route path={`${match.url}/finance-paymentmethodconfig`} component={PaymentMethodConfiguration} />        */}
-        {/* <Route path={`${match.url}/finance-unpaidinvoicereciept`} component={UnpaidInvoiceReciept} />
-        <Route path={`${match.url}/finance-paidinvoicereciept`} component={PaidInvoiceReciept} /> */}
-        {/* <Route path={`${match.url}/student-finance-dashboard`} component={StudentFinanceDashboard} /> */}
+         <Route path={`${match.url}/finance-dashboard`} component={FinanceDashboard} />
+        {/* <Route path={`${match.url}/create-new-invoices`} component={CreateNewInvoice} /> 
+          <Route path={`${match.url}/all-student-finance-directory`} component={AllStudentsFinanceDirectory} /> 
+          <Route path={`${match.url}/student-finance-detail`} component={StudentFinanceDetail} /> 
+         <Route path={`${match.url}/finance-feestructureselection`} component={FinanceFeeStructureSelection} />
+         <Route path={`${match.url}/create-financefee`} component={CreateFinanceFee} /> 
+         <Route path={`${match.url}/finance-information`} component={FinanceInforamtion} /> 
+         <Route path={`${match.url}/finance-paymentmethodconfig`} component={PaymentMethodConfiguration} />        
+         <Route path={`${match.url}/finance-unpaidinvoicereciept`} component={UnpaidInvoiceReciept} />
+        <Route path={`${match.url}/finance-paidinvoicereciept`} component={PaidInvoiceReciept} /> 
+      <Route path={`${match.url}/student-finance-dashboard`} component={StudentFinanceDashboard} />  */}
         
         </div>
       </div>

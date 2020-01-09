@@ -1052,7 +1052,7 @@ class StudentDetail extends Component {
           </div>
           <div className="divider-container">
             <div className="divider-block text--left">
-              <span className="c-heading-lg">Student Details</span>
+              <span className="c-heading-lg">Accessories Details</span>
             </div>
             <div className="divider-block text--right">
               <button className="c-btn grayshade" onClick={this.backButton.bind(this)}>Back</button>

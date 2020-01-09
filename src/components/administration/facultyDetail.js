@@ -364,10 +364,6 @@ class FacultyDetail extends Component {
             <span>{ClassDetail.subject_name}</span>
             <span>{this.state.day[ClassDetail.day]} {ClassDetail.start_time}{" to "}{ClassDetail.end_time}</span>
           </a>
-          {/* <div className="card__elem__setting">
-           
-            <button className="act-delete" data-toggle="modal" data-target="#quizSubmit" onClick={this.onDeleteModel.bind(this, "deleteBatchProfessor", ClassDetail.batch_id)}></button>
-          </div> */}
         </li>
       )
     })
@@ -583,7 +579,7 @@ class FacultyDetail extends Component {
         <div className="clearfix">
           <div className="divider-container">
             <div className="divider-block text--left">
-              <div className="form-group cust-fld">
+              {/* <div className="form-group cust-fld">
                 <label >Access Rights</label><br />
                 {pro.designation != "INSTITUTE" ?
                   <label htmlFor="check-all" className="custome-field field-checkbox" style={{ marginRight: "10px", display: "inline-block" }}>
@@ -596,7 +592,7 @@ class FacultyDetail extends Component {
                   <i></i> <span>Admin</span>
                 </label>
                 {this.state.isRoleSelected ? <label className="help-block" style={{ color: "red" }}>Please Select Designation</label> : <br />}
-              </div>
+              </div> */}
             </div>
             <div className="divider-block text--right">
               <button className="c-btn grayshade" onClick={this.backButton.bind(this)}>Back</button>
@@ -628,7 +624,7 @@ class FacultyDetail extends Component {
               </div>
               <AddStudentBatchModel professorId={this.state.Professor.professorDetail.professor_id} onAddStudentBatch={(data) => { this.onProfessorBatchAdd(data) }} {...this.props} />
             </div> : ""}
-            {pro.designation != 'INSTITUTE' ? <div className="c-card">
+            {/* {pro.designation != 'INSTITUTE' ? <div className="c-card">
               <div className="c-card__title">
                 <span className="c-heading-sm card--title">
                   Activity
@@ -644,10 +640,10 @@ class FacultyDetail extends Component {
                   </div>
                 </div>
               </div>
-            </div> : ""}
+            </div> : ""} */}
           </div>
         </div>
-        <DeleteModal flag={this.state.deleteObj} onDelete={(val) => { this.onDeleteEntry(val) }}   {...this.props} />
+        {/* <DeleteModal flag={this.state.deleteObj} onDelete={(val) => { this.onDeleteEntry(val) }}   {...this.props} /> */}
       </div>
     )
   }

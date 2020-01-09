@@ -267,17 +267,17 @@ class FacultyDirectory extends Component {
           <div className="divider-container">
             <div className="divider-block text--left">
               <span className="c-heading-sm">Administration</span>
-              <span className="c-heading-lg">Faculty Manager</span>
+              <span className="c-heading-lg">Employee Manager</span>
             </div>
             <div className="divider-block text--right">
-              <button className="c-btn prime" onClick={this.onEditProfessor.bind(this)}  >Add New Faculty</button>
+              <button className="c-btn prime" onClick={this.onEditProfessor.bind(this)}  >Add New Employee</button>
             </div>
           </div>
           <div className="divider-container">
             <div className="divider-block text--left">
               <div className="form-group cust-fld">
-                <label>Search Faculty</label>
-                <input  type="search" className="form-control" value={this.state.searchText} onChange={this.serachProfessor.bind(this)} placeholder="Enter Faculty Name" />
+                <label>Search Employee</label>
+                <input  type="search" className="form-control" value={this.state.searchText} onChange={this.serachProfessor.bind(this)} placeholder="Enter Employee Name" />
               </div>
             </div>
             <div className="divider-block text--right">

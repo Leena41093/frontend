@@ -1122,7 +1122,7 @@ class StudentDetail extends Component {
                     </div>
                     <div className="divider-container">
                         <div className="divider-block text--left">
-                            <span className="c-heading-lg">Student Details</span>
+                            <span className="c-heading-lg">Accessories Details</span>
                         </div>
                         <div className="divider-block text--right">
                             <button className="c-btn grayshade" onClick={this.backButton.bind(this)}>Back</button>
@@ -1151,7 +1151,7 @@ class StudentDetail extends Component {
                             </div>
                         </div>
 
-                        <div className="c-card">
+                        {/* <div className="c-card">
                             <div className="c-card__title">
                                 <span className="c-heading-sm card--title">
                                     Batches
@@ -1164,9 +1164,9 @@ class StudentDetail extends Component {
                                 <button className="c-btn-large primary btn" disabled={this.state.disableAddBatchButton}   data-toggle="modal" data-target="#addBatch">+ Add Batches</button>
                             </div>
                             <AddStudentBatchModel onAddStudentBatch={(data) => { this.onStudentBatchAdd(data) }} {...this.props} />
-                        </div>
+                        </div> */}
 
-                        <div className="c-card" >
+                        {/* <div className="c-card" >
                         {this.state.disableAddFinanceButton == false ?
                             <div className="c-card__title">
                                 {this.state.studentPaymentList.length == 0 ? <div className="clearfix margin25-bottom">
@@ -1186,8 +1186,8 @@ class StudentDetail extends Component {
                                 {/* <span className="c-heading-sm card--title">
                                  Activity
                                 </span> */}
-                            </div>:""}
-                            <div className="clearfix" >
+                            {/* </div>:""} */}
+                           {/* <div className="clearfix" >
                                 <div className="c-card__title">
 
                                     <span className="c-heading-sm card--title">
@@ -1238,7 +1238,7 @@ class StudentDetail extends Component {
                   </div> */}
 
 
-                                    {this.state.paymentDetailsList && this.state.paymentDetailsList.length > 0 ?
+                                  {/*  {this.state.paymentDetailsList && this.state.paymentDetailsList.length > 0 ?
                                         <div className="clearfix">
                                             <div className="form-group static-fld">
                                                 <label>Previous Payments</label>
@@ -1274,7 +1274,7 @@ class StudentDetail extends Component {
                                             <div className="clearfix">
                                                 <div className="form-group static-fld">
                                                     {/* <label>Unpaid Payments</label> */}
-                                                    <div class="c-paymentsHist">
+                                                    {/* <div class="c-paymentsHist">
                                                         <ul>
                                                             {this.renderTableRow()}
 
@@ -1294,7 +1294,8 @@ class StudentDetail extends Component {
 
                                 {unPaidInstallments && unPaidInstallments.length > 0 ? <button className="c-btn-large primary" onClick={this.getData.bind(this, unPaidInstallments[0])} data-toggle="modal" data-target="#addPayment">+ Add Payments</button> : ""}
                             </div>
-                        </div>
+                        </div> */}
+                     
                     </div>
                 </div>
        

@@ -446,12 +446,12 @@ class EnquiryDetails extends Component {
           <div className="divider-container">
             <div className="divider-block text--left">
               <span className="c-heading-sm">Administration</span>
-              <span className="c-heading-lg">Enquiries</span>
+              <span className="c-heading-lg">Complaints</span>
             </div>
-            <div className="divider-block text--right">
+            {/* <div className="divider-block text--right">
               <button className="c-btn prime" data-toggle="modal" data-target="#addnewEnquiryPage"
                 onClick={this.onEditEnquiry.bind(this, false, false)}>Add New Enquiry</button>
-            </div>
+            </div> */}
           </div>
         </div>
 

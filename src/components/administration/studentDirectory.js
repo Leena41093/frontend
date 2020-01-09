@@ -463,17 +463,17 @@ class StudentDirectory extends Component {
             <div className="divider-container">
               <div className="divider-block text--left  test">
                 <span className="c-heading-sm">Administration</span>
-                <span className="c-heading-lg">Student Directory</span>
+                <span className="c-heading-lg">Accessories Directory</span>
               </div>
               <div className="divider-block text--right">
-                <button className="c-btn prime" onClick={this.onNewStudent.bind(this)} >Add New Student</button>
+                <button className="c-btn prime" onClick={this.onNewStudent.bind(this)} >Add New Accessories</button>
               </div>
             </div>
             <div className="divider-container">
               <div className="divider-block text--left">
                 <div className="form-group cust-fld">
-                  <label>Search Student</label>
-                  <input type="search" className="form-control" value={this.state.searchText} onChange={this.serachStudent.bind(this)} placeholder="Enter Student Name" />
+                  <label>Search Accessories</label>
+                  <input type="search" className="form-control" value={this.state.searchText} onChange={this.serachStudent.bind(this)} placeholder="Enter Accessories Name" />
                 </div>
               </div>
               <div className="divider-block text--right">
@@ -497,7 +497,7 @@ class StudentDirectory extends Component {
                     </div>
                   </div>
                 </div> */}
-                <div className="inline--flex">
+                {/* <div className="inline--flex">
                   <div className="form-group cust-fld">
                     <label>Class Name</label>
                     <div className="dropdown">
@@ -535,7 +535,7 @@ class StudentDirectory extends Component {
                       </ul>
                     </div>
                   </div>
-                </div>
+                </div> */}
 
               </div>
             </div>
