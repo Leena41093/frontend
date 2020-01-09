@@ -2,61 +2,62 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import $ from "jquery";
 import { bindActionCreators } from 'redux';
-import {getProfessorsList,invitationSend, getIsProfessorAdmin, getEmailOfFacultyDirectory} from '../../actions/index';
+import { getProfessorsList, invitationSend, getIsProfessorAdmin, getEmailOfFacultyDirectory } from '../../actions/index';
+import { getEmployeeList } from '../../actions/inventoryAdminAction';
 import { errorToste, successToste } from '../../constant/util';
 import { ToastContainer, toast } from 'react-toastify';
 let table = '0';
 
 class FacultyDirectory extends Component {
   constructor(props) {
-    
+
     super(props);
     this.state = {
       professorList: [],
       searchText: '',
       count: 0,
-      branchId:0,
-      instituteId:0
+      branchId: 0,
+      instituteId: 0
     }
   }
 
-  componentWillReceiveProps(nextProps){
-    let id  = localStorage.getItem("instituteid");
-		if(id == nextProps.instituteId){
+  componentWillReceiveProps(nextProps) {
+    let id = localStorage.getItem("instituteid");
+    if (id == nextProps.instituteId) {
 
-    if(this.state.instituteId != nextProps.instituteId){
-      this.setState({instituteId:nextProps.instituteId},()=>{
-        var datas = {
-          institudeId: this.props.instituteId,
-          branchId: this.props.branchId,
-          token: this.props.token,
-        }
-        this.props.getIsProfessorAdmin(datas).then(()=>{
-         let res = this.props.ProfessorAdmin;
-         if(res && res.data.status == 200 && res.data.response.isProfessorAdmin == false ){
-         this.props.history.push("/app/dashboard");
-         }
-         else{
-          if(this.state.branchId != nextProps.branchId){
-            this.setState({branchId:nextProps.branchId},()=>{
-              table.fnDraw()
-            });
+      if (this.state.instituteId != nextProps.instituteId) {
+        this.setState({ instituteId: nextProps.instituteId }, () => {
+          var datas = {
+            institudeId: this.props.instituteId,
+            branchId: this.props.branchId,
+            token: this.props.token,
           }
-         }
+          this.props.getIsProfessorAdmin(datas).then(() => {
+            let res = this.props.ProfessorAdmin;
+            if (res && res.data.status == 200 && res.data.response.isProfessorAdmin == false) {
+              this.props.history.push("/app/dashboard");
+            }
+            else {
+              if (this.state.branchId != nextProps.branchId) {
+                this.setState({ branchId: nextProps.branchId }, () => {
+                  table.fnDraw()
+                });
+              }
+            }
+          })
         })
-      })
-		}
-		} 
+      }
+    }
   }
 
   componentDidMount() {
-    this.setState({instituteId:this.props.instituteId})
-    let data={
-      institute_id:this.props.instituteId,
-      branch_id:this.props.branchId,
-      token:this.props.token
+    this.setState({ instituteId: this.props.instituteId })
+    let data = {
+      institute_id: this.props.instituteId,
+      branch_id: this.props.branchId,
+      token: this.props.token
     }
-    this.props.getEmailOfFacultyDirectory(data).then(()=>{
+    this.props.getEmailOfFacultyDirectory(data).then(() => {
 
     })
     this.initDataTable();
@@ -78,23 +79,23 @@ class FacultyDirectory extends Component {
           "data": null,
           "defaultContent": `<button class="link--btn" id="view">View Profile</button>`,
           // targets:[6],
-          "render":(data,type,row)=>{
-            
+          "render": (data, type, row) => {
+
             let rowhtml;
             let rowData = row[6];
             let title = this.getConditionForButton(rowData);
-            if(title){
+            if (title) {
               return rowhtml = `<button class="link--btn" id="view">View Profile</button> 
-              <button class="link--btn" id="invite" >${title}</button>`;  
-            }else{
-              return rowhtml =`<button class="link--btn" id="view">View Profile</button>`
+              <button class="link--btn" id="invite" >${title}</button>`;
+            } else {
+              return rowhtml = `<button class="link--btn" id="view">View Profile</button>`
             }
-           
+
           }
-        },{orderable:false,targets:[2,3,4,5]},
+        }, { orderable: false, targets: [2, 3, 4, 5] },
         {
-          targets:[0],
-          className:'c-bold'
+          targets: [0],
+          className: 'c-bold'
         }],
         serverSide: true,
         responsive: true,
@@ -105,16 +106,16 @@ class FacultyDirectory extends Component {
         pagingType: "full_numbers",
       });
 
-      $(".dataTables_length").css('clear', 'none');
-      $(".dataTables_length").css('margin-right', '2%');
-      $(".dataTables_length").css('margin-top', '4px');
-      // $(".dataTables_length").css('margin-left', '20%');
-  
-      $(".dataTables_info").css('clear', 'none');
-      $(".dataTables_info").css('padding', '0');
-      $(".dataTables_info").css('margin-top', '5px');
-      // $(".dataTables_info").css('margin-right', '200%');
-  
+    $(".dataTables_length").css('clear', 'none');
+    $(".dataTables_length").css('margin-right', '2%');
+    $(".dataTables_length").css('margin-top', '4px');
+    // $(".dataTables_length").css('margin-left', '20%');
+
+    $(".dataTables_info").css('clear', 'none');
+    $(".dataTables_info").css('padding', '0');
+    $(".dataTables_info").css('margin-top', '5px');
+    // $(".dataTables_info").css('margin-right', '200%');
+
     var _ = this;
     $('#professorList tbody').on('click', '#view', function () {
       var data = table.api().row($(this).parents('tr')).data();
@@ -152,97 +153,111 @@ class FacultyDirectory extends Component {
     } else {
       order_type = 1;
     }
-    let apiData={
-      payload:{
+    let apiData = {
+      payload: {
         "searchText": this.state.searchText,
         "record_per_page": data.length,
         "page_number": data.start / data.length + 1,
         "order_column": order_column,
         "order_type": order_type
-      } ,
-      
-      instituteId:this.props.instituteId,
-      branchId:this.props.branchId,
-      token:this.props.token,
+      },
+
+      instituteId: this.props.instituteId,
+      branchId: this.props.branchId,
+      token: this.props.token,
+    }
+    let empdata = {
+      payload: {
+        "searchText": "",
+        "record_per_page": 10,
+        "page_number": 1,
+        "order_column": "created_at",
+        "order_type": 0
+      }
     }
 
-    getProfessorsList(apiData).then(res =>{
-    this.handleResponse(res, callback);
+    getEmployeeList(empdata).then(res => {
+      console.log("res", res)
+    })
+
+    getProfessorsList(apiData).then(res => {
+      this.handleResponse(res, callback);
     });
-    
+
   }
-  
+
   handleResponse(res, callback) {
     if (res && res.data.status == 200 && res.data.response) {
       var columnData = [];
-      this.setState({ count:res.data.response.professorDetail ? res.data.response.professorDetail.length > 0 ? res.data.response.totalCount : 0 : 0})
-      let facultyList=res.data.response.professorDetail;
-      if(facultyList&& facultyList.length>0){
-      facultyList.map((data, index) => {
-        var arr = []
-        let name = data.firstname+" "+data.lastname;
-        arr[0] = name;
-        arr[1] = data.designation;
-        arr[2] = data.mobile;
-        arr[3] = data.email;
-        arr[4] = data.emergency_contact;
-        arr[5] = data.professor_id;
-        arr[6] = data;
-        columnData.push(arr);
-      })
-    }
-      callback({ recordsTotal: this.state.count,
+      this.setState({ count: res.data.response.professorDetail ? res.data.response.professorDetail.length > 0 ? res.data.response.totalCount : 0 : 0 })
+      let facultyList = res.data.response.professorDetail;
+      if (facultyList && facultyList.length > 0) {
+        facultyList.map((data, index) => {
+          var arr = []
+          let name = data.firstname + " " + data.lastname;
+          arr[0] = name;
+          arr[1] = data.designation;
+          arr[2] = data.mobile;
+          arr[3] = data.email;
+          arr[4] = data.emergency_contact;
+          arr[5] = data.professor_id;
+          arr[6] = data;
+          columnData.push(arr);
+        })
+      }
+      callback({
+        recordsTotal: this.state.count,
         recordsFiltered: this.state.count,
-        data: columnData 
+        data: columnData
       });
     }
-    else if(res && res.data.status == 500){
-      this.setState({count:0})
+    else if (res && res.data.status == 500) {
+      this.setState({ count: 0 })
     }
   }
 
-  getConditionForButton(obj){
-    if(obj.is_invite == true && obj.is_register == false){
+  getConditionForButton(obj) {
+    if (obj.is_invite == true && obj.is_register == false) {
       return "Invite Again";
-    }else if(obj.is_invite == false && obj.is_register == false){
+    } else if (obj.is_invite == false && obj.is_register == false) {
       return "Invite";
-    }else if(obj.is_invite == true && obj.is_register == true){
+    } else if (obj.is_invite == true && obj.is_register == true) {
       return false;
     }
   }
 
-  onSendInvitation(data){
+  onSendInvitation(data) {
     let payloadType;
-    if(data.designation == "INSTITUTE"){
-      payloadType= "Institute"
+    if (data.designation == "INSTITUTE") {
+      payloadType = "Institute"
     }
-    else if(data.designation == "Professor"){
+    else if (data.designation == "Professor") {
       payloadType = "Professor"
     }
-   let apiData = {
-     payload:{
-      type:payloadType,
-      id:data.professor_id
-     },
-    institude_id:this.props.instituteId,
-    branch_id:this.props.branchId,
-    token:this.props.token
-   }
-   this.props.invitationSend(apiData).then(()=>{
-     let res = this.props.sendInvitation;
-     if(res && res.status == 200){
-      successToste("Invitation Send Successfully");
-     }
-     else if(res && res.status == 500){
-       errorToste("Something Went Wrong")
-     }
-   })
+    let apiData = {
+      payload: {
+        type: payloadType,
+        id: data.professor_id
+      },
+      institude_id: this.props.instituteId,
+      branch_id: this.props.branchId,
+      token: this.props.token
+    }
+    this.props.invitationSend(apiData).then(() => {
+      let res = this.props.sendInvitation;
+      if (res && res.status == 200) {
+        successToste("Invitation Send Successfully");
+      }
+      else if (res && res.status == 500) {
+        errorToste("Something Went Wrong")
+      }
+    })
   }
 
   onChangePage(data) {
     this.props.history.push({
       pathname: 'faculty-detail',
-      state: { data: data ,branchId:this.props.branchId}
+      state: { data: data, branchId: this.props.branchId }
     })
   }
 
@@ -262,7 +277,7 @@ class FacultyDirectory extends Component {
   render() {
     return (
       <div className="c-container clearfix">
-      <ToastContainer/>
+        <ToastContainer />
         <div className="clearfix">
           <div className="divider-container">
             <div className="divider-block text--left">
@@ -277,7 +292,7 @@ class FacultyDirectory extends Component {
             <div className="divider-block text--left">
               <div className="form-group cust-fld">
                 <label>Search Employee</label>
-                <input  type="search" className="form-control" value={this.state.searchText} onChange={this.serachProfessor.bind(this)} placeholder="Enter Employee Name" />
+                <input type="search" className="form-control" value={this.state.searchText} onChange={this.serachProfessor.bind(this)} placeholder="Enter Employee Name" />
               </div>
             </div>
             <div className="divider-block text--right">
@@ -298,7 +313,7 @@ class FacultyDirectory extends Component {
                     <th style={{ width: "15%" }}>Emergency Contact</th>
                     <th style={{ width: "13%" }}>Actions</th>
                   </tr>
-                </thead>      
+                </thead>
               </table>
             </div>
           </div>
@@ -308,22 +323,22 @@ class FacultyDirectory extends Component {
   }
 }
 
-const mapStateToProps = ({ app ,auth}) => ({
+const mapStateToProps = ({ app, auth }) => ({
   branchId: app.branchId,
   instituteId: app.institudeId,
-  token:auth.token,
-  sendInvitation:app.sendInvitation,
-  ProfessorAdmin : app.professorAdmin,
-  professorEmailChecking : app.professorEmailCheck
+  token: auth.token,
+  sendInvitation: app.sendInvitation,
+  ProfessorAdmin: app.professorAdmin,
+  professorEmailChecking: app.professorEmailCheck
 })
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
-    { 
-      invitationSend,getIsProfessorAdmin,getEmailOfFacultyDirectory
+    {
+      invitationSend, getIsProfessorAdmin, getEmailOfFacultyDirectory
     }, dispatch
   )
 
-export default connect(mapStateToProps,mapDispatchToProps)(FacultyDirectory)
+export default connect(mapStateToProps, mapDispatchToProps)(FacultyDirectory)
 
 

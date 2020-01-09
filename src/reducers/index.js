@@ -7,7 +7,7 @@ import professorDrive from './professorDriveReducer';
 import studentDrive from './studentDriveReducer';
 import sidebar from './sidebarReducer';
 import finance from './financeReducer';
-
+import inventoryAdmin from './inventoryAdminReducer';
 export default combineReducers({
   app,
   professor,
@@ -16,5 +16,6 @@ export default combineReducers({
   professorDrive,
   studentDrive,
   sidebar,
-  finance
+  finance,
+  inventoryAdmin
 })
