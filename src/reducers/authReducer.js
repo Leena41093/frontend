@@ -13,7 +13,7 @@ const initialState = {
     passwordVerify:null,
     forgotPasswordUpdate:null,
     authCheck:null,
-    changePassword:null,
+    changePassword:null,    
 }
 
 

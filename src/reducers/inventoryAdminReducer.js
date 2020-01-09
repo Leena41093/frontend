@@ -5,10 +5,11 @@ import {
   
   const initialState = {
     financeInstituteDetail: null,
-    
+    companyId:1,
+    adminbranchId:1,    
   };
   
-  export default function finance(state = initialState, action) {
+  export default function inventoryAdmin(state = initialState, action) {
     switch (action.type) {
       case GET_FINANCEINSTITUTEDETAIL: {
         return {

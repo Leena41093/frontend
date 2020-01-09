@@ -131,76 +131,45 @@ class FacultyDirectory extends Component {
 
   getProfessors(data, callback, setting) {
     let order_column
-    if (data.order[0].column == 0) {
-      order_column = "firstname"
-    }
-    else if (data.order[0].column == 1) {
-      order_column = "designation"
-    }
-    else if (data.order[0].column == 2) {
-      order_column = "mobile"
-    }
-    else if (data.order[0].column == 3) {
-      order_column = "email"
-    }
-    else if (data.order[0].column == 4) {
-      order_column = "emergency_contact"
-    }
-
+    
     let order_type;
     if (data.order[0].dir == "asc") {
       order_type = 0
     } else {
       order_type = 1;
     }
-    let apiData = {
+    let empdata = {
+      companyId:this.props.companyId,
+      branch_id:this.props.BranchId,
       payload: {
         "searchText": this.state.searchText,
         "record_per_page": data.length,
-        "page_number": data.start / data.length + 1,
-        "order_column": order_column,
+        "page_number":  data.start / data.length + 1,
+        "order_column":  "created_at",
         "order_type": order_type
-      },
-
-      instituteId: this.props.instituteId,
-      branchId: this.props.branchId,
-      token: this.props.token,
-    }
-    let empdata = {
-      payload: {
-        "searchText": "",
-        "record_per_page": 10,
-        "page_number": 1,
-        "order_column": "created_at",
-        "order_type": 0
       }
     }
 
     getEmployeeList(empdata).then(res => {
-      console.log("res", res)
-    })
-
-    getProfessorsList(apiData).then(res => {
       this.handleResponse(res, callback);
-    });
-
+    })
   }
 
   handleResponse(res, callback) {
     if (res && res.data.status == 200 && res.data.response) {
       var columnData = [];
-      this.setState({ count: res.data.response.professorDetail ? res.data.response.professorDetail.length > 0 ? res.data.response.totalCount : 0 : 0 })
-      let facultyList = res.data.response.professorDetail;
-      if (facultyList && facultyList.length > 0) {
-        facultyList.map((data, index) => {
+      this.setState({ count: res.data.response.employeeDetails ? res.data.response.employeeDetails.length > 0 ? res.data.response.totalCount : 0 : 0 })
+      let employeeList = res.data.response.employeeDetails;
+      if (employeeList && employeeList.length > 0) {
+        employeeList.map((data, index) => {
           var arr = []
-          let name = data.firstname + " " + data.lastname;
+          let name = data.emp_name;
           arr[0] = name;
           arr[1] = data.designation;
-          arr[2] = data.mobile;
+          arr[2] = data.DOB;
           arr[3] = data.email;
-          arr[4] = data.emergency_contact;
-          arr[5] = data.professor_id;
+          arr[4] = data.address;
+          arr[5] = data.emp_id;
           arr[6] = data;
           columnData.push(arr);
         })
@@ -308,9 +277,9 @@ class FacultyDirectory extends Component {
                   <tr>
                     <th style={{ width: "15%" }}>Name</th>
                     <th style={{ width: "12%" }}>Designation</th>
-                    <th style={{ width: "15%" }}>Phone</th>
+                    <th style={{ width: "15%" }}>DOB</th>
                     <th style={{ width: "18%" }}>Email</th>
-                    <th style={{ width: "15%" }}>Emergency Contact</th>
+                    <th style={{ width: "15%" }}>Address</th>
                     <th style={{ width: "13%" }}>Actions</th>
                   </tr>
                 </thead>
@@ -323,13 +292,15 @@ class FacultyDirectory extends Component {
   }
 }
 
-const mapStateToProps = ({ app, auth }) => ({
+const mapStateToProps = ({ app, auth}) => ({
   branchId: app.branchId,
   instituteId: app.institudeId,
   token: auth.token,
   sendInvitation: app.sendInvitation,
   ProfessorAdmin: app.professorAdmin,
-  professorEmailChecking: app.professorEmailCheck
+  professorEmailChecking: app.professorEmailCheck,
+  companyId:app.companyId,
+  BranchId:app.AdminbranchId,
 })
 
 const mapDispatchToProps = dispatch =>
