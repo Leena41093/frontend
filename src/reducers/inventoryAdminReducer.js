@@ -1,14 +1,17 @@
 import {
    GETEMPDETAIL,
-    GET_ADMINDASHBOARDDETAILS
-    
+    GET_ADMINDASHBOARDDETAILS,
+    GET_PROJECTEMPLOYEEDATA,
+    ADD_PROJECTDETAILS
   } from "../actions/inventoryAdminAction";
   
   const initialState = {
     adminDashboardDetail:null,
     companyId:1,
     adminbranchId:1,  
-    employeeDetail:null  
+    employeeDetail:null  ,
+    projectEmployeeDetail:null,
+    addprojectdata:null
   };
   
   export default function inventoryAdmin(state = initialState, action) {
@@ -24,6 +27,18 @@ import {
         return{
           ...state,
           adminDashboardDetail: action.payload
+        }
+      }
+      case GET_PROJECTEMPLOYEEDATA:{
+        return{
+          ...state,
+          projectEmployeeDetail:action.payload
+        }
+      }
+      case ADD_PROJECTDETAILS:{
+        return{
+          ...state,
+          addprojectdata: action.payload
         }
       }
       default:

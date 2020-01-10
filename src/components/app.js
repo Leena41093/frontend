@@ -71,6 +71,8 @@ import AttendanceDirectory from '../components/administration/attendanceDirector
 import PdfView from '../components/professor/pdfView';
 import FinanceDashboard from '../components/finance/financeDashboard/financeDashboard';
 import ProjectDirectory from '../components/professor/projectDirectory'
+import ProjectDetails from '../components/professor/projectDetails'
+import NewProjectDetail from '../components/professor/newproject'
 // import CreateNewInvoice from '../components/finance/financeDashboard/createNewInvoice';
 // import AllStudentsFinanceDirectory from '../components/finance/financeDashboard/allStudentsFinanceDirectory';
 // import StudentFinanceDetail from '../components/finance/financeDashboard/studentFinanceDetail'
@@ -171,6 +173,8 @@ export const App = ({ match, history }) => {
         <Route path={`${match.url}/finance-paidinvoicereciept`} component={PaidInvoiceReciept} /> 
       <Route path={`${match.url}/student-finance-dashboard`} component={StudentFinanceDashboard} />  */}
          <Route path={`${match.url}/projects-directory`} component={ProjectDirectory} />
+         <Route path={`${match.url}/project-detail`} component={ProjectDetails} />
+         <Route path={`${match.url}/new-project`} component = {NewProjectDetail}/>
         </div>
       </div>
     )
