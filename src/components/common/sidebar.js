@@ -506,7 +506,7 @@ class Sidebar extends Component {
                     <ul className="sidebar--submenus">
                       <li className="linkbtn hover-pointer" onClick={this.handleAdminOptionClick.bind(this, 'classManager')}>
                         <a className={this.getLiCss('classManager')}>
-                          <i className="icon cg-calendar"></i>Class Manager
+                          <i className="icon cg-user"></i>Class Manager
                     </a>
                       </li>
                       <li className="linkbtn hover-pointer" onClick={this.handleAdminOptionClick.bind(this, 'facultyDirectory')}>
@@ -572,7 +572,7 @@ class Sidebar extends Component {
                         </li>
                         <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'facultyDirectory')}>
                           <a className={this.getLiCss('timetable')}>
-                            <i className="icon cg-calendar"></i>Employee Management
+                            <i className="icon cg-user"></i>Employee Management
                           </a>
                         </li>
                         
@@ -583,17 +583,17 @@ class Sidebar extends Component {
                         </li>
                         <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'pastyear')}>
                           <a className={this.getLiCss('pastyear')}>
-                            <i className="icon cg-clock"></i>Projects
+                            <i className="icon cg-line-chart"></i>Projects
                           </a>
                         </li>
                         <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, "finance")}>
                           <a className={this.getLiCss('pastyear')}>
-                            <i className="icon cg-clock"></i>Finance
+                            <i className="icon cg-purse"></i>Finance
                           </a>
                         </li>
                         <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'enquiry')}>
                           <a className={this.getLiCss('pastyear')}>
-                            <i className="icon cg-clock"></i>Complaints
+                            <i className="icon cg-notebook"></i>Complaints
                           </a>
                         </li>
                       </ul>
@@ -627,7 +627,7 @@ class Sidebar extends Component {
                         </li>
                         <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'facultyDirectory')}>
                           <a className={this.getLiCss('timetable')}>
-                            <i className="icon cg-calendar"></i>Employee Management
+                            <i className="icon cg-user"></i>Employee Management
                           </a>
                         </li>
                         
@@ -638,17 +638,17 @@ class Sidebar extends Component {
                         </li>
                         <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'pastyear')}>
                           <a className={this.getLiCss('pastyear')}>
-                            <i className="icon cg-clock"></i>Projects
+                            <i className="icon cg-line-chart"></i>Projects
                           </a>
                         </li>
                         <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'finance')}>
-                          <a className={this.getLiCss('pastyear')}>
-                            <i className="icon cg-clock"></i>Finance
+                          <a className={this.getLiCss('finance')}>
+                            <i className="icon cg-purse"></i>Finance
                           </a>
                         </li>
                         <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'enquiry')}>
-                          <a className={this.getLiCss('pastyear')}>
-                            <i className="icon cg-clock"></i>Complaints
+                          <a className={this.getLiCss('complaints')}>
+                            <i className="icon cg-notebook"></i>Complaints
                           </a>
                         </li>
                       </ul>

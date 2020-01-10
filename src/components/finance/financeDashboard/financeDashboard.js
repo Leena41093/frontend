@@ -501,7 +501,7 @@ class FinanceDashboard extends Component{
             <div className="row">
               <div className="col-md-4">
                 <div className="stripImage">
-                  <img src="../images/finance-icon.png" />
+                  <img src="../images/finances.png" />
                 </div>
                 <div className="stripText">ACCEPT FEES</div>
               </div>

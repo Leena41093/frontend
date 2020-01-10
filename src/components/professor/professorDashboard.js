@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getProfessorDashboard, professorTimeTableInfo } from '../../actions/professorActions';
 import { checkProfileSelectedOrNot, profilePicUpload, getProfilePic } from '../../actions/index';
+import {getAdminDashboardData} from '../../actions/inventoryAdminAction'
 import { getBranches } from '../../actions/sidebarAction';
 import moment from 'moment';
 import { ProfilePicModal } from '../common/profilepic';
@@ -37,7 +38,7 @@ class ProfessorDashboard extends Component {
       flag1: true,
       currentDate: moment(),
       addloader: true,
-
+      employeeData:{}
     }
   }
 
@@ -65,6 +66,7 @@ class ProfessorDashboard extends Component {
   componentDidMount() {
     this.renderIncomeExpenceGraph();
     this.renderPieGraph();
+    this.getAdminData();
     this.setState({ instituteId: this.props.instituteId }, () => {
       if (this.props.instituteId != null) {
         const data = {
@@ -109,6 +111,25 @@ class ProfessorDashboard extends Component {
 
     })
 
+  }
+
+  getAdminData(){
+    let data = {
+      companyId:this.props.companyId,
+      branch_id:this.props.BranchId
+    }
+    this.props.getAdminDashboardData(data).then(()=>{
+      let res= this.props.admindashboarddetailsData;
+      if(res && res.data.status == 200){
+        this.setState({employeeData:res.data.response},()=>{
+          this.renderProfessorbatchDashbord();
+          this.renderComplaintsList()
+          this.renderIncomeExpenceGraph();
+          this.renderPieGraph();
+        });
+      }
+    
+    })
   }
 
   getDashbord(branchId) {
@@ -229,13 +250,32 @@ class ProfessorDashboard extends Component {
     })
   }
 
+  renderComplaintsList(){
+    let{employeeData} = this.state;
+    if(employeeData && employeeData.complaintsDetails){
+      let complaintArray = employeeData.complaintsDetails;
+      console.log("complaintArray:",complaintArray);
+      return employeeData.complaintsDetails[0].map((complaint,index)=>{
+        return (
+          <li>
+              <img src="./../images/avatars/user_avatar.png" className="user-img" alt="" />
+              <span className="news__heading">{complaint.emp_name + " Complaining about " + complaint.complaint_text}</span>
+              <span className="news__info"></span>
+            </li>
+        )
+      })
+    }
+  }
+
   renderProfessorbatchDashbord() {
+    let {employeeData} = this.state;
+    if(employeeData != {}){
     return (
       <div className="row">
         <div className="col-sm-4">
           <div className="card">
             <div className="row">
-              <div className="cardgrid--item" onClick={this.professorBatchDashboardPage.bind(this)}>
+              <div className="cardgrid--item">
                 <div className="col-sm-4" style={{ paddingLeft: "0px" }}>
                   <img src="./../images/employee.png" width="60px" height="60px" />
                 </div>
@@ -244,7 +284,7 @@ class ProfessorDashboard extends Component {
                     <h2 className="c-heading-sm card--title">
                       Employees
                   </h2>
-                    <h1 style={{ fontWeight: "40px", fontSize: "40px", margin: "0px" }}>80</h1>
+    <h1 style={{ fontWeight: "40px", fontSize: "40px", margin: "0px" }}>{employeeData.employeeCount}</h1>
                   </div>
                 </div>
               </div>
@@ -255,7 +295,7 @@ class ProfessorDashboard extends Component {
         <div className="col-sm-4">
           <div className="card">
             <div className="row">
-              <div className="cardgrid--item" onClick={this.professorBatchDashboardPage.bind(this)}>
+              <div className="cardgrid--item">
                 <div className="col-sm-4" style={{ paddingLeft: "0px" }}>
                   <img src="./../images/analytics.png" width="60px" height="60px" />
                 </div>
@@ -264,7 +304,7 @@ class ProfessorDashboard extends Component {
                     <h2 className="c-heading-sm card--title">
                       Projects
                 </h2>
-                    <h1 style={{ fontWeight: "40px", fontSize: "40px", margin: "0px" }}>80</h1>
+    <h1 style={{ fontWeight: "40px", fontSize: "40px", margin: "0px" }}>{employeeData.projectCount}</h1>
                   </div>
                 </div>
               </div>
@@ -276,7 +316,7 @@ class ProfessorDashboard extends Component {
         <div className="col-sm-4">
           <div className="card">
             <div className="row">
-              <div className="cardgrid--item" onClick={this.professorBatchDashboardPage.bind(this)}>
+              <div className="cardgrid--item">
                 <div className="col-sm-4" style={{ paddingLeft: "0px" }}>
                   <img src="./../images/complaints.png" width="60px" height="60px" />
                 </div>
@@ -285,7 +325,7 @@ class ProfessorDashboard extends Component {
                     <h2 className="c-heading-sm card--title">
                       Complaints
                 </h2>
-                    <h1 style={{ fontWeight: "40px", fontSize: "40px", margin: "0px" }}>80</h1>
+    <h1 style={{ fontWeight: "40px", fontSize: "40px", margin: "0px" }}>{employeeData.complaintsCount}</h1>
                   </div>
                 </div>
               </div>
@@ -296,7 +336,7 @@ class ProfessorDashboard extends Component {
 
       </div>
     )
-
+    }
 
   }
 
@@ -321,6 +361,7 @@ class ProfessorDashboard extends Component {
   }
 
   renderPieGraph() {
+    let { employeeData } = this.state;
     // Make monochrome colors
     var pieColors = (function() {
       var colors = [],
@@ -374,8 +415,8 @@ class ProfessorDashboard extends Component {
         {
           name: "Share",
           data: [
-            { name: "Income", y: 11000 },
-            { name: "Expense", y: 4000}
+            { name: "Income", y: employeeData && employeeData.total_income != null ? employeeData.total_income : 0 },
+            { name: "Expense", y: employeeData &&  employeeData.total_expense != null ? employeeData.total_expense : 0 }
           ]
         }
       ]
@@ -383,7 +424,7 @@ class ProfessorDashboard extends Component {
   }
 
   renderIncomeExpenceGraph() {
-    let { barGraphData } = this.state;
+    let { employeeData } = this.state;
     Highcharts.chart({
       chart: {
         type: "column",
@@ -427,12 +468,12 @@ class ProfessorDashboard extends Component {
           data: [
             {
               name: "Assign Employees",
-              y: 14
+              y: employeeData && employeeData.assignEmpProjectCount>0? employeeData.assignEmpProjectCount:0
 
             },
             {
               name: "Free Employees",
-              y: 10
+              y: employeeData && employeeData.unassignEmpProjectCount>0? employeeData.unassignEmpProjectCount:0
             }
           ]
         }
@@ -445,6 +486,12 @@ class ProfessorDashboard extends Component {
       <div>
         <button id="openmodal" data-toggle="modal" data-target="#newprofilepic" hidden></button>
         <ToastContainer />
+        <div className="divider-container">
+            <div className="divider-block text--left">
+              <span className="c-heading-lg">Dashboard</span>
+              {/* {(this.state.studentBatch.length == 0&& this.state.commentActivities.length==0) ? <span style={{color:"red"}}>There is no data available</span>:""} */}
+            </div>
+          </div>
         <div className="c-container clearfix">
           <div className="c-container__data st--blank">
             {this.renderProfessorbatchDashbord()}
@@ -481,81 +528,8 @@ class ProfessorDashboard extends Component {
           </h2>
           <div className="news--listing">
             <ul style={{height:"200px",overflowY:"auto"}}>
-          <li>
-              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
-              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Lorem Ipsum is simply d"}</span>
-              <span className="news__info"></span>
-            </li>
-            <li>
-              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
-              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
-              <span className="news__info"></span>
-            </li>
-            <li>
-              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
-              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
-              <span className="news__info"></span>
-            </li>
-            <li>
-              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
-              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
-              <span className="news__info"></span>
-            </li>
-            <li>
-              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
-              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
-              <span className="news__info"></span>
-            </li>
-            <li>
-              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
-              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
-              <span className="news__info"></span>
-            </li>
-            <li>
-              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
-              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
-              <span className="news__info"></span>
-            </li>
-            <li>
-              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
-              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
-              <span className="news__info"></span>
-            </li>
-            <li>
-              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
-              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
-              <span className="news__info"></span>
-            </li>
-            <li>
-              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
-              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
-              <span className="news__info"></span>
-            </li>
-            <li>
-              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
-              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
-              <span className="news__info"></span>
-            </li>
-            <li>
-              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
-              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
-              <span className="news__info"></span>
-            </li>
-            <li>
-              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
-              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
-              <span className="news__info"></span>
-            </li>
-            <li>
-              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
-              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
-              <span className="news__info"></span>
-            </li>
-            <li>
-              <img src="./../images/avatars/Avatar_16.jpg" className="user-img" alt="" />
-              <span className="news__heading">{"Pooja" + " " + "Roy" + " Complaining about" + "Laptop works slow"}</span>
-              <span className="news__info"></span>
-            </li>
+              {console.log("call",this.state.employeeData)}
+              {this.state.employeeData && this.state.employeeData != {}? this.renderComplaintsList() : ""}
             </ul>
           </div>
         </div>
@@ -568,7 +542,7 @@ class ProfessorDashboard extends Component {
   }
 }
 
-const mapStateToProps = ({ app, professor, sidebar, auth }) => ({
+const mapStateToProps = ({ app, professor, sidebar, auth, inventoryAdmin }) => ({
   professorDashboard: professor.professorDashboard,
   branchId: app.branchId,
   instituteId: app.institudeId,
@@ -579,13 +553,16 @@ const mapStateToProps = ({ app, professor, sidebar, auth }) => ({
   token: auth.token,
   profileSelectedOrNot: app.profileSelectedOrNot,
   profileUpload: app.profileUpload,
-  getProfilePicture: app.getProfilePicture
+  getProfilePicture: app.getProfilePicture,
+  admindashboarddetailsData : inventoryAdmin.adminDashboardDetail,
+  companyId:app.companyId,
+  BranchId:app.AdminbranchId,
 })
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators({
     getProfessorDashboard, getBranches, professorTimeTableInfo, checkProfileSelectedOrNot,
-    profilePicUpload, getProfilePic
+    profilePicUpload, getProfilePic,getAdminDashboardData
   },
     dispatch
   )

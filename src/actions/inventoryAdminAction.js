@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BASE_URL } from "../components/common/config";
+export const GET_ADMINDASHBOARDDETAILS = "GET_ADMINDASHBOARDDETAILS";
 
 export const GETEMPDETAIL = 'GETEMPDETAIL';
 
@@ -46,3 +47,27 @@ export function getEmployeeDetail(data) {
       });
   }
 }
+
+export function getAdminDashboardData(data) {
+  const API_CONFIG = {
+    headers: {
+      "Content-Type": "application/json",
+      // Authorization: "JWT " + data.token
+    }
+  };
+
+  let URL = `http://35.154.43.111:9000/company/${data.companyId}/branch/${data.branch_id}/dashboadDetails/ `;
+
+  return dispatch => {
+    return axios
+      .get(URL, API_CONFIG)
+      .then(function (response) {
+        dispatch({
+          type: GET_ADMINDASHBOARDDETAILS,
+          payload: response
+        });
+      })
+      .catch(function (error) { });
+  };
+}
+
