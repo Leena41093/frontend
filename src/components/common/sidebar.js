@@ -209,8 +209,10 @@ class Sidebar extends Component {
         this.props.history.push('/app/notes-directory');
         break;
       }
-      case 'projects':{
-        this.props.history.push('/app/projects-directory')
+
+      case 'projects': {
+        this.props.history.push('/app/projects-directory');
+        break;
       }
       case 'timetable': {
         this.props.history.push('/app/professor-timetable');

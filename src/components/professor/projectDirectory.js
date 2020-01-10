@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import $ from "jquery";
 import { bindActionCreators } from 'redux';
+import moment from 'moment';
 import { getProfessorsList, invitationSend, getIsProfessorAdmin, getEmailOfFacultyDirectory } from '../../actions/index';
-import { getEmployeeList } from '../../actions/inventoryAdminAction';
+import { getEmployeeList,getProjectList } from '../../actions/inventoryAdminAction';
 import { errorToste, successToste } from '../../constant/util';
 import { ToastContainer, toast } from 'react-toastify';
 let table = '0';
@@ -13,7 +14,7 @@ class ProjectDirectory extends Component {
 
     super(props);
     this.state = {
-      EmployeeList: [],
+      projectDetails: [],
       searchText: '',
       count: 0,
       branchId: 0,
@@ -83,7 +84,7 @@ class ProjectDirectory extends Component {
           "render": (data, type, row) => {
 
             let rowhtml;
-            let rowData = row[6];
+            let rowData = row[5];
             let title = this.getConditionForButton(rowData);
             if (title) {
               return rowhtml = `<button class="link--btn" id="view">View Profile</button> 
@@ -120,7 +121,7 @@ class ProjectDirectory extends Component {
     var _ = this;
     $('#EmployeeList tbody').on('click', '#view', function () {
       var data = table.api().row($(this).parents('tr')).data();
-      _.onChangePage(data[6]);
+      _.onChangePage(data[5]);
     });
 
     var _ = this;
@@ -151,7 +152,7 @@ class ProjectDirectory extends Component {
       }
     }
 
-    getEmployeeList(empdata).then(res => {
+    getProjectList(empdata).then(res => {
       this.handleResponse(res, callback);
     })
   }
@@ -159,19 +160,20 @@ class ProjectDirectory extends Component {
   handleResponse(res, callback) {
     if (res && res.data.status == 200 && res.data.response) {
       var columnData = [];
-      this.setState({ count: res.data.response.employeeDetails ? res.data.response.employeeDetails.length > 0 ? res.data.response.totalCount : 0 : 0 })
-      let employeeList = res.data.response.employeeDetails;
-      if (employeeList && employeeList.length > 0) {
-        employeeList.map((data, index) => {
+       this.setState({ count: res.data.response.projectDetails ? res.data.response.projectDetails.length > 0 ? res.data.response.totalCount : 0 : 0 })
+       let projectList = res.data.response.projectDetails;
+      console.log("------------->",res.data.response)
+      if (projectList && projectList.length > 0) {
+        console.log
+        projectList.map((data, index) => {
           var arr = []
-          let name = data.emp_name;
-          arr[0] = name;
-          arr[1] = data.designation;
-          arr[2] = data.DOB;
-          arr[3] = data.email;
-          arr[4] = data.address;
-          arr[5] = data.emp_id;
-          arr[6] = data;
+          
+          arr[0] = data.project_name;
+          arr[1] = data.client_name;
+          arr[2] = moment(data.start_date).format("DD-MM-YYYY");
+          arr[3] = moment(data.end_date).format("DD-MM-YYYY");
+          arr[4] = data.team_size;
+          arr[5] = data;
           columnData.push(arr);
         })
       }
@@ -226,7 +228,7 @@ class ProjectDirectory extends Component {
 
   onChangePage(data) {
     this.props.history.push({
-      pathname: 'faculty-detail',
+      pathname: '/app/project-detail',
       state: { data: data, branchId: this.props.branchId }
     })
   }
@@ -234,7 +236,7 @@ class ProjectDirectory extends Component {
   onEditProfessor(event) {
     var flag = true
     this.props.history.push({
-      pathname: '/app/new-faculty',
+      pathname: '/app/new-project',
     })
   }
 
@@ -252,16 +254,16 @@ class ProjectDirectory extends Component {
           <div className="divider-container">
             <div className="divider-block text--left">
               <span className="c-heading-sm">Administration</span>
-              <span className="c-heading-lg">Employee Manager</span>
+              <span className="c-heading-lg">Project Management</span>
             </div>
             <div className="divider-block text--right">
-              <button className="c-btn prime" onClick={this.onEditProfessor.bind(this)}  >Add New Employee</button>
+              <button className="c-btn prime" onClick={this.onEditProfessor.bind(this)}  >Add New Project</button>
             </div>
           </div>
           <div className="divider-container">
             <div className="divider-block text--left">
               <div className="form-group cust-fld">
-                <label>Search Employee</label>
+                <label>Search Project</label>
                 <input type="search" className="form-control" value={this.state.searchText} onChange={this.serachProfessor.bind(this)} placeholder="Enter Employee Name" />
               </div>
             </div>
@@ -276,11 +278,11 @@ class ProjectDirectory extends Component {
               <table id="EmployeeList" className="table data--table">
                 <thead>
                   <tr>
-                    <th style={{ width: "15%" }}>Name</th>
-                    <th style={{ width: "12%" }}>Designation</th>
-                    <th style={{ width: "15%" }}>DOB</th>
-                    <th style={{ width: "18%" }}>Email</th>
-                    <th style={{ width: "15%" }}>Address</th>
+                    <th style={{ width: "15%" }}>Project Name</th>
+                    <th style={{ width: "12%" }}>Client Name</th>
+                    <th style={{ width: "15%" }}>Start Date</th>
+                    <th style={{ width: "18%" }}>End Date</th>
+                    <th style={{ width: "15%" }}>Team Size</th>
                     <th style={{ width: "13%" }}>Actions</th>
                   </tr>
                 </thead>
@@ -307,7 +309,7 @@ const mapStateToProps = ({ app, auth}) => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      invitationSend, getIsProfessorAdmin, getEmailOfFacultyDirectory,
+      invitationSend, getIsProfessorAdmin, getEmailOfFacultyDirectory
     }, dispatch
   )
 
