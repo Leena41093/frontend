@@ -486,13 +486,14 @@ class ProfessorDashboard extends Component {
       <div>
         <button id="openmodal" data-toggle="modal" data-target="#newprofilepic" hidden></button>
         <ToastContainer />
+       
+        <div className="c-container clearfix">
         <div className="divider-container">
             <div className="divider-block text--left">
               <span className="c-heading-lg">Dashboard</span>
               {/* {(this.state.studentBatch.length == 0&& this.state.commentActivities.length==0) ? <span style={{color:"red"}}>There is no data available</span>:""} */}
             </div>
           </div>
-        <div className="c-container clearfix">
           <div className="c-container__data st--blank">
             {this.renderProfessorbatchDashbord()}
           </div>

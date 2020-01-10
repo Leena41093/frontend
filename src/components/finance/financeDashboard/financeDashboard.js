@@ -403,7 +403,7 @@ class FinanceDashboard extends Component{
             {
               name: "Income",
               y: barGraphData != 0 ? barGraphData.total_income : 0,
-              color: "#990000"
+              color: "#39CCCC"
             },
             {
               name: "Expence",
@@ -430,19 +430,6 @@ class FinanceDashboard extends Component{
         </div>
         <div className="clearfix">
           <div className="c-flexGrid margin25-bottom">
-            <div className="flexGrid_sect grow-2">
-              <div className="c-infoBlock">
-                <span className="c-heading">TOTAL STUDENTS</span>
-                <span className="c-number">532</span>
-              </div>
-              <div className="c-infoBlock">
-                <span className="c-heading">FEE DEFAULTERS</span>
-                <span className="c-number col-red">24</span>
-              </div>
-              <div className="clearfix">
-                <button className="link--btn">View all defaulters</button>
-              </div>
-            </div>
             <div className="flexGrid_sect grow-5">
               <div className="divider-container valign-top nomargin">
                 <div
@@ -503,31 +490,7 @@ class FinanceDashboard extends Component{
                 <div className="stripImage">
                   <img src="../images/finances.png" />
                 </div>
-                <div className="stripText">ACCEPT FEES</div>
-              </div>
-
-              <div className="col-md-4">
-                <div className="searchBox">
-                  <input
-                    className="txtBox"
-                    type="text"
-                    placeholder="Search Student Name/ID"
-                  />
-                  <button className="searchBtn">Search</button>
-                </div>
-              </div>
-
-              <div className="col-md-1">
-                <span className="orText">OR</span>
-              </div>
-
-              <div className="col-md-3">
-                <button
-                  className="btnBox"
-                  onClick={this.goToAllStudentFinanceDirectory.bind(this)}
-                >
-                  View All Student Finances
-                </button>
+                <div className="stripText">Payments Details</div>
               </div>
             </div>
           </div>
@@ -536,7 +499,7 @@ class FinanceDashboard extends Component{
           <div className="clearfix financeBlockHead type1">
             <div className="divider-container nomargin">
               <div className="divider-block text--left">
-                <span className="block-title st-colored noborder nomargin nopad">
+                <span className="block-title st-colored noborder nomargin nopad" style={{color:"#00000"}}>
                   ACCOUNTS
                 </span>
               </div>
@@ -554,12 +517,6 @@ class FinanceDashboard extends Component{
                   data-target="#previewInvoice"
                 >
                   Add Expence
-                </button>
-                <button
-                  className="c-btn colorYellow"
-                  onClick={this.createNewInvoice.bind(this)}
-                >
-                  Create Invoice
                 </button>
               </div>
             </div>
@@ -635,96 +592,6 @@ class FinanceDashboard extends Component{
                   </button>
                 </div> */}
             </div>
-          </div>
-        </div>
-        <div className="clearfix financeBlockHead type2">
-          <div className="form-group cust-fld md childSect left">
-            <label>Transaction Type</label>
-            <div className="dropdown">
-              <button
-                id="dLabel"
-                type="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                All Types
-              </button>
-              <ul className="dropdown-menu" aria-labelledby="dLabel">
-                <li>
-                  <a href="javascript:void(0);" className="dd-option">
-                    Option 1
-                  </a>
-                </li>
-                <li>
-                  <a href="javascript:void(0);" className="dd-option">
-                    Option 1
-                  </a>
-                </li>
-                <li>
-                  <a href="javascript:void(0);" className="dd-option">
-                    Option 1
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="form-group cust-fld md childSect left">
-            <label>Status</label>
-            <div className="dropdown">
-              <button
-                id="dLabel"
-                type="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                All Status
-              </button>
-              <ul className="dropdown-menu" aria-labelledby="dLabel">
-                <li>
-                  <a href="javascript:void(0);" className="dd-option">
-                    Option 1
-                  </a>
-                </li>
-                <li>
-                  <a href="javascript:void(0);" className="dd-option">
-                    Option 1
-                  </a>
-                </li>
-                <li>
-                  <a href="javascript:void(0);" className="dd-option">
-                    Option 1
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="form-group cust-fld childSect left">
-            <label>From date</label>
-            <input
-              type="text"
-              className="form-control sm fld--date"
-              placeholder="date"
-            />
-          </div>
-          <div className="form-group cust-fld childSect left">
-            <label>To date</label>
-            <input
-              type="text"
-              className="form-control sm fld--date"
-              placeholder="date"
-            />
-          </div>
-          <div className="clearfix childSect right margin10-top">
-            <button className="c-btn prime childSect left">
-              <i className="icon cg-download" />
-              Export
-            </button>
-            <button className="c-btn">
-              <i className="icon cg-filter" />
-              Apply Filters
-            </button>
           </div>
         </div>
         <div className="clearfix">
