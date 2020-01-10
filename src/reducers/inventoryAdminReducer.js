@@ -1,6 +1,7 @@
 import {
    GETEMPDETAIL,
-    GET_ADMINDASHBOARDDETAILS
+    GET_ADMINDASHBOARDDETAILS,
+    GET_COMPLAINTS
     
   } from "../actions/inventoryAdminAction";
   
@@ -8,7 +9,8 @@ import {
     adminDashboardDetail:null,
     companyId:1,
     adminbranchId:1,  
-    employeeDetail:null  
+    employeeDetail:null  ,
+    complaintsList:null,
   };
   
   export default function inventoryAdmin(state = initialState, action) {
@@ -26,6 +28,13 @@ import {
           adminDashboardDetail: action.payload
         }
       }
+      case GET_COMPLAINTS:
+        {
+          return{
+            ...state,
+            complaintsList:action.payload
+          }
+        }
       default:
         return state;
     }
