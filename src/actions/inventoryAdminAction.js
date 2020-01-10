@@ -4,7 +4,7 @@ export const GET_ADMINDASHBOARDDETAILS = "GET_ADMINDASHBOARDDETAILS";
 export const GET_PROJECTEMPLOYEEDATA = "GET_PROJECTEMPLOYEEDATA"
 export const GETEMPDETAIL = 'GETEMPDETAIL';
 export const ADD_PROJECTDETAILS = "ADD_PROJECTDETAILS"
-
+export const GET_ALLEMPLOYEES = "GET_ALLEMPLOYEES"
 export function getEmployeeList(data) {
 
   const API_CONFIG = {
@@ -131,6 +131,29 @@ export function addProjectData(data) {
       .then(function (response) {
         dispatch({
           type: ADD_PROJECTDETAILS,
+          payload: response
+        });
+      })
+      .catch(function (error) { });
+  };
+}
+
+export function getAllEmployee(data) {
+  const API_CONFIG = {
+    headers: {
+      "Content-Type": "application/json",
+      // Authorization: "JWT " + data.token
+    }
+  };
+
+  let URL = `http://35.154.43.111:9000/company/${data.company_id}/branch/${data.branch_id}/get_employee_details/  `;
+  let payload = data.payload
+  return dispatch => {
+    return axios
+      .post(URL,payload,API_CONFIG)
+      .then(function (response) {
+        dispatch({
+          type: GET_ALLEMPLOYEES,
           payload: response
         });
       })

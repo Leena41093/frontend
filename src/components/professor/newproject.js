@@ -385,7 +385,7 @@ class NewProjectDetail extends Component {
         <ToastContainer />
         <div className="clearfix">
           <div className="c-brdcrum">
-            <a onClick={this.backButton.bind(this)} >Back to Staff Directory</a>
+            <a onClick={this.backButton.bind(this)} >Back to Project Directory</a>
           </div>
           <div className="divider-container">
             <div className="divider-block text--left">
