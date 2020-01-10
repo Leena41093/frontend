@@ -13,7 +13,7 @@ class FacultyDirectory extends Component {
 
     super(props);
     this.state = {
-      professorList: [],
+      EmployeeList: [],
       searchText: '',
       count: 0,
       branchId: 0,
@@ -51,6 +51,7 @@ class FacultyDirectory extends Component {
   }
 
   componentDidMount() {
+    
     this.setState({ instituteId: this.props.instituteId })
     let data = {
       institute_id: this.props.instituteId,
@@ -64,7 +65,7 @@ class FacultyDirectory extends Component {
   }
 
   initDataTable() {
-    table = $("#professorList")
+    table = $("#EmployeeList")
       .dataTable({
         "ajax": (data, callback, setting) => {
           this.getProfessors(data, callback, setting);
@@ -117,13 +118,13 @@ class FacultyDirectory extends Component {
     // $(".dataTables_info").css('margin-right', '200%');
 
     var _ = this;
-    $('#professorList tbody').on('click', '#view', function () {
+    $('#EmployeeList tbody').on('click', '#view', function () {
       var data = table.api().row($(this).parents('tr')).data();
       _.onChangePage(data[6]);
     });
 
     var _ = this;
-    $('#professorList tbody').on('click', '#invite', function () {
+    $('#EmployeeList tbody').on('click', '#invite', function () {
       var data = table.api().row($(this).parents('tr')).data();
       _.onSendInvitation(data[6]);
     });
@@ -272,7 +273,7 @@ class FacultyDirectory extends Component {
         <div className="c-container__data">
           <div className="card-container for--table">
             <div className="c-table">
-              <table id="professorList" className="table data--table">
+              <table id="EmployeeList" className="table data--table">
                 <thead>
                   <tr>
                     <th style={{ width: "15%" }}>Name</th>
@@ -306,7 +307,7 @@ const mapStateToProps = ({ app, auth}) => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      invitationSend, getIsProfessorAdmin, getEmailOfFacultyDirectory
+      invitationSend, getIsProfessorAdmin, getEmailOfFacultyDirectory,
     }, dispatch
   )
 
