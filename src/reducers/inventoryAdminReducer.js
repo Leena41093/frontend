@@ -4,6 +4,7 @@ import {
   CREATEEMPLOYEEDETAIL,
   GETACCESSORIES,
   GETPROJECTES,
+  GET_COMPLAINTS,
   GET_PROJECTEMPLOYEEDATA,
   ADD_PROJECTDETAILS
 } from "../actions/inventoryAdminAction";
@@ -16,6 +17,7 @@ const initialState = {
   projectes: null,
   companyId: 1,
   adminbranchId: 1,
+  complaintsList: null,
   projectEmployeeDetail: null,
   addprojectdata: null
 };
@@ -56,18 +58,26 @@ export default function inventoryAdmin(state = initialState, action) {
         projectes: action.payload
       }
     }
-    case GET_PROJECTEMPLOYEEDATA: {
-      return {
-        ...state,
-        projectEmployeeDetail: action.payload
-      }
-    }
+
     case ADD_PROJECTDETAILS: {
       return {
         ...state,
         addprojectdata: action.payload
-      }
+      }    
     }
+    case GET_COMPLAINTS: {
+      return {
+        ...state,
+        complaintsList: action.payload
+      };
+    }
+    case GET_PROJECTEMPLOYEEDATA: {
+      return {
+        ...state,
+        projectEmployeeDetail: action.payload
+      };
+    }
+   
     default:
       return state;
   }
