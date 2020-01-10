@@ -3,15 +3,21 @@ import {
   GET_ADMINDASHBOARDDETAILS,
   CREATEEMPLOYEEDETAIL,
   GETACCESSORIES,
-  GETPROJECTES
+  GETPROJECTES,
+  GET_PROJECTEMPLOYEEDATA,
+  ADD_PROJECTDETAILS
 } from "../actions/inventoryAdminAction";
 
 const initialState = {
   adminDashboardDetail: null,
   employeeDetail: null,
-  createEmp:null,
-  accessories:null,
-  projectes:null
+  createEmp: null,
+  accessories: null,
+  projectes: null,
+  companyId: 1,
+  adminbranchId: 1,
+  projectEmployeeDetail: null,
+  addprojectdata: null
 };
 
 export default function inventoryAdmin(state = initialState, action) {
@@ -35,18 +41,31 @@ export default function inventoryAdmin(state = initialState, action) {
       return {
         ...state,
         createEmp: action.payload
-      }
+
+      };
     }
-    case GETACCESSORIES :{
+    case GETACCESSORIES: {
       return {
         ...state,
-        accessories:action.payload
+        accessories: action.payload
       }
     }
-    case GETPROJECTES :{
+    case GETPROJECTES: {
       return {
         ...state,
-        projectes:action.payload
+        projectes: action.payload
+      }
+    }
+    case GET_PROJECTEMPLOYEEDATA: {
+      return {
+        ...state,
+        projectEmployeeDetail: action.payload
+      }
+    }
+    case ADD_PROJECTDETAILS: {
+      return {
+        ...state,
+        addprojectdata: action.payload
       }
     }
     default:

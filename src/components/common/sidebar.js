@@ -209,6 +209,11 @@ class Sidebar extends Component {
         this.props.history.push('/app/notes-directory');
         break;
       }
+
+      case 'projects': {
+        this.props.history.push('/app/projects-directory');
+        break;
+      }
       case 'timetable': {
         this.props.history.push('/app/professor-timetable');
         break;
@@ -581,18 +586,18 @@ class Sidebar extends Component {
                             <i className="icon cg-notebook"></i>Accessories
                           </a>
                         </li>
-                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'pastyear')}>
-                          <a className={this.getLiCss('pastyear')}>
+                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'projects')}>
+                          <a className={this.getLiCss('projects')}>
                             <i className="icon cg-line-chart"></i>Projects
                           </a>
                         </li>
                         <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, "finance")}>
-                          <a className={this.getLiCss('pastyear')}>
+                          <a className={this.getLiCss('finance')}>
                             <i className="icon cg-purse"></i>Finance
                           </a>
                         </li>
                         <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'enquiry')}>
-                          <a className={this.getLiCss('pastyear')}>
+                          <a className={this.getLiCss('complaints')}>
                             <i className="icon cg-notebook"></i>Complaints
                           </a>
                         </li>
@@ -636,8 +641,8 @@ class Sidebar extends Component {
                             <i className="icon cg-notebook"></i>Accessories
                           </a>
                         </li>
-                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'pastyear')}>
-                          <a className={this.getLiCss('pastyear')}>
+                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'projects')}>
+                          <a className={this.getLiCss('projects')}>
                             <i className="icon cg-line-chart"></i>Projects
                           </a>
                         </li>

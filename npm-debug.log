@@ -7,7 +7,7 @@
 6 silly lifecycle @~prestart: no script for prestart, continuing
 7 info lifecycle @~start: @
 8 verbose lifecycle @~start: unsafe-perm in lifecycle true
-9 verbose lifecycle @~start: PATH: /usr/share/npm/bin/node-gyp-bin:/home/bb25/Invetory/frontend/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-11-oracle/bin:/usr/lib/jvm/java-11-oracle/db/bin
+9 verbose lifecycle @~start: PATH: /usr/share/npm/bin/node-gyp-bin:/home/bb25/Invetory/frontend/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-11-oracle/bin:/usr/lib/jvm/java-11-oracle/db/bin:/usr/lib/jvm/java-11-oracle/bin:/usr/lib/jvm/java-11-oracle/db/bin
 10 verbose lifecycle @~start: CWD: /home/bb25/Invetory/frontend
 11 silly lifecycle @~start: Args: [ '-c', 'react-scripts start -h 0.0.0.0' ]
 12 silly lifecycle @~start: Returned: code: 1  signal: null
