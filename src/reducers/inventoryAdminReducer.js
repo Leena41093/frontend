@@ -1,22 +1,23 @@
 import {
-    GET_FINANCEINSTITUTEDETAIL,
+   GETEMPDETAIL,
     GET_ADMINDASHBOARDDETAILS
     
   } from "../actions/inventoryAdminAction";
   
   const initialState = {
-    financeInstituteDetail: null,
     adminDashboardDetail:null,
     companyId:1,
-    adminbranchId:1,    
+    adminbranchId:1,  
+    employeeDetail:null  
   };
   
   export default function inventoryAdmin(state = initialState, action) {
     switch (action.type) {
-      case GET_FINANCEINSTITUTEDETAIL: {
+      
+      case GETEMPDETAIL: {
         return {
           ...state,
-          financeInstituteDetail: action.payload
+          employeeDetail: action.payload
         };
       }
       case GET_ADMINDASHBOARDDETAILS:{

@@ -8,7 +8,9 @@ import {
   updateProfessorDetails, deleteProfessorBatch, updateUserRole, deleteStudentProfessor,
   getIsProfessorAdmin
 } from '../../actions/index';
+
 import { getProfilePic } from '../../actions/index';
+import { getEmployeeDetail } from '../../actions/inventoryAdminAction';
 import $ from "jquery";
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
@@ -24,6 +26,9 @@ class FacultyDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      Employee: {
+        employeeDetail: {},
+      },
       Professor: {
         professorDetail: {},
         batchDetails: [],
@@ -51,7 +56,8 @@ class FacultyDetail extends Component {
       branchId: 0,
       id: 0,
       userProfileUrl: "",
-      instituteId: 0
+      instituteId: 0,
+      emp_id:null,
     }
   }
 
@@ -88,42 +94,28 @@ class FacultyDetail extends Component {
   componentWillMount() {
 
     var pro = this.props ? this.props.location.state.data : ""
-    if (pro.isProfessorAdmin) {
-      this.setState({ professor: true, admin: true });
-    } else {
-      if (pro.designation == "Professor") {
-        this.setState({ professor: true, admin: false });
-      } if (pro.designation == "INSTITUTE") {
-        this.setState({ professor: false, admin: true });
+    console.log("data",pro);
+      if (pro.emp_id != undefined) {
+        this.setState({ emp_id: pro.emp_id })
       }
-    }
-    if (pro.state == true) {
-      this.setState({ isNewProfessor: true })
-    } else {
-      if (pro.professor_id != undefined) {
-        this.setState({ professor_id: pro.professor_id })
-      }
-      let data = {
-        'institude_id': this.props.instituteId,
-        'branch_id': this.props.branchId,
-        'professor_id': pro.professor_id,
-        token: this.props.token,
-      }
-      this.props.getProfessorDetail(data).then(() => {
-        let res = this.props.professorDetail;
-        if (res && res.status == 200) {
-          if (res.data.response && res.data.response.activity) {
-            this.setState({
-              Professor: res.data.response,
-              homeworkCount: res.data.response.activity.homeworkCount,
-              quizCount: res.data.response.activity.quizCount,
-              pro
-            });
-          }
-
+      let apiData = {
+        company_id: this.props.company_id,
+        branch_id: this.props.branch_id,
+        payload: {
+          "emp_id":pro.emp_id
         }
-      });
-    }
+      }
+      let { Employee } = this.state;
+
+      this.props.getEmployeeDetail(apiData).then(() => {
+        // console.log("res", this.props.employeeDetail);
+        let res = this.props.employeeDetail;
+        if (res && res.status == 200) {
+          Employee = { ...Employee, employeeDetail: res.data.response.empployeeDetails }
+          this.setState({ Employee })
+        }
+      })
+    
   }
 
   componentDidMount() {
@@ -140,34 +132,34 @@ class FacultyDetail extends Component {
     return isValidForm;
   }
 
-  onPersonalDetailChange(propertyName, event) {
-    if (propertyName == "firstName") {
-      this.setState({ isFirstNameVisible: false })
-    }
-    if (propertyName == "mobile") {
-      this.setState({ isPhoneNumberVisible: false })
-    }
-    if (propertyName == "email") {
-      this.setState({ isEmailVisible: false })
-    }
-    if (propertyName == "college") {
-      this.setState({ isCollegeVisible: false })
-    }
-    if (propertyName == "DOB") {
-      this.setState({ isDOBVisible: false })
-    }
-    if (propertyName == "emergency_contact_name") {
-      this.setState({ isECNVisible: false })
-    }
-    if (propertyName == "emergency_contact") {
-      this.setState({ isECVisible: false })
-    }
-    let Professor = this.state.Professor;
-    let professorDetail = Professor.professorDetail;
-    professorDetail = { ...professorDetail, [propertyName]: event.target.value };
-    Professor = { ...Professor, professorDetail };
-    this.setState({ Professor });
-  }
+  // onPersonalDetailChange(propertyName, event) {
+  //   if (propertyName == "firstName") {
+  //     this.setState({ isFirstNameVisible: false })
+  //   }
+  //   if (propertyName == "mobile") {
+  //     this.setState({ isPhoneNumberVisible: false })
+  //   }
+  //   if (propertyName == "email") {
+  //     this.setState({ isEmailVisible: false })
+  //   }
+  //   if (propertyName == "college") {
+  //     this.setState({ isCollegeVisible: false })
+  //   }
+  //   if (propertyName == "DOB") {
+  //     this.setState({ isDOBVisible: false })
+  //   }
+  //   if (propertyName == "emergency_contact_name") {
+  //     this.setState({ isECNVisible: false })
+  //   }
+  //   if (propertyName == "emergency_contact") {
+  //     this.setState({ isECVisible: false })
+  //   }
+  //   let Professor = this.state.Professor;
+  //   let professorDetail = Professor.professorDetail;
+  //   professorDetail = { ...professorDetail, [propertyName]: event.target.value };
+  //   Professor = { ...Professor, professorDetail };
+  //   this.setState({ Professor });
+  // }
 
   onSaveChanges(event) {
     let { pro } = this.state;
@@ -204,10 +196,10 @@ class FacultyDetail extends Component {
     this.props.history.push('/app/faculty-directory')
   }
 
-  OnChangeEditable(event) {
-    let editable = !this.state.editable
-    this.setState({ editable });
-  }
+  // OnChangeEditable(event) {
+  //   let editable = !this.state.editable
+  //   this.setState({ editable });
+  // }
 
   onProfessorBatchAdd(payload) {
     let data1 = {
@@ -263,49 +255,49 @@ class FacultyDetail extends Component {
     })
   }
 
-  handleChange(date) {
-    let Professor = this.state.Professor;
-    let professorDetail = Professor.professorDetail;
-    professorDetail = { ...professorDetail, DOB: date };
-    Professor = { ...Professor, professorDetail };
-    this.setState({ Professor });
-  }
+  // handleChange(date) {
+  //   let Professor = this.state.Professor;
+  //   let professorDetail = Professor.professorDetail;
+  //   professorDetail = { ...professorDetail, DOB: date };
+  //   Professor = { ...Professor, professorDetail };
+  //   this.setState({ Professor });
+  // }
 
-  onSelectProfessorRole() {
-    let { professor } = this.state;
-    professor = !professor
-    if (professor) {
-      this.setState({ isRoleSelected: false })
-    }
-    this.setState({ professor });
-  }
+  // onSelectProfessorRole() {
+  //   let { professor } = this.state;
+  //   professor = !professor
+  //   if (professor) {
+  //     this.setState({ isRoleSelected: false })
+  //   }
+  //   this.setState({ professor });
+  // }
 
-  onSelectAdminRole() {
-    let { admin } = this.state;
-    admin = !admin
-    if (admin) {
-      this.setState({ isRoleSelected: false })
-    }
-    this.setState({ admin });
-  }
+  // onSelectAdminRole() {
+  //   let { admin } = this.state;
+  //   admin = !admin
+  //   if (admin) {
+  //     this.setState({ isRoleSelected: false })
+  //   }
+  //   this.setState({ admin });
+  // }
 
-  onChangeRole(payload) {
-    let apiData = {
-      institude_id: this.props.instituteId,
-      branch_id: this.props.branchId,
-      payload: payload,
-      token: this.props.token
-    }
-    this.props.updateUserRole(apiData).then(() => {
-      let res = this.props.roleUpdate;
-      if (res && res.status == 200) {
-        this.props.history.push('/app/faculty-directory')
-        infoToste("Changes Saved Successfully");
-      } else if (res && res.status == 500) {
-        infoToste("User Designation Not Update");
-      }
-    })
-  }
+  // onChangeRole(payload) {
+  //   let apiData = {
+  //     institude_id: this.props.instituteId,
+  //     branch_id: this.props.branchId,
+  //     payload: payload,
+  //     token: this.props.token
+  //   }
+  //   this.props.updateUserRole(apiData).then(() => {
+  //     let res = this.props.roleUpdate;
+  //     if (res && res.status == 200) {
+  //       this.props.history.push('/app/faculty-directory')
+  //       infoToste("Changes Saved Successfully");
+  //     } else if (res && res.status == 500) {
+  //       infoToste("User Designation Not Update");
+  //     }
+  //   })
+  // }
 
   onDeleteModel(key, id) {
     let { deleteObj } = this.state;
@@ -369,41 +361,41 @@ class FacultyDetail extends Component {
     })
   }
 
-  quizCountShow() {
-    if (this.state.quizCount == 0) {
-      return (
-        <div>
-          <label>Quizes</label>
-          <span className="info-type st-disabled">Not Added Yet</span>
-        </div>
-      )
-    } else {
-      return (
-        <div>
-          <label>Quizes</label>
-          <span className="info-type st-alert">{this.state.Professor.activity.quizCount}</span>
-        </div>
-      )
-    }
-  }
+  // quizCountShow() {
+  //   if (this.state.quizCount == 0) {
+  //     return (
+  //       <div>
+  //         <label>Quizes</label>
+  //         <span className="info-type st-disabled">Not Added Yet</span>
+  //       </div>
+  //     )
+  //   } else {
+  //     return (
+  //       <div>
+  //         <label>Quizes</label>
+  //         <span className="info-type st-alert">{this.state.Professor.activity.quizCount}</span>
+  //       </div>
+  //     )
+  //   }
+  // }
 
-  homeworkCountShow() {
-    if (this.state.homeworkCount == 0) {
-      return (
-        <div>
-          <label>Homeworks</label>
-          <span className="info-type st-disabled">Not Added Yet</span>
-        </div>
-      )
-    } else {
-      return (
-        <div>
-          <label>Homeworks</label>
-          <span className="info-type st-alert">{this.state.Professor.activity.homeworkCount}</span>
-        </div>
-      )
-    }
-  }
+  // homeworkCountShow() {
+  //   if (this.state.homeworkCount == 0) {
+  //     return (
+  //       <div>
+  //         <label>Homeworks</label>
+  //         <span className="info-type st-disabled">Not Added Yet</span>
+  //       </div>
+  //     )
+  //   } else {
+  //     return (
+  //       <div>
+  //         <label>Homeworks</label>
+  //         <span className="info-type st-alert">{this.state.Professor.activity.homeworkCount}</span>
+  //       </div>
+  //     )
+  //   }
+  // }
 
   renderBatch() {
     return this.state.Professor.batchDetails.map((batch, index) => {
@@ -432,60 +424,8 @@ class FacultyDetail extends Component {
   }
 
   renderPersonalDetails() {
-    if (this.state.editable) {
-      return (
-        <div className="c-card__form">
-          <div className="divider-container">
-            <div className="divider-block text--left">
-              <div className="form-group static-fld">
-                <label>Name</label>
-                <input type="text" className="form-control" value={this.state.Professor.professorDetail.firstname} onChange={this.onPersonalDetailChange.bind(this, "firstname")} placeholder="Full Name Goes Here" />
-                {this.state.isFirstNameVisible ? <label className="help-block" style={{ color: "red" }}>Please enter valid name </label> : <br />}
-              </div>
-              <div className="form-group static-fld">
-                <label>Phone</label>
-                <input type="text" className="form-control" value={this.state.Professor.professorDetail.mobile} onChange={this.onPersonalDetailChange.bind(this, "mobile")} placeholder="Phone" />
-                {this.state.isPhoneNumberVisible ? <label className="help-block" style={{ color: "red" }}>Please enter valid phone number</label> : <br />}
-              </div>
-            </div>
-            <div className="divider-block text--left">
-              <div className="c-user-pic">
-                <span className="fld-title">Avatar</span>
-                <div className="user--img"><img src={this.state.Professor.profilePicture ? this.state.Professor.profilePicture : "/images/avatars/Avatar_default.jpg"} alt="Avatar" /></div>
-                <button className="link--btn">Change Avatar</button>
-              </div>
-            </div>
-          </div>
-
-          <div className="form-group static-fld">
-            <label>Email</label>
-            <input type="email" className="form-control" value={this.state.Professor.professorDetail.email} onChange={this.onPersonalDetailChange.bind(this, "email")} placeholder="Email" />
-            {this.state.isEmailVisible ? <label className="help-block" style={{ color: "red" }}>Please enter email</label> : <br />}
-          </div>
-          <div className="form-group static-fld">
-            <label>College</label>
-            <input type="text" className="form-control" value={this.state.Professor.professorDetail.college} onChange={this.onPersonalDetailChange.bind(this, "college")} placeholder="College" />
-            {this.state.isCollegeVisible ? <label className="help-block" style={{ color: "red" }}>Please enter college name</label> : <br />}
-          </div>
-          <div className="form-group static-fld">
-            <label>Date of Birth</label>
-            <DatePicker className="form-control" selected={this.state.Professor.professorDetail.DOB ? moment(this.state.Professor.professorDetail.DOB) : moment()} onChange={this.handleChange.bind(this)} />
-            {this.state.isDOBVisible ? <label className="help-block" style={{ color: "red" }}>Please enter DOB</label> : <br />}
-          </div>
-          <div className="form-group static-fld">
-            <label>Emergency Contact Name</label>
-            <input type="text" className="form-control" value={this.state.Professor.professorDetail.emergency_contact_name} onChange={this.onPersonalDetailChange.bind(this, "emergency_contact_name")} placeholder="Emergency Contact Name" />
-            {this.state.isECNVisible ? <label className="help-block" style={{ color: "red" }}>Please enter emergency contact name</label> : <br />}
-          </div>
-          <div className="form-group static-fld">
-            <label>Emergency Contact</label>
-            <input type="text" className="form-control" value={this.state.Professor.professorDetail.emergency_contact} onChange={this.onPersonalDetailChange.bind(this, "emergency_contact")} placeholder="Emergency Contact" />
-            {this.state.isECVisible ? <label className="help-block" style={{ color: "red" }}>Please enter emergency contact</label> : <br />}
-          </div>
-        </div>
-      )
-    }
-    else {
+    let { Employee } = this.state;
+    
       return (
         <div>
           <div className="c-card__form">
@@ -493,11 +433,11 @@ class FacultyDetail extends Component {
               <div className="divider-block text--left">
                 <div className="form-group static-fld">
                   <label>Name</label>
-                  <span className="info-type">{this.state.Professor.professorDetail ? this.state.Professor.professorDetail.firstname + " " + this.state.Professor.professorDetail.lastname : "Not Added Yet"}</span>
+                  <span className="info-type">{Employee.employeeDetail ? Employee.employeeDetail.emp_name : "Not Added Yet"}</span>
                 </div>
                 <div className="form-group static-fld">
-                  <label>Phone</label>
-                  <span className="info-type">{this.state.Professor.professorDetail ? this.state.Professor.professorDetail.mobile : "Not Added Yet"}</span>
+                  <label>Address</label>
+                  <span className="info-type">{Employee.employeeDetail ? Employee.employeeDetail.address : "Not Added Yet"}</span>
 
                 </div>
               </div>
@@ -510,33 +450,30 @@ class FacultyDetail extends Component {
 
             <div className="form-group static-fld">
               <label>Email</label>
-              <span className="info-type">{this.state.Professor.professorDetail ? (this.state.Professor.professorDetail.email != "") ? this.state.Professor.professorDetail.email : "Not Added Yet." : "Not Added Yet."}</span>
+              <span className="info-type">{Employee.employeeDetail ? Employee.employeeDetail.email : "Not Added Yet."}</span>
             </div>
             <div className="form-group static-fld">
-              <label>College</label>
-              <span className="info-type">{this.state.Professor.professorDetail ? (this.state.Professor.professorDetail.college != "") ? this.state.Professor.professorDetail.college : "Not Added Yet." : "Not Added Yet."}</span>
+              <label>Designation</label>
+              <span className="info-type">{Employee.employeeDetail ? Employee.employeeDetail.designation : "Not Added Yet."}</span>
 
             </div>
             <div className="form-group static-fld">
               <label>Date of Birth</label>
-              <span className="info-type">{this.state.Professor.professorDetail ? moment(this.state.Professor.professorDetail.DOB).format("DD-MM-YYYY") : "Not Added Yet"}</span>
+              <span className="info-type">{Employee.employeeDetail ?  moment(Employee.employeeDetail.DOB).format("DD-MM-YYYY")  : "Not Added Yet"}</span>
             </div>
             <div className="form-group static-fld">
-              <label>Emergency Contact Name</label>
+              <label>Company Name</label>
               <span className="info-type">{this.state.Professor.professorDetail ? (this.state.Professor.professorDetail.emergency_contact_name != "") ? this.state.Professor.professorDetail.emergency_contact_name : "Not Added Yet." : "Not Added Yet."}</span>
             </div>
             <div className="form-group static-fld">
-              <label>Emergency Contact</label>
+              <label>Contact Number</label>
               <span className="info-type">{this.state.Professor.professorDetail ? (this.state.Professor.professorDetail.emergency_contact != "") ? this.state.Professor.professorDetail.emergency_contact : "Not Added Yet." : "Not Added Yet."}</span>
             </div>
           </div>
           <div className="c-card__btnCont">
-            {/* <button style={{ marginTop: '57px', height: '40px' }} className="c-btn primary btn-custom" onClick={this.OnChangeEditable.bind(this)}>
-              Edit Personal Details</button> */}
           </div>
         </div>
       )
-    }
   }
 
   renderBatchDetail() {
@@ -649,7 +586,7 @@ class FacultyDetail extends Component {
   }
 }
 
-const mapStateToProps = ({ app, auth }) => ({
+const mapStateToProps = ({ app, auth, inventoryAdmin }) => ({
   professorDetail: app.professorDetail,
   classes: app.classes,
   subjects: app.subjects,
@@ -663,7 +600,10 @@ const mapStateToProps = ({ app, auth }) => ({
   studentProfessorDelete: app.studentProfessorDelete,
   getProfilePicture: app.getProfilePicture,
   profilePictureUrl: app.profilePictureUrl,
-  ProfessorAdmin: app.professorAdmin
+  ProfessorAdmin: app.professorAdmin,
+  employeeDetail: inventoryAdmin.employeeDetail,
+  company_id:app.companyId,
+  branch_id:app.AdminbranchId
 })
 
 const mapDispatchToProps = dispatch =>
@@ -679,7 +619,8 @@ const mapDispatchToProps = dispatch =>
       updateUserRole,
       deleteStudentProfessor,
       getProfilePic,
-      getIsProfessorAdmin
+      getIsProfessorAdmin,
+      getEmployeeDetail,
     },
     dispatch
   )
