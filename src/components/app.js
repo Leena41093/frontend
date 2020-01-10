@@ -70,6 +70,7 @@ import AttendanceDirectory from '../components/administration/attendanceDirector
 // import StudentReports from '../components/student/studentReport';
 import PdfView from '../components/professor/pdfView';
 import FinanceDashboard from '../components/finance/financeDashboard/financeDashboard';
+import ProjectDirectory from '../components/professor/projectDirectory'
 // import CreateNewInvoice from '../components/finance/financeDashboard/createNewInvoice';
 // import AllStudentsFinanceDirectory from '../components/finance/financeDashboard/allStudentsFinanceDirectory';
 // import StudentFinanceDetail from '../components/finance/financeDashboard/studentFinanceDetail'
@@ -169,7 +170,7 @@ export const App = ({ match, history }) => {
          <Route path={`${match.url}/finance-unpaidinvoicereciept`} component={UnpaidInvoiceReciept} />
         <Route path={`${match.url}/finance-paidinvoicereciept`} component={PaidInvoiceReciept} /> 
       <Route path={`${match.url}/student-finance-dashboard`} component={StudentFinanceDashboard} />  */}
-        
+         <Route path={`${match.url}/projects-directory`} component={ProjectDirectory} />
         </div>
       </div>
     )
