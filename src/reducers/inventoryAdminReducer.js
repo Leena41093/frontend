@@ -6,7 +6,12 @@ import {
   GETPROJECTES,
   GET_COMPLAINTS,
   GET_PROJECTEMPLOYEEDATA,
-  ADD_PROJECTDETAILS
+  ADD_PROJECTDETAILS,
+  ASSIGN_PROJECT_ACCESSORIES,
+  DELETE_PROJECT,
+  DELETE_ACCESSORIES,
+  DELETE_EMP
+
 } from "../actions/inventoryAdminAction";
 
 const initialState = {
@@ -19,7 +24,11 @@ const initialState = {
   adminbranchId: 1,
   complaintsList: null,
   projectEmployeeDetail: null,
-  addprojectdata: null
+  addprojectdata: null,
+  assignProjectAccessories:null,
+  deleteProject:null,
+  deleteAccessories:null,
+  deleteEmp:null,
 };
 
 export default function inventoryAdmin(state = initialState, action) {
@@ -77,7 +86,31 @@ export default function inventoryAdmin(state = initialState, action) {
         projectEmployeeDetail: action.payload
       };
     }
-   
+    case ASSIGN_PROJECT_ACCESSORIES:{
+      return {
+        ...state,
+        assignProjectAccessories: action.payload
+      };
+    }
+    case DELETE_PROJECT:{
+      return {
+        ...state,
+        deleteProject: action.payload
+      };
+    }
+    case DELETE_ACCESSORIES:{
+      return {
+        ...state,
+        deleteAccessories: action.payload
+      };
+    }
+    case DELETE_EMP :{
+      return {
+        ...state,
+        deleteEmp: action.payload
+      };
+    }
+  
     default:
       return state;
   }
