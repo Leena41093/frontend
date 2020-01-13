@@ -131,16 +131,26 @@ export class AddStudentBatchModel extends Component {
 	}
 
 	onHandleClick(event) {
-		let { batch_student } = this.state;
-		let data = batch_student;
-
-		this.setState({ batch_student: [], selectedSubjectArray: [], selectedSubjects: [], classname: "", subjects: [] })
-
-		if (data.length == 0) {
-			errorToste('Insufficient Data(Can Not Add Batch Without Class,Subject And Batch.)')
-		} else {
-			this.props.onAddStudentBatch(data);
+		let { selectedProjectId, selectedAccessoriesId } = this.state;
+		let data = {
+			company_id: this.props.company_id,
+			branch_id: this.props.branch_id,
+			payload: {
+				"projectsIds": selectedProjectId,
+				"accessoryIds": selectedAccessoriesId,
+				"emp_id": this.props.emp_id
+			}
 		}
+		
+		this.props.assignProjectAndAccessories(data).then(() => {
+			let res = this.props.assignProjectAccessories;
+			console.log("res", res);
+			if(res && res.data.status == 200){
+				this.props.onAddStudentBatch(res);
+			}else{
+				errorToste('Project not Added SuccessFully')
+			}
+		})
 	}
 
 	selectAll(event) {
@@ -370,7 +380,7 @@ export class AddStudentBatchModel extends Component {
 						<div className="modal-footer">
 							<div className="clearfix text--right">
 								<button className="c-btn grayshade" data-dismiss="modal">Cancel</button>
-								<button className="c-btn primary" onClick={this.onHandleClick.bind(this)} >Add Batches</button>
+								<button className="c-btn primary" onClick={this.onHandleClick.bind(this)} >Add Projectes & Accessories</button>
 							</div>
 						</div>
 					</div>

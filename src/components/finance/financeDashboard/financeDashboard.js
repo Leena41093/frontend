@@ -636,7 +636,8 @@ const mapStateToProps = ({ finance, app, auth }) => ({
   instituteIncome: finance.instituteIncome,
   instituteExpence: finance.instituteExpence,
   invoiceReceiptPrint: finance.invoiceReceiptPrint,
-  incomeExpenseDetailsDatas: finance.incomeExpenseDetailsData
+  incomeExpenseDetailsDatas: finance.incomeExpenseDetailsData,
+  
 });
 
 const mapDispatchToProps = dispatch =>
