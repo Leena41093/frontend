@@ -243,10 +243,10 @@ export function getAllEmployee(data) {
   };
 
   let URL = `http://35.154.43.111:9000/company/${data.company_id}/branch/${data.branch_id}/get_employee_details/  `;
-  let payload = data.payload
+  
   return dispatch => {
     return axios
-      .post(URL,payload,API_CONFIG)
+      .get(URL,API_CONFIG)
       .then(function (response) {
         dispatch({
           type: GET_ALLEMPLOYEES,
