@@ -10,7 +10,8 @@ import {
 } from '../../actions/index';
 
 import { getProfilePic } from '../../actions/index';
-import { getEmployeeDetail,getProjectEmployeeData ,getAllEmployee,projectEmployeeDetails} from '../../actions/inventoryAdminAction';
+import { getEmployeeDetail,getProjectEmployeeData ,getAllEmployee,projectEmployeeDetails,deleteProject,
+  addEmployeeProject, deleteProjectEmployee} from '../../actions/inventoryAdminAction';
 import $ from "jquery";
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
@@ -115,7 +116,7 @@ class ProjectDetails extends Component {
 
     this.props.projectEmployeeDetails(apiData).then(()=>{
       let resdata = this.props.projectEmployeeDetailsDatas;
-      if( resdata ){
+      if( resdata && resdata.status ==200 ){
         console.log(resdata)
         this.setState({addedEmployees:resdata.data.response},()=>{
           console.log("incoming employee data: ",this.state.addedEmployees);
@@ -167,12 +168,33 @@ class ProjectDetails extends Component {
     }
   }
 
-  deleteEmp(employee){
+  deleteEmp(employee,empid){
    
       let {addedEmployees} = this.state;
+      let empidarray = [];
       addedEmployees.splice(employee, 1);
-      this.setState({ addedEmployees });
-    
+      this.setState({ addedEmployees },()=>{
+      this.state.addedEmployees.forEach((emp,index)=>{
+        empidarray.push(emp.emp_id);
+    })
+    var pro = this.props ? this.props.location.state.data : ""
+     let apidata={
+      company_id: this.props.company_id,
+      branch_id: this.props.branch_id,
+      payload: {
+        project_id:pro.project_id,
+        emp_id:empid
+      }
+     }
+     this.props.deleteProjectEmployee(apidata).then(()=>{
+      let res = this.props.deleteEmployee;
+      if(res && res.data.status == 200){
+        successToste("Employee Deleted Successfully");
+      }
+     
+     });
+   
+  });
   }
 
   renderEmployeeList() {
@@ -186,7 +208,7 @@ class ProjectDetails extends Component {
               {emp.emp_name}
               <div className="card__elem__setting">
 
-                <button><i className="icon cg-rubbish-bin-delete-button" onClick={this.deleteEmp.bind(this, index)}></i></button>
+                <button><i className="icon cg-rubbish-bin-delete-button" onClick={this.deleteEmp.bind(this, index,emp.emp_id)}></i></button>
               </div>
             </div>
           </li>
@@ -196,8 +218,33 @@ class ProjectDetails extends Component {
   }
 
   onAddEmployess(data){
-   this.setState({addedEmployees:data},()=>{
-     successToste("Employee Added Successfully");
+    console.log("===>",data)
+    let {addedEmployees} = this.state;
+    let empidarray =[];
+    data.forEach((emps,i)=>{
+      let obj = {emp_id: emps.value,emp_name:emps.label}
+      addedEmployees.push(obj);
+    })
+    addedEmployees.forEach((emp,index)=>{
+        empidarray.push(emp.emp_id);
+    })
+   this.setState({addedEmployees},()=>{
+    var pro = this.props ? this.props.location.state.data : ""
+     let apidata={
+      company_id: this.props.company_id,
+      branch_id: this.props.branch_id,
+      payload: {
+        project_id:pro.project_id,
+        empIds:empidarray
+      }
+     }
+     this.props.addEmployeeProject(apidata).then(()=>{
+      let res = this.props.addEmployee;
+      if(res && res.data.status == 200){
+        successToste("Employee Added Successfully");
+      }
+     
+     });
    })
   }
 
@@ -337,9 +384,23 @@ class ProjectDetails extends Component {
   }
 
 
-  onDeleteModel(key, id) {
-    let { deleteObj } = this.state;
-    this.setState({ deleteObj: key, id });
+  onDeleteModel() {
+    var pro = this.props ? this.props.location.state.data : ""
+    let apiData = {
+      company_id: this.props.company_id,
+      branch_id: this.props.branch_id,
+      payload: {
+        "project_id":pro.project_id
+      }
+    }
+
+    this.props.deleteProject(apiData).then(()=>{
+      let res = this.props.deleteProjects;
+      if(res && res.data.status == 200){
+        successToste("Project Delete Successfully");
+        this.props.history.push('/app/projects-directory')
+      }
+    })
   }
 
   onDeleteEntry(flag) {
@@ -445,7 +506,7 @@ class ProjectDetails extends Component {
           <span className="c-batchList__title">{batch.className} <img src="/images/Arrow.png" alt="logo" style={{ height: "10px", width: "20px" }} /> {batch.batchName}
             <div className="card__elem__setting1">
 
-              <button style={{ marginRight: "-220px", marginTop: "-7px" }} data-toggle="modal" data-target="#quizSubmit" onClick={this.onDeleteModel.bind(this, "deleteBatchProfessor", batch.timeTable[0].batch_id)} className="act-delete pull-right"></button>
+              <button style={{ marginRight: "-220px", marginTop: "-7px" }} data-toggle="modal" data-target="#quizSubmit" onClick={this.onDeleteModel.bind(this)} className="act-delete pull-right"></button>
             </div>
 
           </span>
@@ -545,7 +606,6 @@ class ProjectDetails extends Component {
             <div className="divider-block text--right">
               <button className="c-btn grayshade" onClick={this.backButton.bind(this)}>Back</button>
               <button className="c-btn prime" data-toggle="modal" data-target="#quizSubmit" onClick={this.onDeleteModel.bind(this, "deleteProfessor", pro.professor_id)}>Delete</button>
-              <button className="c-btn prime" onClick={this.onSaveChanges.bind(this)} >Save changes</button>
             </div>
           </div>
         </div>
@@ -563,7 +623,7 @@ class ProjectDetails extends Component {
               <div className="c-card__title">
                 <span className="c-heading-sm card--title">
                   Employess
-                <span className="c-count filled">{this.state.Professor.batchDetails.length}</span>
+                <span className="c-count filled">{this.state.addedEmployees.length}</span>
                 </span>
               </div>
               <div className="row">
@@ -618,7 +678,10 @@ const mapStateToProps = ({ app, auth, inventoryAdmin }) => ({
   branch_id:app.AdminbranchId,
   projectEmployeeDetailsData: inventoryAdmin.projectEmployeeData,
   allEmplyees:inventoryAdmin.getAllEmployees,
-  projectEmployeeDetailsDatas:inventoryAdmin.projectEmployeeDetailss
+  projectEmployeeDetailsDatas:inventoryAdmin.projectEmployeeDetailss,
+  deleteProjects :inventoryAdmin.deleteproject,
+  addEmployee :inventoryAdmin.addEmployeesToProject,
+  deleteEmployee:inventoryAdmin.deleteEmployeeFromProject
 })
 
 const mapDispatchToProps = dispatch =>
@@ -638,7 +701,10 @@ const mapDispatchToProps = dispatch =>
       getEmployeeDetail,
       getProjectEmployeeData,
       getAllEmployee,
-      projectEmployeeDetails
+      projectEmployeeDetails,
+      deleteProject,
+      addEmployeeProject,
+      deleteProjectEmployee
     },
     dispatch
   )

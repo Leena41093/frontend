@@ -15,12 +15,12 @@ export const DELETE_ACCESSORIES = 'DELETE_ACCESSORIES';
 export const DELETE_EMP = 'DELETE_EMP';
 export const GET_FINANCELIST = "GET_FINANCELIST";
 export const GET_ALLEMPLOYEES = "GET_ALLEMPLOYEES";
-<<<<<<< HEAD
 export const PROJECT_EMPLOYEE_DETAILS = "PROJECT_EMPLOYEE_DETAILS"
-=======
 export const ADD_INCOME = "ADD_INCOME";
 export const ADD_EXPENCE = "ADD_EXPENCE";
->>>>>>> 2f6c05a15288a6f04bb29b69946554519a63f2e0
+export const DELETECOMPLETEPROJECT = "DELETECOMPLETEPROJECT"
+export const ADDEMPLOYEETOPROJECT = "ADDEMPLOYEETOPROJECT"
+export const DELETEEMPLOYEEFROMPROJECT = "DELETEEMPLOYEEFROMPROJECT"
 export function getEmployeeList(data) {
   const API_CONFIG = {
     headers: {
@@ -277,10 +277,9 @@ export function getAllEmployee(data) {
   let URL = `http://35.154.43.111:9000/company/${data.company_id}/branch/${
     data.branch_id
   }/get_employee_details/  `;
-  let payload = data.payload;
   return dispatch => {
     return axios
-      .post(URL, payload, API_CONFIG)
+      .get(URL, API_CONFIG)
       .then(function(response) {
         dispatch({
           type: GET_ALLEMPLOYEES,
@@ -452,6 +451,75 @@ export function projectEmployeeDetails(data) {
       .then(function (response) {
         dispatch({
           type: PROJECT_EMPLOYEE_DETAILS,
+          payload: response
+        });
+      })
+      .catch(function (error) { });
+  };
+}
+
+export function deleteProject(data) {
+  const API_CONFIG = {
+    headers: {
+      "Content-Type": "application/json",
+      // Authorization: "JWT " + data.token
+    }
+  };
+
+  let URL = `http://35.154.43.111:9000/company/${data.company_id}/branch/${data.branch_id}/delete_project/`;
+  let payload = data.payload
+  return dispatch => {
+    return axios
+      .post(URL, payload, API_CONFIG)
+      .then(function (response) {
+        dispatch({
+          type: DELETECOMPLETEPROJECT,
+          payload: response
+        });
+      })
+      .catch(function (error) { });
+  };
+}
+
+export function addEmployeeProject(data) {
+  const API_CONFIG = {
+    headers: {
+      "Content-Type": "application/json",
+      // Authorization: "JWT " + data.token
+    }
+  };
+
+  let URL = `http://35.154.43.111:9000/company/${data.company_id}/branch/${data.branch_id}/projectEmployeeAdd/ `;
+  let payload = data.payload
+  return dispatch => {
+    return axios
+      .post(URL, payload, API_CONFIG)
+      .then(function (response) {
+        dispatch({
+          type: ADDEMPLOYEETOPROJECT,
+          payload: response
+        });
+      })
+      .catch(function (error) { });
+  };
+}
+
+export function deleteProjectEmployee(data) {
+  const API_CONFIG = {
+    headers: {
+      "Content-Type": "application/json",
+      // Authorization: "JWT " + data.token
+    }
+  };
+
+  let URL = `http://35.154.43.111:9000/company/${data.company_id}/branch/${data.branch_id}/deleteProjectEmp/`;
+  let payload = data.payload
+  return dispatch => {
+    return axios
+      .put(URL, payload, API_CONFIG)
+      .then(function (response) {
+        dispatch({
+          type: DELETEEMPLOYEEFROMPROJECT,
           payload: response
         });
       })

@@ -15,7 +15,10 @@ import {
   DELETE_PROJECT,
   DELETE_ACCESSORIES,
   DELETE_EMP,
-  PROJECT_EMPLOYEE_DETAILS
+  PROJECT_EMPLOYEE_DETAILS,
+  DELETECOMPLETEPROJECT,
+  ADDEMPLOYEETOPROJECT,
+  DELETEEMPLOYEEFROMPROJECT
 } from "../actions/inventoryAdminAction";
 
 const initialState = {
@@ -36,12 +39,12 @@ const initialState = {
   accessories: null,
   projectes: null,
   complaintsList: null,
-<<<<<<< HEAD
-  projectEmployeeDetailss:null
-=======
+  projectEmployeeDetailss:null,
   incomeAdd: null,
-  expenceAddition: null
->>>>>>> 2f6c05a15288a6f04bb29b69946554519a63f2e0
+  expenceAddition: null,
+  deleteproject:null,
+  addEmployeesToProject:null,
+  deleteEmployeeFromProject:null
 };
 
 export default function inventoryAdmin(state = initialState, action) {
@@ -133,14 +136,12 @@ export default function inventoryAdmin(state = initialState, action) {
         financeList: action.payload
       };
     }
-<<<<<<< HEAD
     case PROJECT_EMPLOYEE_DETAILS:{
       return{
         ...state,
-        projectEmployeeDetails:action.payload
+        projectEmployeeDetailss:action.payload
       }
     }
-=======
     case ADD_INCOME:
       return {
         ...state,
@@ -151,7 +152,21 @@ export default function inventoryAdmin(state = initialState, action) {
         ...state,
         expenceAddition: action.payload
       };
->>>>>>> 2f6c05a15288a6f04bb29b69946554519a63f2e0
+      case DELETECOMPLETEPROJECT:
+        return{
+          ...state,
+          deleteproject:action.payload
+        }
+        case ADDEMPLOYEETOPROJECT:
+          return{
+          ...state,
+          addEmployeesToProject : action.payload
+          }
+          case DELETEEMPLOYEEFROMPROJECT:
+            return{
+              ...state,
+              deleteEmployeeFromProject: action.payload
+            }
     default:
       return state;
   }
