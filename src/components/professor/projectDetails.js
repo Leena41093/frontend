@@ -193,7 +193,7 @@ class ProjectDetails extends Component {
   }
 
   backButton(event) {
-    this.props.history.push('/app/faculty-directory')
+    this.props.history.push('/app/projects-directory')
   }
 
   // OnChangeEditable(event) {
@@ -492,11 +492,11 @@ class ProjectDetails extends Component {
         <ToastContainer />
         <div className="clearfix">
           <div className="c-brdcrum">
-            <a className="linkbtn hover-pointer" onClick={this.backButton.bind(this)} >Back to Staff Directory</a>
+            <a className="linkbtn hover-pointer" onClick={this.backButton.bind(this)} >Back to Project Directory</a>
           </div>
           <div className="divider-container">
             <div className="divider-block text--left">
-              <span className="c-heading-lg nomargin">Staff Details</span>
+              <span className="c-heading-lg nomargin">Project Details</span>
             </div>
           </div>
         </div>
@@ -544,7 +544,7 @@ class ProjectDetails extends Component {
               </div>
               {this.renderBatchDetail()}
               <div className="c-card__btnCont">
-                {pro.designation == "INSTITUTE" ? "" : <button className="c-btn-large primary" data-toggle="modal" data-target="#addBatch">+ Add Batches</button>}
+                {pro.designation == "INSTITUTE" ? "" : <button className="c-btn-large primary" data-toggle="modal" data-target="#addBatch">+ Add Employee</button>}
               </div>
               {/* <AddStudentBatchModel professorId={this.state.Professor.professorDetail.professor_id} onAddStudentBatch={(data) => { this.onProfessorBatchAdd(data) }} {...this.props} /> */}
             </div> : ""}
