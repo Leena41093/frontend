@@ -9,6 +9,8 @@ import {
   CREATEEMPLOYEEDETAIL,
   GETACCESSORIES,
   GETPROJECTES,
+  ADD_INCOME,
+  ADD_EXPENCE,
   ASSIGN_PROJECT_ACCESSORIES,
   DELETE_PROJECT,
   DELETE_ACCESSORIES,
@@ -24,10 +26,10 @@ const initialState = {
   complaintsList: null,
   projectEmployeeDetail: null,
   addprojectdata: null,
-  assignProjectAccessories:null,
-  deleteProject:null,
-  deleteAccessories:null,
-  deleteEmp:null,
+  assignProjectAccessories: null,
+  deleteProject: null,
+  deleteAccessories: null,
+  deleteEmp: null,
   financeList: null,
   getAllEmployees: null,
   createEmp: null,
@@ -35,6 +37,8 @@ const initialState = {
   projectes: null,
   complaintsList: null,
   addAccessorie:null,
+  incomeAdd: null,
+  expenceAddition: null
 };
 
 export default function inventoryAdmin(state = initialState, action) {
@@ -95,25 +99,25 @@ export default function inventoryAdmin(state = initialState, action) {
         projectEmployeeDetail: action.payload
       };
     }
-    case ASSIGN_PROJECT_ACCESSORIES:{
+    case ASSIGN_PROJECT_ACCESSORIES: {
       return {
         ...state,
         assignProjectAccessories: action.payload
       };
     }
-    case DELETE_PROJECT:{
+    case DELETE_PROJECT: {
       return {
         ...state,
         deleteProject: action.payload
       };
     }
-    case DELETE_ACCESSORIES:{
+    case DELETE_ACCESSORIES: {
       return {
         ...state,
         deleteAccessories: action.payload
       };
     }
-    case DELETE_EMP :{
+    case DELETE_EMP: {
       return {
         ...state,
         deleteEmp: action.payload
@@ -134,6 +138,16 @@ export default function inventoryAdmin(state = initialState, action) {
       };
     }
 
+    case ADD_INCOME:
+      return {
+        ...state,
+        incomeAdd: action.payload
+      };
+    case ADD_EXPENCE:
+      return {
+        ...state,
+        expenceAddition: action.payload
+      };
     default:
       return state;
   }

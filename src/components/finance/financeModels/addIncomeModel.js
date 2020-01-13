@@ -12,7 +12,7 @@ export class AddIncomeModel extends Component {
         description: "",
         amount: "",
 
-        pay_type: "INCOME"
+        pay_types: "INCOME"
       },
       payment_date: moment(),
       payment_method: "Payment Method",
@@ -93,11 +93,11 @@ export class AddIncomeModel extends Component {
         description: this.state.incomeObject.description,
         amount: this.state.incomeObject.amount,
         attachment_url: this.state.attachment_url,
-        pay_type: "INCOME",
+        pay_types: "INCOME",
         payment_date: this.state.payment_date,
         payment_method: this.state.payment_method
       };
-      this.props.addIncome(sendObject);
+      this.props.addIncome1(sendObject);
       $("#addIncome .close").click();
     }
   }
