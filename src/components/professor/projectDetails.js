@@ -10,7 +10,7 @@ import {
 } from '../../actions/index';
 
 import { getProfilePic } from '../../actions/index';
-import { getEmployeeDetail,getProjectEmployeeData ,getAllEmployee} from '../../actions/inventoryAdminAction';
+import { getEmployeeDetail,getProjectEmployeeData ,getAllEmployee,projectEmployeeDetails} from '../../actions/inventoryAdminAction';
 import $ from "jquery";
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
@@ -42,13 +42,6 @@ class ProjectDetails extends Component {
       day: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
       isFirstNameVisible: false,
       isPhoneNumberVisible: false,
-      isEmailVisible: false,
-      isCollegeVisible: false,
-      isDOBVisible: false,
-      isECNVisible: false,
-      isECVisible: false,
-      isNewProfessor: false,
-      isRoleSelected: false,
       startDate: moment(),
       professor: false,
       admin: false,
@@ -119,7 +112,16 @@ class ProjectDetails extends Component {
           this.setState({ projectEmployeeDetails: res.data.response.projectDetails })
         }
       })
-    
+
+    this.props.projectEmployeeDetails(apiData).then(()=>{
+      let resdata = this.props.projectEmployeeDetailsDatas;
+      if( resdata ){
+        console.log(resdata)
+        this.setState({addedEmployees:resdata.data.response},()=>{
+          console.log("incoming employee data: ",this.state.addedEmployees);
+        })
+      }
+    })
   }
 
   getAllEmployeeList(){
@@ -142,6 +144,7 @@ class ProjectDetails extends Component {
   }
 
   renderEmployeeCard() {
+    console.log("renderEmployeeCard",this.state.addedEmployees);
     if (this.state.addedEmployees && this.state.addedEmployees.length) {
       return (
         <div className="c-card__items h-small">
@@ -171,7 +174,7 @@ class ProjectDetails extends Component {
       this.setState({ addedEmployees });
     
   }
-  
+
   renderEmployeeList() {
     console.log("dfsfsf",this.state.addedEmployees)
     if (!this.state.addedEmployees) return false
@@ -180,7 +183,7 @@ class ProjectDetails extends Component {
         return (
           <li key={"emp" + index}>
             <div className="card__elem">
-              {emp.label}
+              {emp.emp_name}
               <div className="card__elem__setting">
 
                 <button><i className="icon cg-rubbish-bin-delete-button" onClick={this.deleteEmp.bind(this, index)}></i></button>
@@ -333,49 +336,6 @@ class ProjectDetails extends Component {
     })
   }
 
-  // handleChange(date) {
-  //   let Professor = this.state.Professor;
-  //   let professorDetail = Professor.professorDetail;
-  //   professorDetail = { ...professorDetail, DOB: date };
-  //   Professor = { ...Professor, professorDetail };
-  //   this.setState({ Professor });
-  // }
-
-  // onSelectProfessorRole() {
-  //   let { professor } = this.state;
-  //   professor = !professor
-  //   if (professor) {
-  //     this.setState({ isRoleSelected: false })
-  //   }
-  //   this.setState({ professor });
-  // }
-
-  // onSelectAdminRole() {
-  //   let { admin } = this.state;
-  //   admin = !admin
-  //   if (admin) {
-  //     this.setState({ isRoleSelected: false })
-  //   }
-  //   this.setState({ admin });
-  // }
-
-  // onChangeRole(payload) {
-  //   let apiData = {
-  //     institude_id: this.props.instituteId,
-  //     branch_id: this.props.branchId,
-  //     payload: payload,
-  //     token: this.props.token
-  //   }
-  //   this.props.updateUserRole(apiData).then(() => {
-  //     let res = this.props.roleUpdate;
-  //     if (res && res.status == 200) {
-  //       this.props.history.push('/app/faculty-directory')
-  //       infoToste("Changes Saved Successfully");
-  //     } else if (res && res.status == 500) {
-  //       infoToste("User Designation Not Update");
-  //     }
-  //   })
-  // }
 
   onDeleteModel(key, id) {
     let { deleteObj } = this.state;
@@ -657,7 +617,8 @@ const mapStateToProps = ({ app, auth, inventoryAdmin }) => ({
   company_id:app.companyId,
   branch_id:app.AdminbranchId,
   projectEmployeeDetailsData: inventoryAdmin.projectEmployeeData,
-  allEmplyees:inventoryAdmin.getAllEmployees
+  allEmplyees:inventoryAdmin.getAllEmployees,
+  projectEmployeeDetailsDatas:inventoryAdmin.projectEmployeeDetailss
 })
 
 const mapDispatchToProps = dispatch =>
@@ -676,7 +637,8 @@ const mapDispatchToProps = dispatch =>
       getIsProfessorAdmin,
       getEmployeeDetail,
       getProjectEmployeeData,
-      getAllEmployee
+      getAllEmployee,
+      projectEmployeeDetails
     },
     dispatch
   )

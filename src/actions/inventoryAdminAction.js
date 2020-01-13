@@ -15,6 +15,7 @@ export const DELETE_ACCESSORIES = 'DELETE_ACCESSORIES';
 export const DELETE_EMP = 'DELETE_EMP';
 export const GET_FINANCELIST = "GET_FINANCELIST";
 export const GET_ALLEMPLOYEES = "GET_ALLEMPLOYEES";
+export const PROJECT_EMPLOYEE_DETAILS = "PROJECT_EMPLOYEE_DETAILS"
 export function getEmployeeList(data) {
   const API_CONFIG = {
     headers: {
@@ -375,6 +376,29 @@ export function deleteEmployee(data) {
       .then(function (response) {
         dispatch({
           type: DELETE_EMP,
+          payload: response
+        });
+      })
+      .catch(function (error) { });
+  };
+}
+
+export function projectEmployeeDetails(data) {
+  const API_CONFIG = {
+    headers: {
+      "Content-Type": "application/json",
+      // Authorization: "JWT " + data.token
+    }
+  };
+
+  let URL = `http://35.154.43.111:9000/company/${data.company_id}/branch/${data.branch_id}/projectEmpDetails/`;
+  let payload = data.payload
+  return dispatch => {
+    return axios
+      .post(URL, payload, API_CONFIG)
+      .then(function (response) {
+        dispatch({
+          type: PROJECT_EMPLOYEE_DETAILS,
           payload: response
         });
       })
