@@ -9,6 +9,8 @@ import {
   CREATEEMPLOYEEDETAIL,
   GETACCESSORIES,
   GETPROJECTES,
+  ADD_INCOME,
+  ADD_EXPENCE,
   ASSIGN_PROJECT_ACCESSORIES,
   DELETE_PROJECT,
   DELETE_ACCESSORIES,
@@ -24,17 +26,22 @@ const initialState = {
   complaintsList: null,
   projectEmployeeDetail: null,
   addprojectdata: null,
-  assignProjectAccessories:null,
-  deleteProject:null,
-  deleteAccessories:null,
-  deleteEmp:null,
+  assignProjectAccessories: null,
+  deleteProject: null,
+  deleteAccessories: null,
+  deleteEmp: null,
   financeList: null,
   getAllEmployees: null,
   createEmp: null,
   accessories: null,
   projectes: null,
   complaintsList: null,
+<<<<<<< HEAD
   projectEmployeeDetailss:null
+=======
+  incomeAdd: null,
+  expenceAddition: null
+>>>>>>> 2f6c05a15288a6f04bb29b69946554519a63f2e0
 };
 
 export default function inventoryAdmin(state = initialState, action) {
@@ -95,25 +102,25 @@ export default function inventoryAdmin(state = initialState, action) {
         projectEmployeeDetail: action.payload
       };
     }
-    case ASSIGN_PROJECT_ACCESSORIES:{
+    case ASSIGN_PROJECT_ACCESSORIES: {
       return {
         ...state,
         assignProjectAccessories: action.payload
       };
     }
-    case DELETE_PROJECT:{
+    case DELETE_PROJECT: {
       return {
         ...state,
         deleteProject: action.payload
       };
     }
-    case DELETE_ACCESSORIES:{
+    case DELETE_ACCESSORIES: {
       return {
         ...state,
         deleteAccessories: action.payload
       };
     }
-    case DELETE_EMP :{
+    case DELETE_EMP: {
       return {
         ...state,
         deleteEmp: action.payload
@@ -126,12 +133,25 @@ export default function inventoryAdmin(state = initialState, action) {
         financeList: action.payload
       };
     }
+<<<<<<< HEAD
     case PROJECT_EMPLOYEE_DETAILS:{
       return{
         ...state,
         projectEmployeeDetails:action.payload
       }
     }
+=======
+    case ADD_INCOME:
+      return {
+        ...state,
+        incomeAdd: action.payload
+      };
+    case ADD_EXPENCE:
+      return {
+        ...state,
+        expenceAddition: action.payload
+      };
+>>>>>>> 2f6c05a15288a6f04bb29b69946554519a63f2e0
     default:
       return state;
   }

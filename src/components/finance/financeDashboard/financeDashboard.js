@@ -12,38 +12,49 @@ import {
   getIncomeExpenseDetails,
   getIncomeExpenceList
 } from "../../../actions/financeAction";
+import {
+  addIncome,
+  getFinanceList,
+  addExpences
+} from "../../../actions/inventoryAdminAction";
+import { successToste, errorToste } from "../../../constant/util";
+import moment from "moment";
 import $ from "jquery";
 let table = "0";
 dataModule(Highcharts);
-class FinanceDashboard extends Component{
-   constructor(props){
-      super(props);
-      this.state = {
-			barGraphData : {}
-      }
-   }
-   componentDidMount(){
-		this.getIncomeExpenseData();
-      this.renderPieGraph();
-		this.initDataTable();
-   }
+class FinanceDashboard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      barGraphData: {},
+      income_details_id: ""
+    };
+  }
+  componentDidMount() {
+    this.getIncomeExpenseData();
+    this.renderPieGraph();
+    this.initDataTable();
+  }
 
-	getIncomeExpenseData(){
-		let self = this;
-		let data = {
-			institude_id:this.props.instituteId,
-			branch_id:this.props.branchId,
-			token:this.props.token
-		}
-		this.props.getIncomeExpenseDetails(data).then(()=>{
-			let resIncomeandExpense = this.props.incomeExpenseDetailsDatas;
-			if(resIncomeandExpense && resIncomeandExpense.data.status == 200){
-			self.setState({barGraphData:resIncomeandExpense.data.response},()=>{
-				self.renderIncomeExpenceGraph();
-			});
-			}
-		})
-	}
+  getIncomeExpenseData() {
+    let self = this;
+    let data = {
+      institude_id: this.props.instituteId,
+      branch_id: this.props.branchId,
+      token: this.props.token
+    };
+    this.props.getIncomeExpenseDetails(data).then(() => {
+      let resIncomeandExpense = this.props.incomeExpenseDetailsDatas;
+      if (resIncomeandExpense && resIncomeandExpense.data.status == 200) {
+        self.setState(
+          { barGraphData: resIncomeandExpense.data.response },
+          () => {
+            self.renderIncomeExpenceGraph();
+          }
+        );
+      }
+    });
+  }
 
   initDataTable() {
     table = $("#Finance").dataTable({
@@ -59,19 +70,14 @@ class FinanceDashboard extends Component{
         {
           targets: 0,
           data: null,
-          defaultContent: `<button class="link--btn" id="view">View Profile</button>`,
-          // targets:[6],
+          // defaultContent: `<button class="link--btn" id="view">View Profile</button>`,
           render: (data, type, row) => {
             let rowhtml;
-            let checkboxdata = row[1];
-            let rowData = row[6];
-            let title = this.getConditionForButton(rowData);
-            if (title) {
-              return (rowhtml = `<button class="link--btn" id="view">View Profile</button> 
-					 <button class="link--btn" id="invite" >${title}</button>`);
-            } else {
-              return (rowhtml = `<button class="link--btn" id="view">View Profile</button>`);
-            }
+
+            let rowData = row[5];
+            //let title = this.getConditionForButton(rowData);
+
+            return (rowhtml = `<label ><i class="fa fa-file-text" id="receipt" style="cursor:pointer;color:#3D3F61" aria-hidden="true"></i>   &nbsp  <i class="fa fa-trash" id="deleteRecord" style="cursor:pointer ;color:#3D3F61" aria-hidden="true"></i></label>`);
           }
         },
         { orderable: false, targets: [2, 3, 4, 5] },
@@ -100,21 +106,46 @@ class FinanceDashboard extends Component{
     // $(".dataTables_info").css('margin-right', '200%');
 
     var _ = this;
-    $("#professorList tbody").on("click", "#view", function() {
+    $("#Finance tbody").on("click", "#deleteRecord", function() {
       var data = table
         .api()
         .row($(this).parents("tr"))
         .data();
-      _.onChangePage(data[6]);
+      _.deleteIncomeExpenseData(data[5]);
     });
+    // $("#Finance tbody").on("click", "#edit", function() {
+    //   var data = table
+    //     .api()
+    //     .row($(this).parents("tr"))
+    //     .data();
+    //   _.goToIncomeExpenseModel(data[5]);
+    // });
+  }
 
-    var _ = this;
-    $("#professorList tbody").on("click", "#invite", function() {
-      var data = table
-        .api()
-        .row($(this).parents("tr"))
-        .data();
-      _.onSendInvitation(data[6]);
+  deleteIncomeExpenseData(data) {
+    let apiData = {
+      payload: {
+        pay_type: data.pay_type,
+        id:
+          data && data.fin_expense_information_id
+            ? data.fin_expense_information_id
+            : data.fin_income_information_id
+      },
+      institude_id: this.props.instituteId,
+      branch_id: this.props.branchId,
+      token: this.props.token
+    };
+
+    this.props.deleteIncomeExpenseData(apiData).then(() => {
+      let res = this.props.deleteIncomeExpense;
+      if (res && res.data.status == 200) {
+        successToste("Record Deleted Successfully");
+        table.fnDraw();
+      } else if (res && res.data.status == 500) {
+        errorToste(res.data.message);
+      } else {
+        errorToste("Something went wrong");
+      }
     });
   }
 
@@ -123,18 +154,16 @@ class FinanceDashboard extends Component{
     if (data.order[0].column == 0) {
       order_column = "";
     } else if (data.order[0].column == 1) {
-      order_column = "srno";
-    } else if (data.order[0].column == 2) {
       order_column = "date";
-    } else if (data.order[0].column == 3) {
+    } else if (data.order[0].column == 2) {
       order_column = "description";
+    } else if (data.order[0].column == 3) {
+      order_column = "type";
     } else if (data.order[0].column == 4) {
       order_column = "toform";
     } else if (data.order[0].column == 5) {
-      order_column = "type";
-    } else if (data.order[0].column == 6) {
       order_column = "amount";
-    } else if (data.order[0].column == 7) {
+    } else if (data.order[0].column == 6) {
       order_column = "action";
     }
 
@@ -146,53 +175,61 @@ class FinanceDashboard extends Component{
     }
     let apiData = {
       payload: {
-        	record_per_page: 10,
-			page_number: 1,
-			order_column: order_column,
-			order_type: 1,
-			transaction_type:"" ,
-			to_date: "",
-			from_date: ""
+        // record_per_page: 10,
+        // page_number: 1,
+        // order_column: order_column,
+        // order_type: 1,
+        // transaction_type: "",
+        // to_date: "",
+        // from_date: ""
+        searchText: "",
+        record_per_page: 10,
+        page_number: 1,
+        order_column: "created_at",
+        order_type: 0
       },
 
-      institude_id: this.props.instituteId,
-      branch_id: this.props.branchId,
-      token: this.props.token
+      company_id: this.props.company_id,
+      branch_id: this.props.branch_id
     };
 
-    getIncomeExpenceList(apiData).then(res =>{
-    this.handleResponse(res, callback);
+    getFinanceList(apiData).then(res => {
+      this.handleResponse(res, callback);
     });
   }
 
   handleResponse(res, callback) {
-	if (res && res.data.status == 200 && res.data.response) {
-	  var columnData = [];
-	  console.log("institutelist:",res.data.response);
-	//   let facultyList=res.data.response.professorDetail;
-	//   if(facultyList&& facultyList.length>0){
-	//   facultyList.map((data, index) => {
-	// 	 var arr = []
-	// 	 let name = data.firstname+" "+data.lastname;
-	// 	 arr[0] = name;
-	// 	 arr[1] = data.designation;
-	// 	 arr[2] = data.mobile;
-	// 	 arr[3] = data.email;
-	// 	 arr[4] = data.emergency_contact;
-	// 	 arr[5] = data.professor_id;
-	// 	 arr[6] = data;
-	// 	 columnData.push(arr);
-	//   })
-	// }
-	//   callback({ recordsTotal: this.state.count,
-	// 	 recordsFiltered: this.state.count,
-	// 	 data: columnData 
-	//   });
-	}
-	else if(res && res.data.status == 500){
-	  this.setState({count:0})
-	}
- }
+    if (res && res.data.status == 200 && res.data.response) {
+      var columnData = [];
+      console.log("institutelist:", res.data.response);
+      let financeList = res.data.response.projectDetails;
+      if (financeList && financeList.length > 0) {
+        financeList.map((data, index) => {
+          console.log("date", data.payment_date);
+          var arr = [];
+          // arr[0] = data.sr_no;
+          arr[0] = moment(data.payment_date).format("DD MMM YYYY");
+          arr[1] = data.description;
+          arr[2] =
+            data && data.payment_to_from != ""
+              ? data.payment_to_from
+              : data.payment_to_from;
+          arr[3] = data.pay_type;
+          arr[4] = data && data.amount != "" ? data.amount : data.amount;
+          arr[5] = data;
+
+          columnData.push(arr);
+        });
+      }
+      callback({
+        recordsTotal: this.state.count,
+        recordsFiltered: this.state.count,
+        data: columnData
+      });
+    } else if (res && res.data.status == 500) {
+      this.setState({ count: 0 });
+    }
+  }
 
   createNewInvoice() {
     this.props.history.push({
@@ -217,14 +254,13 @@ class FinanceDashboard extends Component{
         recurring_date: expenceModelData.recurring_date,
         total_recurring_no: expenceModelData.total_recurring_no,
         recurring: expenceModelData.recurring,
-        pay_type: expenceModelData.pay_type
+        pay_types: expenceModelData.pay_type
       },
-      institude_id: this.props.instituteId,
-      branch_id: this.props.branchId,
-      token: this.props.token
+      company_id: this.props.company_id,
+      branch_id: this.props.branch_id
     };
-    this.props.createInstituteExpence(data).then(() => {
-      let res = this.props.instituteExpence;
+    this.props.addExpences(data).then(() => {
+      let res = this.props.expenceAddition;
 
       if (res && res.data.status == 200) {
         this.setState(
@@ -251,44 +287,42 @@ class FinanceDashboard extends Component{
     });
   }
 
-  incomeAdd(incomeModelData) {
+  incomeAddition(incomeModelData) {
     let data = {
       payload: {
         from_payment: incomeModelData.from_payment,
         description: incomeModelData.description,
         amount: incomeModelData.amount,
         attachment_url: incomeModelData.attachment_url,
-        pay_type: incomeModelData.pay_type,
+        pay_types: incomeModelData.pay_types,
         payment_date: incomeModelData.payment_date,
         payment_method: incomeModelData.payment_method
       },
-      institude_id: this.props.instituteId,
-      branch_id: this.props.branchId,
-      token: this.props.token
+      company_id: this.props.company_id,
+      branch_id: this.props.branch_id
     };
 
-    this.props.createInstituteIncome(data).then(() => {
-      let res = this.props.instituteIncome;
+    this.props.addIncome(data).then(() => {
+      let res = this.props.incomeAdd;
 
       if (res && res.data.status == 200) {
         this.setState(
           {
-            fin_income_information_id:
-              res.data.response.fin_income_information_id
+            income_details_id: res.data.response.income_details_id
           },
           () => {
-            let data = {
-              payload: {
-                uploadType: "income",
-                id: this.state.fin_income_information_id
-              },
-              institude_id: this.props.instituteId,
-              branch_id: this.props.branchId,
-              token: this.props.token
-            };
-            this.props.uploadInvoicePrint(data).then(() => {
-              let res = this.props.invoiceReceiptPrint;
-            });
+            // let data = {
+            //   payload: {
+            //     uploadType: "income",
+            //     id: this.state.income_details_id
+            //   },
+            //   institude_id: this.props.instituteId,
+            //   branch_id: this.props.branchId,
+            //   token: this.props.token
+            // };
+            // this.props.uploadInvoicePrint(data).then(() => {
+            //   let res = this.props.invoiceReceiptPrint;
+            // });
           }
         );
       }
@@ -499,7 +533,10 @@ class FinanceDashboard extends Component{
           <div className="clearfix financeBlockHead type1">
             <div className="divider-container nomargin">
               <div className="divider-block text--left">
-                <span className="block-title st-colored noborder nomargin nopad" style={{color:"#00000"}}>
+                <span
+                  className="block-title st-colored noborder nomargin nopad"
+                  style={{ color: "#00000" }}
+                >
                   ACCOUNTS
                 </span>
               </div>
@@ -599,7 +636,7 @@ class FinanceDashboard extends Component{
             <table id="Finance" className="table data--table">
               <thead>
                 <tr>
-                  <th style={{ width: "15%" }}>sr. No</th>
+                  {/* <th style={{ width: "15%" }}>sr. No</th> */}
                   <th style={{ width: "12%" }}>Date</th>
                   <th style={{ width: "15%" }}>Description</th>
                   <th style={{ width: "18%" }}>To/From</th>
@@ -619,8 +656,8 @@ class FinanceDashboard extends Component{
           {...this.props}
         />
         <AddIncomeModel
-          addIncome={data => {
-            this.incomeAdd(data);
+          addIncome1={data => {
+            this.incomeAddition(data);
           }}
           {...this.props}
         />
@@ -629,7 +666,7 @@ class FinanceDashboard extends Component{
   }
 }
 
-const mapStateToProps = ({ finance, app, auth }) => ({
+const mapStateToProps = ({ finance, app, auth, inventoryAdmin }) => ({
   branchId: app.branchId,
   instituteId: app.institudeId,
   token: auth.token,
@@ -637,7 +674,11 @@ const mapStateToProps = ({ finance, app, auth }) => ({
   instituteExpence: finance.instituteExpence,
   invoiceReceiptPrint: finance.invoiceReceiptPrint,
   incomeExpenseDetailsDatas: finance.incomeExpenseDetailsData,
-  
+  incomeAdd: inventoryAdmin.incomeAdd,
+  company_id: app.companyId,
+  branch_id: app.AdminbranchId,
+  financeList: inventoryAdmin.financeList,
+  expenceAddition: inventoryAdmin.expenceAddition
 });
 
 const mapDispatchToProps = dispatch =>
@@ -646,7 +687,10 @@ const mapDispatchToProps = dispatch =>
       createInstituteIncome,
       createInstituteExpence,
       uploadInvoicePrint,
-      getIncomeExpenseDetails
+      getIncomeExpenseDetails,
+      addIncome,
+      getFinanceList,
+      addExpences
     },
     dispatch
   );

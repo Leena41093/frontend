@@ -53,31 +53,32 @@ export class AddExpenceModel extends Component {
     this.setState({ payment_date: date, isPaymentDateVisible: false });
   }
 
-  selectAll(value) {
-    let checkbox = document.getElementById("check-all1");
-    if (checkbox.checked == true) {
-      this.setState(
-        {
-          recurring: true,
-          recurrFlag: true,
-          recurring_date: moment(),
-          changeRecurrColor: true
-        },
-        () => {}
-      );
-    } else {
-      this.setState({
-        recurring: false,
-        recurrFlag: false,
-        recurring_date: "",
-        changeRecurrColor: false
-      });
-    }
-  }
+  // selectAll(value) {
+  //   let checkbox = document.getElementById("check-all1");
+  //   if (checkbox.checked == true) {
+  //     this.setState(
+  //       {
+  //         recurring: true,
+  //         recurrFlag: true,
+  //         recurring_date: moment(),
+  //         changeRecurrColor: true
+  //       },
+  //       () => {}
+  //     );
+  //   } else {
+  //     this.setState({
+  //       total_recurring_no: "",
+  //       recurring: false,
+  //       recurrFlag: false,
+  //       recurring_date: "",
+  //       changeRecurrColor: false
+  //     });
+  //   }
+  // }
 
-  changeRecurringDate(date) {
-    this.setState({ recurring_date: date });
-  }
+  // changeRecurringDate(date) {
+  //   this.setState({ recurring_date: date });
+  // }
 
   changeNumberOfInstallment(event) {
     this.setState({ total_recurring_no: event.target.value });
@@ -129,7 +130,7 @@ export class AddExpenceModel extends Component {
         recurring_date: this.state.recurring_date,
         total_recurring_no: this.state.total_recurring_no,
         recurring: this.state.recurring,
-        pay_type: "EXPENSE"
+        pay_types: "EXPENSE"
       };
       this.props.addExpense(sendObject);
       $("#previewInvoice .close").click();
@@ -244,7 +245,7 @@ export class AddExpenceModel extends Component {
                     className="form-group cust-fld"
                     style={{ borderBottom: "2px solid #F2F2F5" }}
                   />
-                  <div className="form-group cust-fld">
+                  {/* <div className="form-group cust-fld">
                     <label
                       htmlFor="check-all1"
                       className="custome-field field-checkbox"
@@ -265,7 +266,7 @@ export class AddExpenceModel extends Component {
                       />
                       <i />
                     </label>
-                  </div>
+                  </div> */}
                   {this.state.recurrFlag == true ? (
                     <div>
                       <div className="form-group cust-fld pull-left">
