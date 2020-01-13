@@ -4,12 +4,16 @@ import { BASE_URL } from "../components/common/config";
 export const GET_ADMINDASHBOARDDETAILS = "GET_ADMINDASHBOARDDETAILS";
 export const GETEMPDETAIL = "GETEMPDETAIL";
 export const GET_COMPLAINTS = "GET_COMPLAINTS";
-export const GET_PROJECTEMPLOYEEDATA = "GET_PROJECTEMPLOYEEDATA";
-export const GET_FINANCELIST = "GET_FINANCELIST";
+export const GET_PROJECTEMPLOYEEDATA = "GET_PROJECTEMPLOYEEDATA"
+export const CREATEEMPLOYEEDETAIL = 'CREATEEMPLOYEEDETAIL';
+export const GETACCESSORIES = 'GETACCESSORIES';
+export const GETPROJECTES = 'GETPROJECTES';
 export const ADD_PROJECTDETAILS = "ADD_PROJECTDETAILS";
-export const CREATEEMPLOYEEDETAIL = "CREATEEMPLOYEEDETAIL";
-export const GETACCESSORIES = "GETACCESSORIES";
-export const GETPROJECTES = "GETPROJECTES";
+export const ASSIGN_PROJECT_ACCESSORIES = 'ASSIGN_PROJECT_ACCESSORIES';
+export const DELETE_PROJECT = 'DELETE_PROJECT';
+export const DELETE_ACCESSORIES = 'DELETE_ACCESSORIES';
+export const DELETE_EMP = 'DELETE_EMP';
+export const GET_FINANCELIST = "GET_FINANCELIST";
 export const GET_ALLEMPLOYEES = "GET_ALLEMPLOYEES";
 export const ADD_INCOME = "ADD_INCOME";
 export const ADD_EXPENCE = "ADD_EXPENCE";
@@ -332,5 +336,98 @@ export function addExpences(data) {
         });
       })
       .catch(function(error) {});
+  };
+}
+
+
+export function assignProjectAndAccessories(data) {
+  const API_CONFIG = {
+    headers: {
+      "Content-Type": "application/json",
+      // Authorization: "JWT " + data.token
+    }
+  };
+
+  let URL = `http://35.154.43.111:9000/company/${data.company_id}/branch/${data.branch_id}/projectAccessoryAdd/ `;
+  let payload = data.payload
+  return dispatch => {
+    return axios
+      .post(URL, payload, API_CONFIG)
+      .then(function (response) {
+        dispatch({
+          type: ASSIGN_PROJECT_ACCESSORIES,
+          payload: response
+        });
+      })
+      .catch(function (error) { });
+  };
+}
+
+export function deleteProjectfromEmp(data) {
+  const API_CONFIG = {
+    headers: {
+      "Content-Type": "application/json",
+      // Authorization: "JWT " + data.token
+    }
+  };
+
+  let URL = `http://35.154.43.111:9000/company/${data.company_id}/branch/${data.branch_id}/deleteProjectEmp/ `;
+  let payload = data.payload
+  return dispatch => {
+    return axios
+      .put(URL, payload, API_CONFIG)
+      .then(function (response) {
+        dispatch({
+          type: DELETE_PROJECT,
+          payload: response
+        });
+      })
+      .catch(function (error) { });
+  };
+}
+
+export function deleteAccessoriesfromEmp(data) {
+  const API_CONFIG = {
+    headers: {
+      "Content-Type": "application/json",
+      // Authorization: "JWT " + data.token
+    }
+  };
+
+  let URL = `http://35.154.43.111:9000/company/${data.company_id}/branch/${data.branch_id}/deleteAccssoryEmp/`;
+  let payload = data.payload
+  return dispatch => {
+    return axios
+      .put(URL, payload, API_CONFIG)
+      .then(function (response) {
+        dispatch({
+          type: DELETE_ACCESSORIES,
+          payload: response
+        });
+      })
+      .catch(function (error) { });
+  };
+}
+
+export function deleteEmployee(data) {
+  const API_CONFIG = {
+    headers: {
+      "Content-Type": "application/json",
+      // Authorization: "JWT " + data.token
+    }
+  };
+
+  let URL = `http://35.154.43.111:9000/company/${data.company_id}/branch/${data.branch_id}/delete_employee/`;
+  let payload = data.payload
+  return dispatch => {
+    return axios
+      .post(URL, payload, API_CONFIG)
+      .then(function (response) {
+        dispatch({
+          type: DELETE_EMP,
+          payload: response
+        });
+      })
+      .catch(function (error) { });
   };
 }

@@ -10,7 +10,7 @@ import {
 } from '../../actions/index';
 
 import { getProfilePic } from '../../actions/index';
-import { getEmployeeDetail,getProjectEmployeeData } from '../../actions/inventoryAdminAction';
+import { getEmployeeDetail,getProjectEmployeeData ,getAllEmployee} from '../../actions/inventoryAdminAction';
 import $ from "jquery";
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
@@ -20,7 +20,7 @@ import { ToastContainer } from 'react-toastify';
 import { successToste, errorToste, infoToste } from '../../constant/util';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { DeleteModal } from '../common/deleteModal';
-
+import Select from 'react-select';
 class ProjectDetails extends Component {
 
   constructor(props) {
@@ -59,7 +59,9 @@ class ProjectDetails extends Component {
       userProfileUrl: "",
       instituteId: 0,
       project_id:null,
-      projectEmployeeDetails:{}
+      projectEmployeeDetails:{},
+      option:[],
+      addedEmployees:[]
     }
   }
 
@@ -120,7 +122,83 @@ class ProjectDetails extends Component {
     
   }
 
+  getAllEmployeeList(){
+    let data = {
+      company_id:this.props.company_id,
+      branch_id:this.props.branch_id
+    }
+    this.props.getAllEmployee(data).then(()=>{
+      let res= this.props.allEmplyees;
+      let arr =[]
+      if(res){
+       
+        res.data.response.map((data, index) => {
+          let temp = { value: data.emp_id, label: data.emp_name};
+          arr.push(temp);
+        })
+      }
+      this.setState({  option: arr });
+    })
+  }
+
+  renderEmployeeCard() {
+    if (this.state.addedEmployees && this.state.addedEmployees.length) {
+      return (
+        <div className="c-card__items h-small">
+          <Scrollbars >
+            <ul>
+              {this.renderEmployeeList()}
+            </ul>
+          </Scrollbars >
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <div className="c-card__img">
+            <img src="/images/card-img-5.png" alt="" />
+          </div>
+          <div className="c-card__info">No Employees added yet</div>
+        </div>
+      )
+    }
+  }
+
+  deleteEmp(employee){
+   
+      let {addedEmployees} = this.state;
+      addedEmployees.splice(employee, 1);
+      this.setState({ addedEmployees });
+    
+  }
   
+  renderEmployeeList() {
+    console.log("dfsfsf",this.state.addedEmployees)
+    if (!this.state.addedEmployees) return false
+    return (
+      this.state.addedEmployees.map((emp, index) => {
+        return (
+          <li key={"emp" + index}>
+            <div className="card__elem">
+              {emp.label}
+              <div className="card__elem__setting">
+
+                <button><i className="icon cg-rubbish-bin-delete-button" onClick={this.deleteEmp.bind(this, index)}></i></button>
+              </div>
+            </div>
+          </li>
+        )
+      })
+    )
+  }
+
+  onAddEmployess(data){
+   this.setState({addedEmployees:data},()=>{
+     successToste("Employee Added Successfully");
+   })
+  }
+
+
   validate() {
     let professorDetail = this.state.Professor.professorDetail;
     var isValidForm = true;
@@ -503,20 +581,6 @@ class ProjectDetails extends Component {
         <div className="clearfix">
           <div className="divider-container">
             <div className="divider-block text--left">
-              {/* <div className="form-group cust-fld">
-                <label >Access Rights</label><br />
-                {pro.designation != "INSTITUTE" ?
-                  <label htmlFor="check-all" className="custome-field field-checkbox" style={{ marginRight: "10px", display: "inline-block" }}>
-                    <input type="checkbox" name="check-one" id="check-Professor" value="checkone" onChange={this.onSelectProfessorRole.bind(this)} checked={this.state.professor} />
-                    <i></i> <span>Professor</span>
-                  </label>
-                  : ""}
-                <label style={{ display: "inline-block" }} htmlFor="check-Admin" className="custome-field field-checkbox">
-                  <input type="checkbox" name="check-one" id="check-Admin" value="checkone" onChange={this.onSelectAdminRole.bind(this)} checked={this.state.admin} />
-                  <i></i> <span>Admin</span>
-                </label>
-                {this.state.isRoleSelected ? <label className="help-block" style={{ color: "red" }}>Please Select Designation</label> : <br />}
-              </div> */}
             </div>
             <div className="divider-block text--right">
               <button className="c-btn grayshade" onClick={this.backButton.bind(this)}>Back</button>
@@ -535,39 +599,40 @@ class ProjectDetails extends Component {
               </div>
               {this.renderPersonalDetails()}
             </div>
-            {pro.designation != 'INSTITUTE' ? <div className="c-card">
+           <div className="c-card">
               <div className="c-card__title">
                 <span className="c-heading-sm card--title">
                   Employess
                 <span className="c-count filled">{this.state.Professor.batchDetails.length}</span>
                 </span>
               </div>
-              {this.renderBatchDetail()}
-              <div className="c-card__btnCont">
-                {pro.designation == "INSTITUTE" ? "" : <button className="c-btn-large primary" data-toggle="modal" data-target="#addBatch">+ Add Employee</button>}
-              </div>
-              {/* <AddStudentBatchModel professorId={this.state.Professor.professorDetail.professor_id} onAddStudentBatch={(data) => { this.onProfessorBatchAdd(data) }} {...this.props} /> */}
-            </div> : ""}
-            {/* {pro.designation != 'INSTITUTE' ? <div className="c-card">
-              <div className="c-card__title">
-                <span className="c-heading-sm card--title">
-                  Activity
-								</span>
-              </div>
-              <div className="c-card__items">
-                <div className="c-card__form">
-                  <div className="form-group static-fld">
-                    {this.homeworkCountShow()}
-                  </div>
-                  <div className="form-group static-fld">
-                    {this.quizCountShow()}
-                  </div>
+              <div className="row">
+                <div className="col-sm-8">
+                <Select
+                        // defaultValue={[colourOptions[2], colourOptions[3]]}
+                        isMulti
+                        name="students"
+                        closeMenuOnSelect={false}
+                        options={this.state.option}
+                        onFocus={this.getAllEmployeeList.bind(this)}
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                        onChange={(selected) => { this.setState({selectedValues:selected}) }}
+                    />
+                     {this.renderEmployeeCard()}
+                </div>
+                <div className="col-sm-4">
+                <button className="c-btn-large primary" onClick={this.onAddEmployess.bind(this,this.state.selectedValues)}>+ Add Employee</button>
                 </div>
               </div>
-            </div> : ""} */}
+            
+              
+              {/* <AddStudentBatchModel professorId={this.state.Professor.professorDetail.professor_id} onAddStudentBatch={(data) => { this.onProfessorBatchAdd(data) }} {...this.props} /> */}
+            </div> 
+           
           </div>
         </div>
-        {/* <DeleteModal flag={this.state.deleteObj} onDelete={(val) => { this.onDeleteEntry(val) }}   {...this.props} /> */}
+      
       </div>
     )
   }
@@ -591,7 +656,8 @@ const mapStateToProps = ({ app, auth, inventoryAdmin }) => ({
   employeeDetail: inventoryAdmin.employeeDetail,
   company_id:app.companyId,
   branch_id:app.AdminbranchId,
-  projectEmployeeDetailsData: inventoryAdmin.projectEmployeeData
+  projectEmployeeDetailsData: inventoryAdmin.projectEmployeeData,
+  allEmplyees:inventoryAdmin.getAllEmployees
 })
 
 const mapDispatchToProps = dispatch =>
@@ -609,7 +675,8 @@ const mapDispatchToProps = dispatch =>
       getProfilePic,
       getIsProfessorAdmin,
       getEmployeeDetail,
-      getProjectEmployeeData
+      getProjectEmployeeData,
+      getAllEmployee
     },
     dispatch
   )

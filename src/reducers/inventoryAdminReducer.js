@@ -10,7 +10,11 @@ import {
   GETACCESSORIES,
   GETPROJECTES,
   ADD_INCOME,
-  ADD_EXPENCE
+  ADD_EXPENCE,
+  ASSIGN_PROJECT_ACCESSORIES,
+  DELETE_PROJECT,
+  DELETE_ACCESSORIES,
+  DELETE_EMP
 } from "../actions/inventoryAdminAction";
 
 const initialState = {
@@ -21,6 +25,10 @@ const initialState = {
   complaintsList: null,
   projectEmployeeDetail: null,
   addprojectdata: null,
+  assignProjectAccessories: null,
+  deleteProject: null,
+  deleteAccessories: null,
+  deleteEmp: null,
   financeList: null,
   getAllEmployees: null,
   createEmp: null,
@@ -87,6 +95,30 @@ export default function inventoryAdmin(state = initialState, action) {
       return {
         ...state,
         projectEmployeeDetail: action.payload
+      };
+    }
+    case ASSIGN_PROJECT_ACCESSORIES: {
+      return {
+        ...state,
+        assignProjectAccessories: action.payload
+      };
+    }
+    case DELETE_PROJECT: {
+      return {
+        ...state,
+        deleteProject: action.payload
+      };
+    }
+    case DELETE_ACCESSORIES: {
+      return {
+        ...state,
+        deleteAccessories: action.payload
+      };
+    }
+    case DELETE_EMP: {
+      return {
+        ...state,
+        deleteEmp: action.payload
       };
     }
 
