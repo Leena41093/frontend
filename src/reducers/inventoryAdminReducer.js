@@ -12,7 +12,8 @@ import {
   ASSIGN_PROJECT_ACCESSORIES,
   DELETE_PROJECT,
   DELETE_ACCESSORIES,
-  DELETE_EMP
+  DELETE_EMP,
+  ADD_ACCESSORIE
 } from "../actions/inventoryAdminAction";
 
 const initialState = {
@@ -32,7 +33,8 @@ const initialState = {
   createEmp: null,
   accessories: null,
   projectes: null,
-  complaintsList: null
+  complaintsList: null,
+  addAccessorie:null,
 };
 
 export default function inventoryAdmin(state = initialState, action) {
@@ -122,6 +124,13 @@ export default function inventoryAdmin(state = initialState, action) {
       return {
         ...state,
         financeList: action.payload
+      };
+    }
+
+    case ADD_ACCESSORIE:{
+      return {
+        ...state,
+        addAccessorie: action.payload
       };
     }
 
