@@ -3,7 +3,8 @@ import {
   GET_ADMINDASHBOARDDETAILS,
   GET_COMPLAINTS,
   GET_PROJECTEMPLOYEEDATA,
-  ADD_PROJECTDETAILS
+  ADD_PROJECTDETAILS,
+  GET_FINANCELIST
 } from "../actions/inventoryAdminAction";
 
 const initialState = {
@@ -13,7 +14,8 @@ const initialState = {
   employeeDetail: null,
   complaintsList: null,
   projectEmployeeDetail: null,
-  addprojectdata: null
+  addprojectdata: null,
+  financeList: null
 };
 
 export default function inventoryAdmin(state = initialState, action) {
@@ -46,6 +48,12 @@ export default function inventoryAdmin(state = initialState, action) {
       return {
         ...state,
         addprojectdata: action.payload
+      };
+    }
+    case GET_FINANCELIST: {
+      return {
+        ...state,
+        financeList: action.payload
       };
     }
     default:
