@@ -546,7 +546,7 @@ class ProjectDetails extends Component {
               <div className="c-card__btnCont">
                 {pro.designation == "INSTITUTE" ? "" : <button className="c-btn-large primary" data-toggle="modal" data-target="#addBatch">+ Add Employee</button>}
               </div>
-              <AddStudentBatchModel professorId={this.state.Professor.professorDetail.professor_id} onAddStudentBatch={(data) => { this.onProfessorBatchAdd(data) }} {...this.props} />
+              {/* <AddStudentBatchModel professorId={this.state.Professor.professorDetail.professor_id} onAddStudentBatch={(data) => { this.onProfessorBatchAdd(data) }} {...this.props} /> */}
             </div> : ""}
             {/* {pro.designation != 'INSTITUTE' ? <div className="c-card">
               <div className="c-card__title">

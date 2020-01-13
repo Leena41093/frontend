@@ -15,28 +15,45 @@ export class AddStudentBatchModel extends Component {
 			batch_student: [],
 			selectAll: false,
 			isBatchSelected: false,
+			projects: [],
+			Accessories: [],
+			selectedProjectId: [],
+			selectedAccessoriesId: [],
+			selectedAccessorie: {},
+			selectedProject: {},
 		}
 	}
 
 	componentWillMount() {
-		let data = {
-			"institude_id": this.props.instituteId,
-			"branch_id": this.props.branchId,
-			token: this.props.token
-		};
-		this.props.getClasses(data).then(() => {
-			this.setState({ classes: this.props.classes });
+		let apiData = {
+			company_id: this.props.company_id,
+			branch_id: this.props.branch_id,
+		}
+		this.props.getAccessories(apiData).then(() => {
+			let res = this.props.accessories;
+			if (res && res.status == 200) {
+				this.setState({ Accessories: res.data.response })
+			}
+
 		})
+
+		this.props.getProjectes(apiData).then(() => {
+			let res = this.props.projectes;
+			if (res && res.status == 200) {
+				this.setState({ projects: res.data.response })
+			}
+		})
+
 	}
 
-	classDropDownChange(classe, event) {
-		classe.token = this.props.token,
-			classe.institude_id = this.props.instituteId;
-		this.props.getSubjects(classe).then(() => {
+	// classDropDownChange(classe, event) {
+	// 	classe.token = this.props.token,
+	// 		classe.institude_id = this.props.instituteId;
+	// 	this.props.getSubjects(classe).then(() => {
 
-			this.setState({ batch_student: [], classname: classe.class_name, subjects: this.props.subjects, selectedSubjectArray: [] });
-		})
-	}
+	// 		this.setState({ batch_student: [], classname: classe.class_name, subjects: this.props.subjects, selectedSubjectArray: [] });
+	// 	})
+	// }
 
 	onSelectedSubjectChange(sub, event) {
 		sub.token = this.props.token,
@@ -169,30 +186,79 @@ export class AddStudentBatchModel extends Component {
 
 	}
 
-	renderSubject() {
-		if (this.state.subjects && this.state.subjects.length > 0) {
-			return this.state.subjects.map((sub, index) => {
+	selectedProject(project) {
+		let { selectedProjectId, selectedProject } = this.state;
+		if (selectedProject && selectedProject[project.project_id]) {
+			selectedProject[project.project_id] = false
+			selectedProjectId.forEach((item, index) => {
+				if (project.project_id === item) {
+					selectedProjectId.splice(index, 1);
+				}
+			})
+		} else {
+			selectedProjectId.push(project.project_id);
+			selectedProject[project.project_id] = true
+		}
+		this.setState({ selectedProjectId, selectedProject })
+	}
 
-				let { selectedSubjects } = this.state;
+	selectedAccessories(item) {
 
-				let selected = selectedSubjects[sub.subject_id] ? "st-selected" : ""
+		let { selectedAccessorie, selectedAccessoriesId } = this.state;
+		if (selectedAccessorie && selectedAccessorie[item.accessory_id]) {
+			selectedAccessorie[item.accessory_id] = false
+			selectedAccessoriesId.forEach((item, index) => {
+				if (item.accessory_id === item) {
+					selectedAccessoriesId.splice(index, 1);
+				}
+			})
+		} else {
+			selectedAccessoriesId.push(item.accessory_id);
+			selectedAccessorie[item.accessory_id] = true
+		}
+		this.setState({ selectedAccessoriesId, selectedAccessorie })
+	}
+
+	renderProjectes() {
+
+		if (this.state.projects && this.state.projects.length > 0) {
+			return this.state.projects.map((sub, index) => {
+
+				let { selectedProject } = this.state;
+
+				let selected = selectedProject[sub.project_id] ? "st-selected" : ""
 				return (
-					<li key={"sub" + index}><button className={`listItem ${selected}`} onClick={this.onSelectedSubjectChange.bind(this, sub)}>{sub.subject_name}</button></li>
+					<li key={"sub" + index}><button onClick={this.selectedProject.bind(this, sub)} className={`listItem ${selected}`} >{sub.project_name}</button></li>
 				)
 
 			})
 		}
 	}
 
-	renderClassDropDown() {
-		if (this.state.classes && this.state.classes.length > 0) {
-			return this.state.classes.map((data, index) => {
+	renderAccessories() {
+
+		if (this.state.Accessories && this.state.Accessories.length > 0) {
+			return this.state.Accessories.map((sub, index) => {
+				let { selectedAccessorie } = this.state;
+
+				let selected = selectedAccessorie[sub.accessory_id] ? "st-selected" : ""
 				return (
-					<li key={"class" + index}><a onClick={this.classDropDownChange.bind(this, data)} className="dd-option">{data.class_name}</a></li>
+					<li key={"sub" + index}><button onClick={this.selectedAccessories.bind(this, sub)} className={`listItem ${selected}`} >{sub.accessory_name}</button></li>
 				)
+
 			})
 		}
 	}
+
+	// renderClassDropDown() {
+	// 	if (this.state.classes && this.state.classes.length > 0) {
+	// 		return this.state.classes.map((data, index) => {
+	// 			return (
+	// 				<li key={"class" + index}><a onClick={this.classDropDownChange.bind(this, data)} className="dd-option">{data.class_name}</a></li>
+	// 			)
+	// 		})
+	// 	}
+	// }
 
 	renderBatchOption(id) {
 
@@ -235,46 +301,33 @@ export class AddStudentBatchModel extends Component {
 					<div className="modal-content">
 						<div className="modal-header">
 							<button type="button" className="close" data-dismiss="modal" aria-label="Close"><i className="icon cg-times"></i></button>
-							<h4 className="c-heading-sm card--title">Add Batches</h4>
+							<h4 className="c-heading-sm card--title">Add Projectes And Accessories</h4>
 						</div>
 						<div className="modal-body">
 
 							<div className="divider-container addBatch-container">
 
 								<div className="divider-block" >
-									<div className="cust-m-info">Select class and select multiple subjects.</div>
-									<div className="form-group cust-fld">
-										<label>Class</label>
-										<div className="dropdown">
-											<button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-												{this.state.classname}
-											</button>
-											<ul style={{ height: "100px", overflow: "auto", marginTop: "-1px" }} className="dropdown-menu" aria-labelledby="dLabel">
-												{this.renderClassDropDown()}
-
-											</ul>
-										</div>
-									</div>
-
+									<div className="cust-m-info">Select  multiple Projectes.</div>
 
 									<div className="c-subListing">
 										<div className="clearfix">
 
 											<div className="subjectHeader clearfix" style={{ marginTop: "20px" }}>
-												<div className="pull-left"><div className="cust-m-info nomargin">Subjects</div></div>
+												<div className="pull-left"><div className="cust-m-info nomargin">Projectes</div></div>
 												<div className="pull-right">
-													<div className="form-group nomargin">
+													{/* <div className="form-group nomargin">
 														<label htmlFor="check-all" className="custome-field field-checkbox">
 															<input type="checkbox" onClick={this.selectAll.bind(this)} name="check-one" id="check-all" value="checkone" checked={this.state.selectAll} />
 															<i></i><span>Select All</span>
 														</label>
-													</div>
+													</div> */}
 												</div>
 											</div>
 
-											<div className="subjectBody" style={{overflowY:"auto"}}>
+											<div className="subjectBody" style={{ overflowY: "auto" }}>
 												<ul>
-													{this.renderSubject()}
+													{this.renderProjectes()}
 												</ul>
 											</div>
 
@@ -285,12 +338,30 @@ export class AddStudentBatchModel extends Component {
 								</div>
 
 								<div className="divider-block">
-									<div className="cust-m-info">Select batch for each subject.</div>
-									<div className="c-batchSelect" style={{overflowY:"auto"}}>
-										{this.renderSelectedBatchSubject()}
+									<div className="cust-m-info">Select Accessories</div>
+									<div className="c-subListing">
+										<div className="clearfix">
 
+											<div className="subjectHeader clearfix" style={{ marginTop: "20px" }}>
+												<div className="pull-left"><div className="cust-m-info nomargin">Accessories</div></div>
+												<div className="pull-right">
+													{/* <div className="form-group nomargin">
+														<label htmlFor="check-all" className="custome-field field-checkbox">
+															<input type="checkbox" onClick={this.selectAll.bind(this)} name="check-one" id="check-all" value="checkone" checked={this.state.selectAll} />
+															<i></i><span>Select All</span>
+														</label>
+													</div> */}
+												</div>
+											</div>
+
+											<div className="subjectBody" style={{ overflowY: "auto" }}>
+												<ul>
+													{this.renderAccessories()}
+												</ul>
+											</div>
+
+										</div>
 									</div>
-									{this.state.isBatchSelected ? <label className="help-block" style={{ color: "red" }}>Please enter batch</label> : <br />}
 								</div>
 
 							</div>
