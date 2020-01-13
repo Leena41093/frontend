@@ -9,7 +9,8 @@ import {
   CREATEEMPLOYEEDETAIL,
   GETACCESSORIES,
   GETPROJECTES,
-  GET_COMPLAINTS
+  ADD_INCOME,
+  ADD_EXPENCE
 } from "../actions/inventoryAdminAction";
 
 const initialState = {
@@ -25,7 +26,9 @@ const initialState = {
   createEmp: null,
   accessories: null,
   projectes: null,
-  complaintsList: null
+  complaintsList: null,
+  incomeAdd: null,
+  expenceAddition: null
 };
 
 export default function inventoryAdmin(state = initialState, action) {
@@ -93,7 +96,16 @@ export default function inventoryAdmin(state = initialState, action) {
         financeList: action.payload
       };
     }
-
+    case ADD_INCOME:
+      return {
+        ...state,
+        incomeAdd: action.payload
+      };
+    case ADD_EXPENCE:
+      return {
+        ...state,
+        expenceAddition: action.payload
+      };
     default:
       return state;
   }
