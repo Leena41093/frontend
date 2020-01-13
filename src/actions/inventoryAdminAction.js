@@ -1,14 +1,16 @@
 import axios from "axios";
 import { BASE_URL } from "../components/common/config";
-export const GET_ADMINDASHBOARDDETAILS = "GET_ADMINDASHBOARDDETAILS";
 
+export const GET_ADMINDASHBOARDDETAILS = "GET_ADMINDASHBOARDDETAILS";
 export const GETEMPDETAIL = "GETEMPDETAIL";
 export const GET_COMPLAINTS = "GET_COMPLAINTS";
 export const GET_PROJECTEMPLOYEEDATA = "GET_PROJECTEMPLOYEEDATA";
 export const GET_FINANCELIST = "GET_FINANCELIST";
-
 export const ADD_PROJECTDETAILS = "ADD_PROJECTDETAILS";
-
+export const CREATEEMPLOYEEDETAIL = "CREATEEMPLOYEEDETAIL";
+export const GETACCESSORIES = "GETACCESSORIES";
+export const GETPROJECTES = "GETPROJECTES";
+export const GET_ALLEMPLOYEES = "GET_ALLEMPLOYEES";
 export function getEmployeeList(data) {
   const API_CONFIG = {
     headers: {
@@ -78,6 +80,29 @@ export function getAdminDashboardData(data) {
   };
 }
 
+export function createEmployeeDetail(data) {
+  const API_CONFIG = {
+    headers: {
+      "Content-Type": "application/json"
+      // 'Authorization': 'JWT ' + data.token
+    }
+  };
+  let URL = `http://35.154.43.111:9000/company/${data.company_id}/branch/${
+    data.branch_id
+  }/create_user_employee/`;
+  let payload = data.payload;
+  return dispatch => {
+    return axios
+      .post(URL, payload, API_CONFIG)
+      .then(function(response) {
+        dispatch({
+          type: CREATEEMPLOYEEDETAIL,
+          payload: response
+        });
+      })
+      .catch(function(error) {});
+  };
+}
 export function getInventoryComplaints(data) {
   const API_CONFIG = {
     headers: {
@@ -116,6 +141,48 @@ export function getProjectList(data) {
       return response;
     })
     .catch(function(error) {});
+}
+
+export function getAccessories(data) {
+  let URL = `http://35.154.43.111:9000/company/1/branch/1/accessories`;
+  const API_CONFIG = {
+    headers: {
+      "Content-Type": "application/json"
+      // 'Authorization': 'JWT ' + branch.token,
+    }
+  };
+  return dispatch => {
+    return axios
+      .get(URL, API_CONFIG)
+      .then(function(response) {
+        dispatch({
+          type: GETACCESSORIES,
+          payload: response
+        });
+      })
+      .catch(function(error) {});
+  };
+}
+
+export function getProjectes(data) {
+  let URL = `http://35.154.43.111:9000/company/1/branch/1/get_project_details/`;
+  const API_CONFIG = {
+    headers: {
+      "Content-Type": "application/json"
+      // 'Authorization': 'JWT ' + branch.token,
+    }
+  };
+  return dispatch => {
+    return axios
+      .get(URL, API_CONFIG)
+      .then(function(response) {
+        dispatch({
+          type: GETPROJECTES,
+          payload: response
+        });
+      })
+      .catch(function(error) {});
+  };
 }
 
 export function getProjectEmployeeData(data) {
@@ -186,6 +253,31 @@ export function getFinanceList(data) {
       .then(function(response) {
         dispatch({
           type: GET_FINANCELIST,
+          payload: response
+        });
+      })
+      .catch(function(error) {});
+  };
+}
+
+export function getAllEmployee(data) {
+  const API_CONFIG = {
+    headers: {
+      "Content-Type": "application/json"
+      // Authorization: "JWT " + data.token
+    }
+  };
+
+  let URL = `http://35.154.43.111:9000/company/${data.company_id}/branch/${
+    data.branch_id
+  }/get_employee_details/  `;
+  let payload = data.payload;
+  return dispatch => {
+    return axios
+      .post(URL, payload, API_CONFIG)
+      .then(function(response) {
+        dispatch({
+          type: GET_ALLEMPLOYEES,
           payload: response
         });
       })

@@ -4,7 +4,12 @@ import {
   GET_COMPLAINTS,
   GET_PROJECTEMPLOYEEDATA,
   ADD_PROJECTDETAILS,
-  GET_FINANCELIST
+  GET_FINANCELIST,
+  GET_ALLEMPLOYEES,
+  CREATEEMPLOYEEDETAIL,
+  GETACCESSORIES,
+  GETPROJECTES,
+  GET_COMPLAINTS
 } from "../actions/inventoryAdminAction";
 
 const initialState = {
@@ -15,7 +20,12 @@ const initialState = {
   complaintsList: null,
   projectEmployeeDetail: null,
   addprojectdata: null,
-  financeList: null
+  financeList: null,
+  getAllEmployees: null,
+  createEmp: null,
+  accessories: null,
+  projectes: null,
+  complaintsList: null
 };
 
 export default function inventoryAdmin(state = initialState, action) {
@@ -32,6 +42,38 @@ export default function inventoryAdmin(state = initialState, action) {
         adminDashboardDetail: action.payload
       };
     }
+
+    case CREATEEMPLOYEEDETAIL: {
+      return {
+        ...state,
+        createEmp: action.payload
+      };
+    }
+    case GETACCESSORIES: {
+      return {
+        ...state,
+        accessories: action.payload
+      };
+    }
+    case GETPROJECTES: {
+      return {
+        ...state,
+        projectes: action.payload
+      };
+    }
+    case GET_ALLEMPLOYEES: {
+      return {
+        ...state,
+        getAllEmployees: action.payload
+      };
+    }
+
+    case ADD_PROJECTDETAILS: {
+      return {
+        ...state,
+        addprojectdata: action.payload
+      };
+    }
     case GET_COMPLAINTS: {
       return {
         ...state,
@@ -44,18 +86,14 @@ export default function inventoryAdmin(state = initialState, action) {
         projectEmployeeDetail: action.payload
       };
     }
-    case ADD_PROJECTDETAILS: {
-      return {
-        ...state,
-        addprojectdata: action.payload
-      };
-    }
+
     case GET_FINANCELIST: {
       return {
         ...state,
         financeList: action.payload
       };
     }
+
     default:
       return state;
   }

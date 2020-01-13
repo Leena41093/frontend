@@ -10,7 +10,7 @@ import {
 } from '../../actions/index';
 
 import { getProfilePic } from '../../actions/index';
-import { getEmployeeDetail } from '../../actions/inventoryAdminAction';
+import { getEmployeeDetail,getAccessories,getProjectes } from '../../actions/inventoryAdminAction';
 import $ from "jquery";
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
@@ -108,7 +108,7 @@ class FacultyDetail extends Component {
       let { Employee } = this.state;
 
       this.props.getEmployeeDetail(apiData).then(() => {
-        // console.log("res", this.props.employeeDetail);
+        console.log("res", this.props.employeeDetail);
         let res = this.props.employeeDetail;
         if (res && res.status == 200) {
           Employee = { ...Employee, employeeDetail: res.data.response.empployeeDetails }
@@ -196,11 +196,6 @@ class FacultyDetail extends Component {
     this.props.history.push('/app/faculty-directory')
   }
 
-  // OnChangeEditable(event) {
-  //   let editable = !this.state.editable
-  //   this.setState({ editable });
-  // }
-
   onProfessorBatchAdd(payload) {
     let data1 = {
       batch_professor: payload
@@ -254,50 +249,6 @@ class FacultyDetail extends Component {
       });
     })
   }
-
-  // handleChange(date) {
-  //   let Professor = this.state.Professor;
-  //   let professorDetail = Professor.professorDetail;
-  //   professorDetail = { ...professorDetail, DOB: date };
-  //   Professor = { ...Professor, professorDetail };
-  //   this.setState({ Professor });
-  // }
-
-  // onSelectProfessorRole() {
-  //   let { professor } = this.state;
-  //   professor = !professor
-  //   if (professor) {
-  //     this.setState({ isRoleSelected: false })
-  //   }
-  //   this.setState({ professor });
-  // }
-
-  // onSelectAdminRole() {
-  //   let { admin } = this.state;
-  //   admin = !admin
-  //   if (admin) {
-  //     this.setState({ isRoleSelected: false })
-  //   }
-  //   this.setState({ admin });
-  // }
-
-  // onChangeRole(payload) {
-  //   let apiData = {
-  //     institude_id: this.props.instituteId,
-  //     branch_id: this.props.branchId,
-  //     payload: payload,
-  //     token: this.props.token
-  //   }
-  //   this.props.updateUserRole(apiData).then(() => {
-  //     let res = this.props.roleUpdate;
-  //     if (res && res.status == 200) {
-  //       this.props.history.push('/app/faculty-directory')
-  //       infoToste("Changes Saved Successfully");
-  //     } else if (res && res.status == 500) {
-  //       infoToste("User Designation Not Update");
-  //     }
-  //   })
-  // }
 
   onDeleteModel(key, id) {
     let { deleteObj } = this.state;
@@ -360,43 +311,7 @@ class FacultyDetail extends Component {
       )
     })
   }
-
-  // quizCountShow() {
-  //   if (this.state.quizCount == 0) {
-  //     return (
-  //       <div>
-  //         <label>Quizes</label>
-  //         <span className="info-type st-disabled">Not Added Yet</span>
-  //       </div>
-  //     )
-  //   } else {
-  //     return (
-  //       <div>
-  //         <label>Quizes</label>
-  //         <span className="info-type st-alert">{this.state.Professor.activity.quizCount}</span>
-  //       </div>
-  //     )
-  //   }
-  // }
-
-  // homeworkCountShow() {
-  //   if (this.state.homeworkCount == 0) {
-  //     return (
-  //       <div>
-  //         <label>Homeworks</label>
-  //         <span className="info-type st-disabled">Not Added Yet</span>
-  //       </div>
-  //     )
-  //   } else {
-  //     return (
-  //       <div>
-  //         <label>Homeworks</label>
-  //         <span className="info-type st-alert">{this.state.Professor.activity.homeworkCount}</span>
-  //       </div>
-  //     )
-  //   }
-  // }
-
+  
   renderBatch() {
     return this.state.Professor.batchDetails.map((batch, index) => {
 
@@ -551,7 +466,7 @@ class FacultyDetail extends Component {
             {pro.designation != 'INSTITUTE' ? <div className="c-card">
               <div className="c-card__title">
                 <span className="c-heading-sm card--title">
-                  Batches
+                  Project And Accessories
                 <span className="c-count filled">{this.state.Professor.batchDetails.length}</span>
                 </span>
               </div>
@@ -580,7 +495,7 @@ class FacultyDetail extends Component {
             </div> : ""} */}
           </div>
         </div>
-        {/* <DeleteModal flag={this.state.deleteObj} onDelete={(val) => { this.onDeleteEntry(val) }}   {...this.props} /> */}
+        <DeleteModal flag={this.state.deleteObj} onDelete={(val) => { this.onDeleteEntry(val) }}   {...this.props} />
       </div>
     )
   }
@@ -602,6 +517,8 @@ const mapStateToProps = ({ app, auth, inventoryAdmin }) => ({
   profilePictureUrl: app.profilePictureUrl,
   ProfessorAdmin: app.professorAdmin,
   employeeDetail: inventoryAdmin.employeeDetail,
+  accessories:inventoryAdmin.accessories,
+  projectes:inventoryAdmin.projectes,
   company_id:app.companyId,
   branch_id:app.AdminbranchId
 })
@@ -621,6 +538,8 @@ const mapDispatchToProps = dispatch =>
       getProfilePic,
       getIsProfessorAdmin,
       getEmployeeDetail,
+      getAccessories,
+      getProjectes 
     },
     dispatch
   )
