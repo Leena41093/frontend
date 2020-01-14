@@ -19,7 +19,8 @@ import {
   DELETECOMPLETEPROJECT,
   ADDEMPLOYEETOPROJECT,
   DELETEEMPLOYEEFROMPROJECT,
-  ADD_ACCESSORIE
+  ADD_ACCESSORIE,
+  DELETE_ACCESSORY
 } from "../actions/inventoryAdminAction";
 
 const initialState = {
@@ -40,13 +41,14 @@ const initialState = {
   accessories: null,
   projectes: null,
   complaintsList: null,
-  projectEmployeeDetailss:null,
-  addAccessorie:null,
+  projectEmployeeDetailss: null,
+  addAccessorie: null,
   incomeAdd: null,
   expenceAddition: null,
-  deleteproject:null,
-  addEmployeesToProject:null,
-  deleteEmployeeFromProject:null
+  deleteproject: null,
+  addEmployeesToProject: null,
+  deleteEmployeeFromProject: null,
+  deleteaccessory: null,
 };
 
 export default function inventoryAdmin(state = initialState, action) {
@@ -138,14 +140,14 @@ export default function inventoryAdmin(state = initialState, action) {
         financeList: action.payload
       };
     }
-    case PROJECT_EMPLOYEE_DETAILS:{
-      return{
+    case PROJECT_EMPLOYEE_DETAILS: {
+      return {
         ...state,
-        projectEmployeeDetailss:action.payload
+        projectEmployeeDetailss: action.payload
       }
     }
 
-    case ADD_ACCESSORIE:{
+    case ADD_ACCESSORIE: {
       return {
         ...state,
         addAccessorie: action.payload
@@ -162,21 +164,27 @@ export default function inventoryAdmin(state = initialState, action) {
         ...state,
         expenceAddition: action.payload
       };
-      case DELETECOMPLETEPROJECT:
-        return{
-          ...state,
-          deleteproject:action.payload
-        }
-        case ADDEMPLOYEETOPROJECT:
-          return{
-          ...state,
-          addEmployeesToProject : action.payload
-          }
-          case DELETEEMPLOYEEFROMPROJECT:
-            return{
-              ...state,
-              deleteEmployeeFromProject: action.payload
-            }
+    case DELETECOMPLETEPROJECT:
+      return {
+        ...state,
+        deleteproject: action.payload
+      }
+    case ADDEMPLOYEETOPROJECT:
+      return {
+        ...state,
+        addEmployeesToProject: action.payload
+      }
+    case DELETEEMPLOYEEFROMPROJECT:
+      return {
+        ...state,
+        deleteEmployeeFromProject: action.payload
+      }
+    case DELETE_ACCESSORY:{
+      return {
+        ...state,
+        deleteaccessory: action.payload
+      }
+    }  
     default:
       return state;
   }
