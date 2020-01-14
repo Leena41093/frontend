@@ -24,6 +24,8 @@ export const ADDEMPLOYEETOPROJECT = "ADDEMPLOYEETOPROJECT"
 export const DELETEEMPLOYEEFROMPROJECT = "DELETEEMPLOYEEFROMPROJECT"
 export const DELETEINCOME = "DELETEINCOME"
 export const DELETEEXPENSE = "DELETEEXPENSE"
+export const DELETE_ACCESSORY = 'DELETE_ACCESSORY'
+
 export function getEmployeeList(data) {
   const API_CONFIG = {
     headers: {
@@ -609,6 +611,28 @@ export function deleteExpense(data) {
       .then(function (response) {
         dispatch({
           type: DELETEEXPENSE,
+          payload: response
+        });
+      })
+      .catch(function (error) { });
+  };
+}
+
+    export function deleteAccessory(data) {
+                      const API_CONFIG = {
+                headers: {
+                  "Content-Type": "application/json",
+                  // Authorization: "JWT " + data.token
+                }
+              };
+  let URL = `http://35.154.43.111:9000/company/${data.company_id}/branch/${data.branch_id}/deleteaccessory/${data.accessory_id}/`;
+  
+  return dispatch => {
+    return axios
+      .delete(URL, API_CONFIG)
+      .then(function (response) {
+        dispatch({
+          type: DELETE_ACCESSORY,
           payload: response
         });
       })

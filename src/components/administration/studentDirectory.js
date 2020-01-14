@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
-import { getAccessoriesList } from '../../actions/inventoryAdminAction';
+import { getAccessoriesList,deleteAccessory } from '../../actions/inventoryAdminAction';
 import { errorToste, successToste } from '../../constant/util';
 import { bindActionCreators } from 'redux';
 import $ from "jquery";
@@ -41,7 +41,7 @@ class StudentDirectory extends Component {
         targets: [4],
         "render": (data, type, row) => {
           let rowhtml;
-            return rowhtml = `<button class="link--btn" id="view">View Profile</button>`
+            return rowhtml = `<button class="link--btn" id="view">Delete</button>`
         }
       }, { orderable: false, targets: [4] },
 
@@ -135,9 +135,21 @@ class StudentDirectory extends Component {
   }
 
   onChangeStudentDetail(data) {
-    this.props.history.push({
-      pathname: 'student-detail',
-      state: { data: data, branchId: this.props.branchId }
+    // this.props.history.push({
+    //   pathname: 'student-detail',
+    //   state: { data: data, branchId: this.props.branchId }
+    // })
+    let apiData={
+      company_id: this.props.company_id,
+      branch_id: this.props.branch_id,
+      accessory_id:data.accessory_id
+    }
+    this.props.deleteAccessory(apiData).then(()=>{
+      let res = this.props.deleteaccessory;
+      if(res && res.status == 200){
+        successToste("Delete Accessory Successfully")
+        table.fnDraw();
+      }
     })
   }
 
@@ -208,15 +220,16 @@ class StudentDirectory extends Component {
   }
 }
 
-const mapStateToProps = ({ app, auth }) => ({
+const mapStateToProps = ({ app, auth,inventoryAdmin }) => ({
   company_id: app.companyId,
   branch_id: app.AdminbranchId,
-
+  deleteaccessory :inventoryAdmin.deleteaccessory
 })
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
+      deleteAccessory
     }, dispatch
   )
 
