@@ -19,7 +19,9 @@ import {
   DELETECOMPLETEPROJECT,
   ADDEMPLOYEETOPROJECT,
   DELETEEMPLOYEEFROMPROJECT,
-  ADD_ACCESSORIE
+  ADD_ACCESSORIE,
+  DELETEINCOME,
+  DELETEEXPENSE
 } from "../actions/inventoryAdminAction";
 
 const initialState = {
@@ -46,7 +48,9 @@ const initialState = {
   expenceAddition: null,
   deleteproject:null,
   addEmployeesToProject:null,
-  deleteEmployeeFromProject:null
+  deleteEmployeeFromProject:null,
+  deleteIncomeData:null,
+  deleteExpenseData:null
 };
 
 export default function inventoryAdmin(state = initialState, action) {
@@ -177,6 +181,16 @@ export default function inventoryAdmin(state = initialState, action) {
               ...state,
               deleteEmployeeFromProject: action.payload
             }
+        case DELETEINCOME:
+          return{
+            ...state,
+            deleteIncomeData: action.payload
+          }
+        case DELETEEXPENSE:
+          return{
+            ...state,
+            deleteExpenseData:action.payload
+          }
     default:
       return state;
   }

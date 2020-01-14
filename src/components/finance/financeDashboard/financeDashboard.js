@@ -15,7 +15,10 @@ import {
 import {
   addIncome,
   getFinanceList,
-  addExpences
+  addExpences,
+  deleteIncome,
+  deleteExpense,
+  getAdminDashboardData
 } from "../../../actions/inventoryAdminAction";
 import { successToste, errorToste } from "../../../constant/util";
 import moment from "moment";
@@ -32,8 +35,8 @@ class FinanceDashboard extends Component {
   }
   componentDidMount() {
     this.getIncomeExpenseData();
-    this.renderPieGraph();
     this.initDataTable();
+    this.getAdminData();
   }
 
   getIncomeExpenseData() {
@@ -66,26 +69,23 @@ class FinanceDashboard extends Component {
           data: []
         });
       },
-      columnDefs: [
-        {
-          targets: 0,
-          data: null,
-          // defaultContent: `<button class="link--btn" id="view">View Profile</button>`,
-          render: (data, type, row) => {
-            let rowhtml;
+      "columnDefs": [{
+        "targets": -1,
+        "data": null,
+      
+        // targets:[6],
+        "render": (data, type, row) => {
 
-            let rowData = row[5];
-            //let title = this.getConditionForButton(rowData);
+          let rowhtml;
+          let rowData = row[5];
+            return rowhtml = `<label><i class="fa fa-trash" id="deleteRecord" style="cursor:pointer ;color:#3D3F61" aria-hidden="true"></i></label>`
 
-            return (rowhtml = `<label ><i class="fa fa-file-text" id="receipt" style="cursor:pointer;color:#3D3F61" aria-hidden="true"></i>   &nbsp  <i class="fa fa-trash" id="deleteRecord" style="cursor:pointer ;color:#3D3F61" aria-hidden="true"></i></label>`);
-          }
-        },
-        { orderable: false, targets: [2, 3, 4, 5] },
-        {
-          targets: [0],
-          className: "c-bold"
         }
-      ],
+      }, { orderable: false, targets: [2, 3, 4, 5] },
+      {
+        targets: [0],
+        className: 'c-bold'
+      }],
       serverSide: true,
       responsive: true,
       bFilter: false,
@@ -122,22 +122,25 @@ class FinanceDashboard extends Component {
     // });
   }
 
+  getAdminData() {
+      let res = this.props.admindashboarddetailsData;
+      if (res && res.data.status == 200) {
+        this.setState({ barGraphData: res.data.response },()=>{
+          this.renderIncomeExpenceGraph();
+        })
+      }
+  }
+
   deleteIncomeExpenseData(data) {
+    if(data.pay_type == "INCOME"){
     let apiData = {
-      payload: {
-        pay_type: data.pay_type,
-        id:
-          data && data.fin_expense_information_id
-            ? data.fin_expense_information_id
-            : data.fin_income_information_id
-      },
-      institude_id: this.props.instituteId,
-      branch_id: this.props.branchId,
-      token: this.props.token
+       income_id: data.income_details_id,
+      company_id: this.props.company_id,
+      branch_id: this.props.branch_id
     };
 
-    this.props.deleteIncomeExpenseData(apiData).then(() => {
-      let res = this.props.deleteIncomeExpense;
+    this.props.deleteIncome(apiData).then(() => {
+      let res = this.props.deleteIncomeDetails;
       if (res && res.data.status == 200) {
         successToste("Record Deleted Successfully");
         table.fnDraw();
@@ -147,23 +150,40 @@ class FinanceDashboard extends Component {
         errorToste("Something went wrong");
       }
     });
+  }else if(data.pay_type == "EXPENSE"){
+    let apiData = {
+      expense_id:data.fin_expense_information_id,
+     company_id: this.props.company_id,
+     branch_id: this.props.branch_id
+   };
+
+   this.props.deleteExpense(apiData).then(() => {
+     let res = this.props.deleteExpenseDetails;
+     if (res && res.data.status == 200) {
+       successToste("Record Deleted Successfully");
+       table.fnDraw();
+     } else if (res && res.data.status == 500) {
+       errorToste(res.data.message);
+     } else {
+       errorToste("Something went wrong");
+     }
+   });
+  }
   }
 
   getFinance(data, callback, setting) {
     let order_column;
     if (data.order[0].column == 0) {
-      order_column = "";
-    } else if (data.order[0].column == 1) {
       order_column = "date";
-    } else if (data.order[0].column == 2) {
+    } else if (data.order[0].column == 1) {
       order_column = "description";
-    } else if (data.order[0].column == 3) {
+    } else if (data.order[0].column == 2) {
       order_column = "type";
-    } else if (data.order[0].column == 4) {
+    } else if (data.order[0].column == 3) {
       order_column = "toform";
-    } else if (data.order[0].column == 5) {
+    } else if (data.order[0].column == 4) {
       order_column = "amount";
-    } else if (data.order[0].column == 6) {
+    } else if (data.order[0].column == 5) {
       order_column = "action";
     }
 
@@ -205,17 +225,15 @@ class FinanceDashboard extends Component {
       let financeList = res.data.response.projectDetails;
       if (financeList && financeList.length > 0) {
         financeList.map((data, index) => {
-          console.log("date", data.payment_date);
           var arr = [];
           // arr[0] = data.sr_no;
-          arr[0] = moment(data.payment_date).format("DD MMM YYYY");
+          console.log("-=-===>",data.payment_date)
+          arr[0] = moment(data.payment_date).format("DD-MM-YYYY");
           arr[1] = data.description;
-          arr[2] =
-            data && data.payment_to_from != ""
-              ? data.payment_to_from
-              : data.payment_to_from;
+          arr[2] =data.payment_to_from
+             
           arr[3] = data.pay_type;
-          arr[4] = data && data.amount != "" ? data.amount : data.amount;
+          arr[4] = data.amount;
           arr[5] = data;
 
           columnData.push(arr);
@@ -496,7 +514,7 @@ class FinanceDashboard extends Component {
                 />
               </div>
             </div>
-            <div className="flexGrid_sect grow-5">
+            {/* <div className="flexGrid_sect grow-5">
               <div className="divider-container valign-top nomargin">
                 <div className="divider-block text--left">
                   <div className="c-infoBlock">
@@ -514,7 +532,7 @@ class FinanceDashboard extends Component {
                 </div>
                 <div className="divider-block" id="pieGraph" />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="clearfix c-searchStrip">
@@ -678,7 +696,10 @@ const mapStateToProps = ({ finance, app, auth, inventoryAdmin }) => ({
   company_id: app.companyId,
   branch_id: app.AdminbranchId,
   financeList: inventoryAdmin.financeList,
-  expenceAddition: inventoryAdmin.expenceAddition
+  expenceAddition: inventoryAdmin.expenceAddition,
+  deleteIncomeDetails : inventoryAdmin.deleteIncomeData,
+  deleteExpenseDetails: inventoryAdmin.deleteExpenseData,
+  admindashboarddetailsData: inventoryAdmin.adminDashboardDetail,
 });
 
 const mapDispatchToProps = dispatch =>
@@ -690,7 +711,10 @@ const mapDispatchToProps = dispatch =>
       getIncomeExpenseDetails,
       addIncome,
       getFinanceList,
-      addExpences
+      addExpences,
+      deleteIncome,
+      deleteExpense,
+      getAdminDashboardData
     },
     dispatch
   );

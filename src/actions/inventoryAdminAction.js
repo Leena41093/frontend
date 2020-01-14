@@ -22,6 +22,8 @@ export const ADD_EXPENCE = "ADD_EXPENCE";
 export const DELETECOMPLETEPROJECT = "DELETECOMPLETEPROJECT"
 export const ADDEMPLOYEETOPROJECT = "ADDEMPLOYEETOPROJECT"
 export const DELETEEMPLOYEEFROMPROJECT = "DELETEEMPLOYEEFROMPROJECT"
+export const DELETEINCOME = "DELETEINCOME"
+export const DELETEEXPENSE = "DELETEEXPENSE"
 export function getEmployeeList(data) {
   const API_CONFIG = {
     headers: {
@@ -563,6 +565,50 @@ export function deleteProjectEmployee(data) {
       .then(function (response) {
         dispatch({
           type: DELETEEMPLOYEEFROMPROJECT,
+          payload: response
+        });
+      })
+      .catch(function (error) { });
+  };
+}
+
+export function deleteIncome(data) {
+  const API_CONFIG = {
+    headers: {
+      "Content-Type": "application/json",
+      // Authorization: "JWT " + data.token
+    }
+  };
+
+  let URL = `http://35.154.43.111:9000/company/${data.company_id}/branch/${data.branch_id}/income_details/${data.income_id}`;
+  return dispatch => {
+    return axios
+      .delete(URL,API_CONFIG)
+      .then(function (response) {
+        dispatch({
+          type: DELETEINCOME,
+          payload: response
+        });
+      })
+      .catch(function (error) { });
+  };
+}
+
+export function deleteExpense(data) {
+  const API_CONFIG = {
+    headers: {
+      "Content-Type": "application/json",
+      // Authorization: "JWT " + data.token
+    }
+  };
+
+  let URL = `http://35.154.43.111:9000/company/${data.company_id}/branch/${data.branch_id}/expense/${data.expense_id}`;
+  return dispatch => {
+    return axios
+      .delete(URL,API_CONFIG)
+      .then(function (response) {
+        dispatch({
+          type: DELETEEXPENSE,
           payload: response
         });
       })
