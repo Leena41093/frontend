@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 import { successToste, errorToste, infoToste } from '../../constant/util';
 import { ToastContainer, toast } from 'react-toastify';
-import { getProfessorProfile, updateProfessorProfile } from '../../actions/professorActions';
-import { ProfilePicModal } from '../common/profilepic';
+// import { getProfessorProfile, updateProfessorProfile } from '../../actions/professorActions';
+// import { ProfilePicModal } from '../common/profilepic';
 import DatePicker from 'react-datepicker';
 import { profilePicUpload, getProfilePic } from '../../actions/index';
 import moment from 'moment';
@@ -389,19 +389,19 @@ class GetProfile extends Component {
 
           </div>
         </div>
-        <ProfilePicModal onSelectProfile={(data) => this.saveProfile(data)} userType={this.props.userType} Gender={this.state.professorDetail.gender} showCancelBtn={true}{...this.props} />
+        {/* <ProfilePicModal onSelectProfile={(data) => this.saveProfile(data)} userType={this.props.userType} Gender={this.state.professorDetail.gender} showCancelBtn={true}{...this.props} /> */}
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ app, professor, auth }) => ({
-  professorProfile: professor.professorProfile,
+const mapStateToProps = ({ app,  auth }) => ({
+  // professorProfile: professor.professorProfile,
   branchId: app.branchId,
   instituteId: app.institudeId,
   token: auth.token,
   userType: auth.userType,
-  editProfessorProfile: professor.editProfessorProfile,
+  // editProfessorProfile: professor.editProfessorProfile,
   profileUpload: app.profileUpload,
   getProfilePicture: app.getProfilePicture,
   profilePictureUrl: app.profilePictureUrl
@@ -410,8 +410,8 @@ const mapStateToProps = ({ app, professor, auth }) => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getProfessorProfile,
-      updateProfessorProfile,
+      // getProfessorProfile,
+      // updateProfessorProfile,
       profilePicUpload,
       getProfilePic
     }, dispatch)

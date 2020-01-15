@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import moment from 'moment';
 import { getProjectList } from '../../actions/inventoryAdminAction';
 import { ToastContainer, toast } from 'react-toastify';
+var dt = require('datatables.net')
 let table = '0';
 
 class ProjectDirectory extends Component {

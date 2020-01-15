@@ -22,7 +22,6 @@ import {
 	ISPROFESSORADMIN, GET_STUDENTDETAILS, GET_STUDENTBATCHWISEATTENDANCEREPORT
 	, GET_PROFESSOREMAILCHECK, GET_STUDENTEMAILCHECK, CLASSMANAGERFLOW
 } from '../actions/index';
-import { notesDriveFileUploading } from '../actions/professorActions';
 
 const initialState = {
 	branches: [],
