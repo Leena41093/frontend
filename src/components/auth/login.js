@@ -255,9 +255,9 @@ class Login extends Component {
                   </div>
                 </form>
                 <button className="btn btn-primary btn-block mt-4" onClick={this.handelloginuser.bind(this)}>Login</button>
-                <div className="mt-2">
+                {/* <div className="mt-2">
                   <a className="linkbtn hover-pointer" onClick={this.getForgotPasswordPage.bind(this)}>Forgot Password?</a>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

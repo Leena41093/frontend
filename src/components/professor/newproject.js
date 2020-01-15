@@ -1,32 +1,11 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { AddStudentBatchModel } from "../common/addStudentBatchModal";
-import { getProfessorDetail } from "../../actions/index";
-import {
-  AddProfessor,
-  addStudentProfessorRegistration,
-  invitationSend,
-  getIsProfessorAdmin
-} from "../../actions/index";
-import {
-  getClasses,
-  getSubjects,
-  getBatches,
-  addProfessorBatches,
-  updateProfessorDetails,
-  deleteProfessorBatch,
-  updateUserRole,
-  deleteStudentProfessor
-} from "../../actions/index";
-import $ from "jquery";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
 import { ToastContainer } from "react-toastify";
 import { successToste, errorToste, infoToste } from "../../constant/util";
-import { Scrollbars } from "react-custom-scrollbars";
-import { DeleteModal } from "../common/deleteModal";
 import { addProjectData } from "../../actions/inventoryAdminAction";
 class NewProjectDetail extends Component {
   constructor(props) {
@@ -42,25 +21,7 @@ class NewProjectDetail extends Component {
         },
         employeeDetails: []
       },
-      professor_id: 4,
-      homeworkCount: 0,
-      quizCount: 0,
-      activity: {
-        homeworkDone: null,
-        quizDone: null,
-        totalQuiz: null,
-        totalHomework: null
-      },
       editable: true,
-      day: [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ],
       isProjectNameVisible: false,
       isPhoneNumberVisible: false,
       isEmailVisible: false,
@@ -72,41 +33,12 @@ class NewProjectDetail extends Component {
       isRoleSelected: false,
       isEmergencyContactVisible: false,
       startDate: moment(),
-      professor: true,
-      admin: false,
-      pro: {},
-      deleteObj: null,
       isClientNameVisible: false,
       invitationRes: false,
       disableAddBatchButton: true,
       isGenderSelected: false,
-      instituteId: 0
+     
     };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    let id = localStorage.getItem("instituteid");
-    if (id == nextProps.instituteId) {
-      if (this.state.instituteId != nextProps.instituteId) {
-        this.setState({ instituteId: nextProps.instituteId }, () => {
-          var datas = {
-            institudeId: this.props.instituteId,
-            branchId: this.props.branchId,
-            token: this.props.token
-          };
-          this.props.getIsProfessorAdmin(datas).then(() => {
-            let res = this.props.ProfessorAdmin;
-            if (
-              res &&
-              res.data.status == 200 &&
-              res.data.response.isProfessorAdmin == false
-            ) {
-              this.props.history.push("/app/dashboard");
-            }
-          });
-        });
-      }
-    }
   }
 
   componentDidMount() {
@@ -183,35 +115,6 @@ class NewProjectDetail extends Component {
     this.props.history.push("/app/projects-directory");
   }
 
-  onProfessorBatchAdd(payload) {}
-
-  deleteBatches(batch_id) {
-    var data = {
-      institude_id: this.props.instituteId,
-      branch_id: this.props.branchId,
-      professor_id: this.state.professor_id,
-      batch_id: batch_id,
-      token: this.props.token
-    };
-
-    this.props.deleteProfessorBatch(data).then(() => {
-      successToste("Batch Deleted Successfully");
-      let datas = {
-        institude_id: this.props.instituteId,
-        branch_id: this.props.branchId,
-        professor_id: this.state.professor_id,
-        token: this.props.token
-      };
-
-      this.props.getProfessorDetail(datas).then(() => {
-        let res = this.props.professorDetail;
-        if (res && res.status == 200) {
-          this.setState({ Professor: res.data.response });
-        }
-      });
-    });
-  }
-
   handleChange(type, date) {
     let project = this.state.project;
     let projectDetail = project.projectDetail;
@@ -222,104 +125,6 @@ class NewProjectDetail extends Component {
     }
     project = { ...project, projectDetail };
     this.setState({ project });
-  }
-
-  onDeleteModel(key) {
-    this.setState({ deleteObj: key });
-  }
-
-  onDeleteEntry(flag) {
-    if (flag == "deleteProfessor") {
-      this.onDeleteProfessor();
-      $("#quizSubmit .close").click();
-    }
-  }
-
-  renderBatchClass(index) {
-    return this.state.project.employeeDetails[index].timeTable.map(
-      (ClassDetail, idx) => {
-        return (
-          <li key={"classdetail" + idx}>
-            <a href="javascript:void(0);">
-              <span>{ClassDetail.subject_name}</span>
-              <span>
-                {this.state.day[ClassDetail.day]} {ClassDetail.start_time}
-                {" to "}
-                {ClassDetail.end_time}
-              </span>
-            </a>
-            <div className="card__elem__setting">
-              <button
-                className="act-delete"
-                onClick={this.deleteBatches.bind(this, ClassDetail.batch_id)}
-              />
-            </div>
-          </li>
-        );
-      }
-    );
-  }
-
-  quizCountShow() {
-    if (this.state.quizCount == 0) {
-      return (
-        <div>
-          <label>Quizes</label>
-          <span class="info-type st-disabled">Not Added Yet</span>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <label>Quizes</label>
-          <span className="info-type st-alert">
-            {this.state.Professor.activity.quizCount}
-          </span>
-        </div>
-      );
-    }
-  }
-
-  homeworkCountShow() {
-    if (this.state.homeworkCount == 0) {
-      return (
-        <div>
-          <label>Homeworks</label>
-          <span class="info-type st-disabled">Not Added Yet</span>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <label>Homeworks</label>
-          <span class="info-type st-alert">
-            {this.state.Professor.activity.homeworkCount}
-          </span>
-        </div>
-      );
-    }
-  }
-
-  renderBatch() {
-    return this.state.project.employeeDetails.map((batch, index) => {
-      if (batch.timeTable.length == 0) return false;
-      return (
-        <div key={"batch" + index} className="c-batchList">
-          <span className="c-batchList__title">
-            {batch.className}{" "}
-            <img
-              src="/images/Arrow.png"
-              alt="logo"
-              style={{ height: "10px", width: "20px" }}
-            />{" "}
-            {batch.batchName}
-          </span>
-          <div className="c-batchList__list">
-            <ul>{this.renderBatchClass(index)}</ul>
-          </div>
-        </div>
-      );
-    });
   }
 
   renderPersonalDetails() {
@@ -410,77 +215,6 @@ class NewProjectDetail extends Component {
           </div>
         </div>
       );
-    } else {
-      return (
-        <div>
-          <div className="c-card__form">
-            <div className="divider-container">
-              <div className="divider-block text--left">
-                <div className="form-group static-fld">
-                  <label>Project Name</label>
-                  <span className="info-type">
-                    {this.state.project.projectDetail.project_name
-                      ? this.state.project.projectDetail.project_name
-                      : "Not Added Yet"}
-                  </span>
-                </div>
-                <div className="form-group static-fld">
-                  <label>Client Name</label>
-                  <span className="info-type">
-                    {this.state.project.projectDetail.client_name
-                      ? this.state.project.projectDetail.client_name
-                      : "Not Added Yet"}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="form-group static-fld">
-              <label>Start Date</label>
-              <span className="info-type">
-                {this.state.project.projectDetail.start_date
-                  ? moment(this.state.project.projectDetail.start_date).format(
-                      "DD-MM-YYYY"
-                    )
-                  : "Not Added Yet"}
-              </span>
-            </div>
-            <div className="form-group static-fld">
-              <label>End Date</label>
-              <span className="info-type">
-                {this.state.project.projectDetail.end_date
-                  ? moment(this.state.project.projectDetail.end_date).format(
-                      "DD-MM-YYYY"
-                    )
-                  : "Not Added Yet"}
-              </span>
-            </div>
-          </div>
-          <div className="c-card__btnCont">
-            {/* <button style={{ marginTop: '57px', height: '40px' }} className="c-btn primary btn-custom" onClick={this.OnChangeEditable.bind(this)}>
-              Edit Personal Details</button> */}
-          </div>
-        </div>
-      );
-    }
-  }
-
-  renderBatchDetail() {
-    if (this.state.project.employeeDetails.length == 0) {
-      return (
-        <div style={{ height: "380px" }}>
-          <div className="c-card__img">
-            <img src="/images/card-img-3.png" alt="logo" />
-          </div>
-          <div className="c-card__info">No employees added yet.</div>
-        </div>
-      );
-    } else {
-      return (
-        <div className="c-card__items">
-          <Scrollbars>{this.renderBatch()}</Scrollbars>
-        </div>
-      );
     }
   }
 
@@ -502,22 +236,7 @@ class NewProjectDetail extends Component {
         </div>
         <div className="clearfix">
           <div className="divider-container">
-            <div className="divider-block text--left">
-              {/* <div className="form-group cust-fld">
-                <label >Access Rights</label><br />
-                <label className="custome-field field-checkbox" style={{ marginRight: "10px", display: "inline-block" }}>
-                  <input type="checkbox" name="check-one" id="check-Professor" value="checkone" checked={this.state.professor} />
-                  <i></i> <span>Professor</span>
-                </label>
-
-                <label style={{ display: "inline-block" }} className="custome-field field-checkbox">
-                  <input type="checkbox" name="check-one" id="check-Admin" value="checkone" onChange={this.onSelectAdminRole.bind(this)} checked={this.state.admin} />
-                  <i></i> <span>Admin</span>
-                </label>
-                <br />
-                {this.state.isRoleSelected ? <label className="help-block" style={{ color: "red" }}>Please Select Designation</label> : <br />}
-              </div> */}
-            </div>
+            
             <div class="divider-block text--right">
               <button
                 class="c-btn grayshade"
@@ -549,66 +268,14 @@ class NewProjectDetail extends Component {
                 </div>
               </div>
             </div>
-            {/* <div className="c-card">
-              <div className="c-card__title">
-                <span className="c-heading-sm card--title">
-                  Employees
-                <span className="c-count filled"></span>
-                </span>
-              </div>
-              {this.renderBatchDetail()}
-              <div className="c-card__btnCont">
-                {(this.state.project) ? <button style={{ color: "white" }} className="c-btn-large primary btn" data-toggle="modal" disabled={this.state.disableAddBatchButton} data-target="#addBatch">+ Add Employees</button> : ""}
-              </div>
-              <AddStudentBatchModel professorId={this.state.project.projectDetail.professor_id} onAddStudentBatch={(data) => { this.onProfessorBatchAdd(data) }} {...this.props} />
-            </div> */}
-            {/* {this.state.professor || (this.state.professor && this.state.admin) ? <div class="c-card">
-              <div class="c-card__title">
-                <span class="c-heading-sm card--title">
-                  Activity
-								</span>
-              </div>
-              <div class="c-card__items">
-                <div class="c-card__form">
-                  <div class="form-group static-fld">
-                    {this.homeworkCountShow()}
-                  </div>
-                  <div class="form-group static-fld">
-                    {this.quizCountShow()}
-                  </div>
-                </div>
-              </div>
-            </div> : ""} */}
-          </div>
+            </div>
         </div>
-        <DeleteModal
-          flag={this.state.deleteObj}
-          onDelete={val => {
-            this.onDeleteEntry(val);
-          }}
-          {...this.props}
-        />
       </div>
     );
   }
 }
 
 const mapStateToProps = ({ app, auth, inventoryAdmin }) => ({
-  professorDetail: app.professorDetail,
-  classes: app.classes,
-  subjects: app.subjects,
-  batches: app.batches,
-  updateProfessorDetail: app.updateProfessorDetail,
-  branchId: app.branchId,
-  instituteId: app.institudeId,
-  roleUpdate: app.roleUpdate,
-  token: auth.token,
-  userType: auth.userType,
-  ProfessorAdmin: app.professorAdmin,
-  isProfessorAdmin: auth.isProfessorAdmin,
-  studentProfessorDelete: app.studentProfessorDelete,
-  studentProfessorRegiAdd: app.studentProfessorRegiAdd,
-  sendInvitation: app.sendInvitation,
   addprojectdata: inventoryAdmin.addprojectdata,
   company_id: app.companyId,
   branch_id: app.AdminbranchId
@@ -617,19 +284,6 @@ const mapStateToProps = ({ app, auth, inventoryAdmin }) => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getClasses,
-      getSubjects,
-      getBatches,
-      addProfessorBatches,
-      updateProfessorDetails,
-      deleteProfessorBatch,
-      getProfessorDetail,
-      updateUserRole,
-      deleteStudentProfessor,
-      AddProfessor,
-      addStudentProfessorRegistration,
-      invitationSend,
-      getIsProfessorAdmin,
       addProjectData
     },
     dispatch

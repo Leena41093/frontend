@@ -18,8 +18,8 @@ class Sidebar extends Component {
         this.props.history.push('/app/faculty-directory');
         break;
       }
-      case 'enquiry': {
-        this.props.history.push('/app/enquiry-detail');
+      case 'complaints': {
+        this.props.history.push('/app/complaints');
         break;
       }
       case 'studentDirectory': {
@@ -125,7 +125,7 @@ class Sidebar extends Component {
                             <i className="icon cg-purse"></i>Finance
                           </a>
                         </li>
-                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'enquiry')}>
+                        <li className="linkbtn hover-pointer" onClick={this.handleProfessorOptionClick.bind(this, 'complaints')}>
                           <a className={this.getLiCss('complaints')}>
                             <i className="icon cg-notebook"></i>Complaints
                           </a>

@@ -96,11 +96,6 @@ class ComplaintsDirectory extends Component {
       company_id: this.props.company_id,
       branch_id: this.props.branch_id,
       payload:{
-      // "searchText": searchText,
-      // "record_per_page": data.length,
-      // "page_number":data.start / data.length + 1,
-      // "order_column":"created_at",
-      // "order_type": order_type
       "searchText": "",
       "record_per_page":10,
       "page_number": 1,
@@ -166,16 +161,16 @@ class ComplaintsDirectory extends Component {
                 <span className="c-heading-sm">Administration</span>
                 <span className="c-heading-lg">Complaints Directory</span>
               </div>
-              <div className="divider-block text--right">
+              {/* <div className="divider-block text--right">
                 <button className="c-btn prime" onClick={this.onNewStudent.bind(this)} >Add New Accessories</button>
-              </div>
+              </div> */}
             </div>
             <div className="divider-container">
               <div className="divider-block text--left">
-                <div className="form-group cust-fld">
+                {/* <div className="form-group cust-fld">
                   <label>Search complaints</label>
                   {/* <input type="search" className="form-control" value={this.state.searchText} onChange={this.serachStudent.bind(this)} placeholder="Enter Accessories Name" /> */}
-                </div>
+                {/* </div> */}
               </div>
               <div className="divider-block text--right">
               </div>

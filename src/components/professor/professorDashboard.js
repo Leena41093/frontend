@@ -1,99 +1,26 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {
-  getProfessorDashboard,
-  professorTimeTableInfo
-} from "../../actions/professorActions";
-
 import { getAdminDashboardData } from "../../actions/inventoryAdminAction";
-import { getBranches } from "../../actions/sidebarAction";
-import moment from "moment";
-
 import { ToastContainer } from "react-toastify";
 import Highcharts from "highcharts";
 import dataModule from "highcharts/modules/data";
-import $ from "jquery";
 import "bootstrap-datepicker";
-import { successToste } from "../../constant/util";
-import { ClipLoader } from "react-spinners";
-import { css } from "react-emotion";
 dataModule(Highcharts);
-const override = css`
-  display: block;
-  margin: 0 auto;
-  border-color: red;
-  margin-left: 10px;
-`;
 
 class ProfessorDashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentBranch: "select",
-      professorDashboard: {},
-      isDateChange: false,
-      professorTimeTable: [],
-      timeTableDate: moment(),
-      instituteId: 0,
-      flag: true,
-      flag1: true,
-      currentDate: moment(),
-      addloader: true,
       employeeData: {}
     };
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   var id = localStorage.getItem("instituteid");
-  //   if (id == nextProps.instituteId) {
-  //     if (this.state.instituteId != nextProps.instituteId) {
-  //       this.setState(
-  //         {
-  //           instituteId: nextProps.instituteId,
-  //           professorTimeTable: [],
-  //           professorDashboard: {},
-  //           flag1: true
-  //         },
-  //         () => {
-  //           const data = {
-  //             instituteId: nextProps.instituteId,
-  //             token: this.props.token
-  //           };
-  //           this.props.getBranches(data).then(() => {
-  //             if (this.props.branches && this.props.branches.length > 0) {
-  //               const branch = this.props.branches[0];
-  //               this.getDashbord(branch.branch_id);
-  //             }
-  //           });
-  //         }
-  //       );
-  //     }
-  //   }
-  // }
 
   componentDidMount() {
-    this.renderIncomeExpenceGraph();
-    this.renderPieGraph();
+    // this.renderIncomeExpenceGraph();
+    // this.renderPieGraph();
     this.getAdminData();
-    this.setState({ instituteId: this.props.instituteId }, () => {
-      // if (this.props.instituteId != null) {
-      //   if (this.props.branchId) {
-      //     // this.getDashbord(this.props.branchId);
-      //   } else {
-      //     const data = {
-      //       instituteId: this.props.instituteId,
-      //       token: this.props.token
-      //     };
-      //     this.props.getBranches(data).then(() => {
-      //       if (this.props.branches && this.props.branches.length > 0) {
-      //         const branch = this.props.branches[0];
-      //         // this.getDashbord(branch.branch_id);
-      //       }
-      //     });
-      //   }
-      // }
-    });
   }
 
   getAdminData() {
@@ -105,7 +32,7 @@ class ProfessorDashboard extends Component {
       let res = this.props.admindashboarddetailsData;
       if (res && res.data.status == 200) {
         this.setState({ employeeData: res.data.response }, () => {
-          this.renderProfessorbatchDashbord();
+          // this.renderProfessorbatchDashbord();
           this.renderComplaintsList();
           this.renderIncomeExpenceGraph();
           this.renderPieGraph();
@@ -390,7 +317,6 @@ class ProfessorDashboard extends Component {
           <div className="divider-container">
             <div className="divider-block text--left">
               <span className="c-heading-lg">Dashboard</span>
-              {/* {(this.state.studentBatch.length == 0&& this.state.commentActivities.length==0) ? <span style={{color:"red"}}>There is no data available</span>:""} */}
             </div>
           </div>
           <div className="c-container__data st--blank">
@@ -412,8 +338,6 @@ class ProfessorDashboard extends Component {
                 </h2>
                 <div id="pieGraph" style={{ height: "200px" }} />
               </div>
-
-              {/* <div className="divider-block" id="pieGraph" /> */}
             </div>
           </div>
         </div>
@@ -434,7 +358,6 @@ class ProfessorDashboard extends Component {
             </div>
           </div>
         </div>
-        {/* <ProfilePicModal onSelectProfile={(data) => this.saveProfile(data)} userType={this.props.userType} {...this.props} /> */}
       </div>
     );
   }
@@ -442,19 +365,11 @@ class ProfessorDashboard extends Component {
 
 const mapStateToProps = ({
   app,
-  professor,
-  sidebar,
   auth,
   inventoryAdmin
-}) => ({
-  professorDashboard: professor.professorDashboard,
-  branchId: app.branchId,
-  
+}) => ({  
   userType: auth.userType,
- 
-  
-  token: auth.token,
- 
+  token: auth.token, 
   admindashboarddetailsData: inventoryAdmin.adminDashboardDetail,
   companyId: app.companyId,
   BranchId: app.AdminbranchId
@@ -463,9 +378,6 @@ const mapStateToProps = ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getProfessorDashboard,
-      getBranches,
-
       getAdminDashboardData
     },
     dispatch

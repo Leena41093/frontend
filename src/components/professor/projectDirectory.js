@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import $ from "jquery";
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
-import { getProfessorsList, invitationSend, getIsProfessorAdmin, getEmailOfFacultyDirectory } from '../../actions/index';
-import { getEmployeeList,getProjectList } from '../../actions/inventoryAdminAction';
-import { errorToste, successToste } from '../../constant/util';
+import { getProjectList } from '../../actions/inventoryAdminAction';
 import { ToastContainer, toast } from 'react-toastify';
 let table = '0';
 
@@ -17,51 +15,10 @@ class ProjectDirectory extends Component {
       projectDetails: [],
       searchText: '',
       count: 0,
-      branchId: 0,
-      instituteId: 0
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    let id = localStorage.getItem("instituteid");
-    if (id == nextProps.instituteId) {
-
-      if (this.state.instituteId != nextProps.instituteId) {
-        this.setState({ instituteId: nextProps.instituteId }, () => {
-          var datas = {
-            institudeId: this.props.instituteId,
-            branchId: this.props.branchId,
-            token: this.props.token,
-          }
-          this.props.getIsProfessorAdmin(datas).then(() => {
-            let res = this.props.ProfessorAdmin;
-            if (res && res.data.status == 200 && res.data.response.isProfessorAdmin == false) {
-              this.props.history.push("/app/dashboard");
-            }
-            else {
-              if (this.state.branchId != nextProps.branchId) {
-                this.setState({ branchId: nextProps.branchId }, () => {
-                  table.fnDraw()
-                });
-              }
-            }
-          })
-        })
-      }
     }
   }
 
   componentDidMount() {
-    
-    this.setState({ instituteId: this.props.instituteId })
-    let data = {
-      institute_id: this.props.instituteId,
-      branch_id: this.props.branchId,
-      token: this.props.token
-    }
-    this.props.getEmailOfFacultyDirectory(data).then(() => {
-
-    })
     this.initDataTable();
   }
 
@@ -82,17 +39,9 @@ class ProjectDirectory extends Component {
           "defaultContent": `<button class="link--btn" id="view">View Profile</button>`,
           // targets:[6],
           "render": (data, type, row) => {
-
             let rowhtml;
             let rowData = row[5];
-            let title = this.getConditionForButton(rowData);
-            if (title) {
-              return rowhtml = `<button class="link--btn" id="view">View Profile</button> 
-              <button class="link--btn" id="invite" >${title}</button>`;
-            } else {
-              return rowhtml = `<button class="link--btn" id="view">View Profile</button>`
-            }
-
+            return rowhtml = `<button class="link--btn" id="view">View Profile</button>`
           }
         }, { orderable: false, targets: [2, 3, 4, 5] },
         {
@@ -124,11 +73,6 @@ class ProjectDirectory extends Component {
       _.onChangePage(data[5]);
     });
 
-    var _ = this;
-    $('#EmployeeList tbody').on('click', '#invite', function () {
-      var data = table.api().row($(this).parents('tr')).data();
-      _.onSendInvitation(data[6]);
-    });
   }
 
   getProfessors(data, callback, setting) {
@@ -162,9 +106,7 @@ class ProjectDirectory extends Component {
       var columnData = [];
        this.setState({ count: res.data.response.projectDetails ? res.data.response.projectDetails.length > 0 ? res.data.response.totalCount : 0 : 0 })
        let projectList = res.data.response.projectDetails;
-      console.log("------------->",res.data.response)
       if (projectList && projectList.length > 0) {
-        console.log
         projectList.map((data, index) => {
           var arr = []
           
@@ -186,44 +128,6 @@ class ProjectDirectory extends Component {
     else if (res && res.data.status == 500) {
       this.setState({ count: 0 })
     }
-  }
-
-  getConditionForButton(obj) {
-    if (obj.is_invite == true && obj.is_register == false) {
-      return "Invite Again";
-    } else if (obj.is_invite == false && obj.is_register == false) {
-      return "Invite";
-    } else if (obj.is_invite == true && obj.is_register == true) {
-      return false;
-    }
-  }
-
-  onSendInvitation(data) {
-    let payloadType;
-    if (data.designation == "INSTITUTE") {
-      payloadType = "Institute"
-    }
-    else if (data.designation == "Professor") {
-      payloadType = "Professor"
-    }
-    let apiData = {
-      payload: {
-        type: payloadType,
-        id: data.professor_id
-      },
-      institude_id: this.props.instituteId,
-      branch_id: this.props.branchId,
-      token: this.props.token
-    }
-    this.props.invitationSend(apiData).then(() => {
-      let res = this.props.sendInvitation;
-      if (res && res.status == 200) {
-        successToste("Invitation Send Successfully");
-      }
-      else if (res && res.status == 500) {
-        errorToste("Something Went Wrong")
-      }
-    })
   }
 
   onChangePage(data) {
@@ -296,12 +200,7 @@ class ProjectDirectory extends Component {
 }
 
 const mapStateToProps = ({ app, auth}) => ({
-  branchId: app.branchId,
-  instituteId: app.institudeId,
   token: auth.token,
-  sendInvitation: app.sendInvitation,
-  ProfessorAdmin: app.professorAdmin,
-  professorEmailChecking: app.professorEmailCheck,
   companyId:app.companyId,
   BranchId:app.AdminbranchId,
 })
@@ -309,7 +208,6 @@ const mapStateToProps = ({ app, auth}) => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      invitationSend, getIsProfessorAdmin, getEmailOfFacultyDirectory
     }, dispatch
   )
 
