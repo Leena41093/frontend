@@ -82,7 +82,7 @@ import NewProjectDetail from '../components/professor/newproject'
 // import PaymentMethodConfiguration from '../components/finance/createFinance/paymentMethodConfiguration';
 // import UnpaidInvoiceReciept from '../components/finance/financeDashboard/unpaidInvoiceReciept';
 // import PaidInvoiceReciept from '../components/finance/financeDashboard/paidInvoiceReciept';
-
+import ComplaintsDirectory from '../components/professor/complaintsDirectory'
 // import StudentFinanceDashboard from '../components/finance/financeDashboard/studentFinanceDashboard'
 export const App = ({ match, history }) => {
   let localData = localStorage.getItem("persist:root");
@@ -175,6 +175,7 @@ export const App = ({ match, history }) => {
          <Route path={`${match.url}/projects-directory`} component={ProjectDirectory} />
          <Route path={`${match.url}/project-detail`} component={ProjectDetails} />
          <Route path={`${match.url}/new-project`} component = {NewProjectDetail}/>
+         <Route path ={`${match.url}/complaints`} component = {ComplaintsDirectory}/>
         </div>
       </div>
     )

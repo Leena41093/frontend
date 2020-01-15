@@ -1,5 +1,7 @@
 import axios from "axios";
-import { BASE_URL } from "../components/common/config";
+import {
+  BASE_URL
+} from "../components/common/config";
 
 export const GET_ADMINDASHBOARDDETAILS = "GET_ADMINDASHBOARDDETAILS";
 export const GETEMPDETAIL = "GETEMPDETAIL";
@@ -25,7 +27,7 @@ export const DELETEEMPLOYEEFROMPROJECT = "DELETEEMPLOYEEFROMPROJECT"
 export const DELETEINCOME = "DELETEINCOME"
 export const DELETEEXPENSE = "DELETEEXPENSE"
 export const DELETE_ACCESSORY = 'DELETE_ACCESSORY'
-
+export const UPDATE_COMPLAINT = "UPDATE_COMPLAINT"
 export function getEmployeeList(data) {
   const API_CONFIG = {
     headers: {
@@ -43,7 +45,7 @@ export function getEmployeeList(data) {
     .then(function (response) {
       return response;
     })
-    .catch(function (error) { });
+    .catch(function (error) {});
 }
 
 export function getEmployeeDetail(data) {
@@ -66,7 +68,7 @@ export function getEmployeeDetail(data) {
           payload: response
         });
       })
-      .catch(function (error) { });
+      .catch(function (error) {});
   };
 }
 
@@ -91,7 +93,7 @@ export function getAdminDashboardData(data) {
           payload: response
         });
       })
-      .catch(function (error) { });
+      .catch(function (error) {});
   };
 }
 
@@ -114,7 +116,7 @@ export function createEmployeeDetail(data) {
           payload: response
         });
       })
-      .catch(function (error) { });
+      .catch(function (error) {});
   };
 }
 export function getInventoryComplaints(data) {
@@ -125,7 +127,7 @@ export function getInventoryComplaints(data) {
     }
   };
 
-  let URL = `http://35.154.43.111:9000/company/${data.companyId}/branch/${data.branch_id}/complaintsList/ `;
+  let URL = `http://35.154.43.111:9000/company/${data.company_id}/branch/${data.branch_id}/complaintsListDetails/`;
   let payload = data.payload;
 
   return axios
@@ -133,8 +135,9 @@ export function getInventoryComplaints(data) {
     .then(function (response) {
       return response;
     })
-    .catch(function (error) { });
+    .catch(function (error) {});
 }
+
 export function getProjectList(data) {
   const API_CONFIG = {
     headers: {
@@ -152,7 +155,7 @@ export function getProjectList(data) {
     .then(function (response) {
       return response;
     })
-    .catch(function (error) { });
+    .catch(function (error) {});
 }
 
 export function getAccessories(data) {
@@ -172,7 +175,7 @@ export function getAccessories(data) {
           payload: response
         });
       })
-      .catch(function (error) { });
+      .catch(function (error) {});
   };
 }
 
@@ -193,7 +196,7 @@ export function getProjectes(data) {
           payload: response
         });
       })
-      .catch(function (error) { });
+      .catch(function (error) {});
   };
 }
 
@@ -218,7 +221,7 @@ export function getProjectEmployeeData(data) {
           payload: response
         });
       })
-      .catch(function (error) { });
+      .catch(function (error) {});
   };
 }
 
@@ -243,7 +246,7 @@ export function addProjectData(data) {
           payload: response
         });
       })
-      .catch(function (error) { });
+      .catch(function (error) {});
   };
 }
 
@@ -262,10 +265,10 @@ export function getFinanceList(data) {
 
   return axios
     .post(URL, payload, API_CONFIG)
-    .then(function(response) {
+    .then(function (response) {
       return response;
     })
-    .catch(function(error) {});
+    .catch(function (error) {});
 }
 
 export function getAllEmployee(data) {
@@ -282,13 +285,13 @@ export function getAllEmployee(data) {
   return dispatch => {
     return axios
       .get(URL, API_CONFIG)
-      .then(function(response) {
+      .then(function (response) {
         dispatch({
           type: GET_ALLEMPLOYEES,
           payload: response
         });
       })
-      .catch(function (error) { });
+      .catch(function (error) {});
   };
 }
 
@@ -314,7 +317,7 @@ export function addIncome(data) {
           payload: response
         });
       })
-      .catch(function(error) {});
+      .catch(function (error) {});
   };
 }
 
@@ -334,13 +337,13 @@ export function addExpences(data) {
   return dispatch => {
     return axios
       .post(URL, payload, API_CONFIG)
-      .then(function(response) {
+      .then(function (response) {
         dispatch({
           type: ADD_EXPENCE,
           payload: response
         });
       })
-      .catch(function (error) { });
+      .catch(function (error) {});
   };
 }
 
@@ -364,7 +367,7 @@ export function assignProjectAndAccessories(data) {
           payload: response
         });
       })
-      .catch(function (error) { });
+      .catch(function (error) {});
   };
 }
 
@@ -387,7 +390,7 @@ export function deleteProjectfromEmp(data) {
           payload: response
         });
       })
-      .catch(function (error) { });
+      .catch(function (error) {});
   };
 }
 
@@ -410,7 +413,7 @@ export function deleteAccessoriesfromEmp(data) {
           payload: response
         });
       })
-      .catch(function (error) { });
+      .catch(function (error) {});
   };
 }
 
@@ -433,7 +436,7 @@ export function deleteEmployee(data) {
           payload: response
         });
       })
-      .catch(function (error) { });
+      .catch(function (error) {});
   };
 }
 
@@ -456,7 +459,7 @@ export function projectEmployeeDetails(data) {
           payload: response
         });
       })
-      .catch(function (error) { });
+      .catch(function (error) {});
   };
 }
 
@@ -479,7 +482,7 @@ export function deleteProject(data) {
           payload: response
         });
       })
-      .catch(function (error) { });
+      .catch(function (error) {});
   };
 }
 
@@ -502,12 +505,12 @@ export function addEmployeeProject(data) {
           payload: response
         });
       })
-      .catch(function (error) { });
+      .catch(function (error) {});
   };
 }
-  
+
 export function getAccessoriesList(data) {
-  
+
   const API_CONFIG = {
     headers: {
       "Content-Type": "application/json"
@@ -516,18 +519,18 @@ export function getAccessoriesList(data) {
   };
 
   let URL = `http://35.154.43.111:9000/company/${data.company_id}/branch/${data.branch_id}/accessoryList/`;
-  
+
   let payload = data.payload;
   return axios
     .post(URL, payload, API_CONFIG)
     .then(function (response) {
       return response;
     })
-    .catch(function (error) { });
+    .catch(function (error) {});
 }
 
 export function addAccessories(data) {
-  
+
   const API_CONFIG = {
     headers: {
       "Content-Type": "application/json"
@@ -536,7 +539,7 @@ export function addAccessories(data) {
   };
 
   let URL = `http://35.154.43.111:9000/company/${data.company_id}/branch/${data.branch_id}/accessories`;
-  
+
   let payload = data.payload;
   return dispatch => {
     return axios
@@ -547,7 +550,7 @@ export function addAccessories(data) {
           payload: response
         });
       })
-      .catch(function (error) { });
+      .catch(function (error) {});
   };
 }
 
@@ -570,7 +573,7 @@ export function deleteProjectEmployee(data) {
           payload: response
         });
       })
-      .catch(function (error) { });
+      .catch(function (error) {});
   };
 }
 
@@ -585,14 +588,14 @@ export function deleteIncome(data) {
   let URL = `http://35.154.43.111:9000/company/${data.company_id}/branch/${data.branch_id}/income_details/${data.income_id}`;
   return dispatch => {
     return axios
-      .delete(URL,API_CONFIG)
+      .delete(URL, API_CONFIG)
       .then(function (response) {
         dispatch({
           type: DELETEINCOME,
           payload: response
         });
       })
-      .catch(function (error) { });
+      .catch(function (error) {});
   };
 }
 
@@ -607,26 +610,26 @@ export function deleteExpense(data) {
   let URL = `http://35.154.43.111:9000/company/${data.company_id}/branch/${data.branch_id}/expense/${data.expense_id}`;
   return dispatch => {
     return axios
-      .delete(URL,API_CONFIG)
+      .delete(URL, API_CONFIG)
       .then(function (response) {
         dispatch({
           type: DELETEEXPENSE,
           payload: response
         });
       })
-      .catch(function (error) { });
+      .catch(function (error) {});
   };
 }
 
-    export function deleteAccessory(data) {
-                      const API_CONFIG = {
-                headers: {
-                  "Content-Type": "application/json",
-                  // Authorization: "JWT " + data.token
-                }
-              };
+export function deleteAccessory(data) {
+  const API_CONFIG = {
+    headers: {
+      "Content-Type": "application/json",
+      // Authorization: "JWT " + data.token
+    }
+  };
   let URL = `http://35.154.43.111:9000/company/${data.company_id}/branch/${data.branch_id}/deleteaccessory/${data.accessory_id}/`;
-  
+
   return dispatch => {
     return axios
       .delete(URL, API_CONFIG)
@@ -636,6 +639,28 @@ export function deleteExpense(data) {
           payload: response
         });
       })
-      .catch(function (error) { });
+      .catch(function (error) {});
+  };
+}
+
+export function updateComplaints(data) {
+  const API_CONFIG = {
+    headers: {
+      "Content-Type": "application/json",
+      // Authorization: "JWT " + data.token
+    }
+  };
+  let URL = `http://35.154.43.111:9000/company/${data.company_id}/branch/${data.branch_id}/complaint/${data.complaint_id}`;
+let payload = data.paylaod;
+  return dispatch => {
+    return axios
+      .put(URL,payload, API_CONFIG)
+      .then(function (response) {
+        dispatch({
+          type: UPDATE_COMPLAINT,
+          payload: response
+        });
+      })
+      .catch(function (error) {});
   };
 }
