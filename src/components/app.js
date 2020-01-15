@@ -24,20 +24,20 @@ export const App = ({ match, history }) => {
         <Header history={history} />
         <div className="c-body">
           <Sidebar history={history} />
-        <Route exact path={match.url} component={Dashboard}/>  
-        <Route path={`${match.url}/faculty-directory`} component={FacultyDirectory} />
-        <Route path={`${match.url}/faculty-detail`} component={FacultyDetail} />
-        <Route path={`${match.url}/new-faculty`} component={addNewFaculty} />
-        <Route path={`${match.url}/student-directory`} component={StudentDirectory}/>
-        <Route path={`${match.url}/enquiry-detail`} component={EnquiryDetails} /> 
-        <Route path={`${match.url}/new-student`} component={addNewStudent} />
-        <Route path={`${match.url}/dashboard`} component={Dashboard} />
-        <Route path={`${match.url}/get-professorProfile`} component={GetProfile} /> 
-         <Route path={`${match.url}/finance-dashboard`} component={FinanceDashboard} />
-         <Route path={`${match.url}/projects-directory`} component={ProjectDirectory} />
-         <Route path={`${match.url}/project-detail`} component={ProjectDetails} />
-         <Route path={`${match.url}/new-project`} component = {NewProjectDetail}/>
-         <Route path ={`${match.url}/complaints`} component = {ComplaintsDirectory}/>
+          <Route exact path={match.url} component={Dashboard} />
+          <Route path={`${match.url}/faculty-directory`} component={FacultyDirectory} />
+          <Route path={`${match.url}/faculty-detail`} component={FacultyDetail} />
+          <Route path={`${match.url}/new-faculty`} component={addNewFaculty} />
+          <Route path={`${match.url}/student-directory`} component={StudentDirectory} />
+          <Route path={`${match.url}/enquiry-detail`} component={EnquiryDetails} />
+          <Route path={`${match.url}/new-student`} component={addNewStudent} />
+          <Route path={`${match.url}/dashboard`} component={Dashboard} />
+          <Route path={`${match.url}/get-professorProfile`} component={GetProfile} />
+          <Route path={`${match.url}/finance-dashboard`} component={FinanceDashboard} />
+          <Route path={`${match.url}/projects-directory`} component={ProjectDirectory} />
+          <Route path={`${match.url}/project-detail`} component={ProjectDetails} />
+          <Route path={`${match.url}/new-project`} component={NewProjectDetail} />
+          <Route path={`${match.url}/complaints`} component={ComplaintsDirectory} />
         </div>
       </div>
     )
