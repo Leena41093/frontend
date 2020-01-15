@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 import { errorToste } from '../../constant/util';
 import { ToastContainer } from 'react-toastify';
-import { loginStudent, storeStudentToken, checkAuth } from '../../actions/authAction';
+import { loginStudent, storeStudentToken, checkAuth, loginUser } from '../../actions/authAction';
 import './bootstrap-spacing.css'
 import $ from 'jquery'
 class Login extends Component {
@@ -34,14 +34,14 @@ class Login extends Component {
     }
     else {
       let localData = localStorage.getItem("persist:root");
-      if (JSON.parse(localData) && JSON.parse(localData).auth && JSON.parse(JSON.parse(localData).auth) && JSON.parse(JSON.parse(localData).auth).token) {
-        if (JSON.parse(JSON.parse(localData).auth).user_type != "INSTITUTE" || JSON.parse(JSON.parse(localData).auth).user_type != "ADMIN") {
-          this.props.history.push('/app/dashboard');
-        }
-        else {
-          this.props.history.push('/app/class-manager');
-        }
-      }
+      // if (JSON.parse(localData) && JSON.parse(localData).auth && JSON.parse(JSON.parse(localData).auth) && JSON.parse(JSON.parse(localData).auth).inventoryToken) {
+      //   if (JSON.parse(JSON.parse(localData).auth).user_type != "INSTITUTE" || JSON.parse(JSON.parse(localData).auth).user_type != "ADMIN") {
+      //     this.props.history.push('/app/dashboard');
+      //   }
+      //   else {
+      //     this.props.history.push('/app/class-manager');
+      //   }
+      // }
     }
     let self = this;
     $(document).keypress(function (e) {
@@ -80,6 +80,30 @@ class Login extends Component {
       isValidForm = false;
     }
     return isValidForm;
+  }
+
+  handelloginuser(){
+    const isValidForm = this.validate();
+    let apiData = {
+      payload: {
+        "email": this.state.email, "password": this.state.password,
+      }
+    }
+    if (!isValidForm) {
+      return;
+    }
+    else {
+      let data ={
+        payload: {
+          "email": this.state.email, "password": this.state.password,
+        } 
+      }
+      this.props.loginUser(data).then(()=>{
+        console.log("res", JSON.parse(JSON.parse(localStorage.getItem("persist:root")).auth))
+        this.props.history.push('/app/dashboard');
+      })
+    }
+    // this.props.history.push('/app/dashboard');
   }
 
   handelSubmit(event) {
@@ -184,7 +208,7 @@ class Login extends Component {
         <div className="spacer d-none d-md-block"></div>
         <div className="container">
           <div className="cg-card row justify-content-center ">
-            <div style={{background:"#FFFFFF"}} className="col-12 col-md-6 col-lg-8 bg-maroon p-4">
+            <div style={{ background: "#FFFFFF" }} className="col-12 col-md-6 col-lg-8 bg-maroon p-4">
               <img src="/images/img/logo1.svg" height="30" />
 
               <img className="illustration mt-4" src="/images/img/splashScreen.jpeg" />
@@ -196,8 +220,8 @@ class Login extends Component {
               <p className="d-none d-md-block">
                 Please login to your  account.
               </p>
-              <div className="d-none d-md-block">
-                
+              {/* <div className="d-none d-md-block">
+
                 <form className="mt-3">
                   <div className="form-group">
                     <label htmlFor="email">Email</label>
@@ -214,6 +238,26 @@ class Login extends Component {
                 <div className="mt-2">
                   <a className="linkbtn hover-pointer"  onClick={this.getForgotPasswordPage.bind(this)}>Forgot Password?</a>
                 </div>
+              </div> */}
+
+              <div className="d-none d-md-block">
+
+                <form className="mt-3">
+                  <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <input type="email" className="form-control" id="email" value={this.state.email} onChange={this.handleEmailChange.bind(this)} placeholder="Email" />
+                    {this.state.isEmailVisible ? <label className="help-block" style={{ color: "red" }} >Please Enter Valid Email</label> : <div></div>}
+                  </div>
+                  <div className="form-group pt-1">
+                    <label htmlFor="password">Password</label>
+                    <input type="password" className="form-control" id="password" value={this.state.password} onChange={this.handlePassChange.bind(this)} placeholder="Password" />
+                    {this.state.isPasswordVisible ? <label className="help-block" style={{ color: "red" }} >Please Enter Valid Password</label> : <div></div>}
+                  </div>
+                </form>
+                <button className="btn btn-primary btn-block mt-4" onClick={this.handelloginuser.bind(this)}>Login</button>
+                <div className="mt-2">
+                  <a className="linkbtn hover-pointer" onClick={this.getForgotPasswordPage.bind(this)}>Forgot Password?</a>
+                </div>
               </div>
             </div>
           </div>
@@ -227,7 +271,7 @@ class Login extends Component {
 const mapStateToProps = ({ app, auth }) => ({
   login: auth.login,
   storeToken: auth.storeToken,
-  authCheck: auth.authCheck
+  authCheck: auth.authCheck,
 })
 
 const mapDispatchToProps = dispatch =>
@@ -235,7 +279,8 @@ const mapDispatchToProps = dispatch =>
     {
       loginStudent,
       storeStudentToken,
-      checkAuth
+      checkAuth,
+      loginUser
     }, dispatch
   )
 

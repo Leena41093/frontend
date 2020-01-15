@@ -11,11 +11,12 @@ export const ADD_INSTITUTEINCOME = "ADD_INSTITUTEINCOME";
 export const ADD_INSTITUTEEXPENCE = "ADD_INSTITUTEEXPENCE";
 export const UPLOAD_INVOICERECEIPTPRINT = "UPLOAD_INVOICERECEIPTPRINT";
 export const GET_FINANCETEMPLATEDATA = "GET_FINANCETEMPLATEDATA";
+let token = `JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozMCwidXNlcm5hbWUiOiJiaHVzaGFuM0BnbWFpbC5jb20iLCJleHAiOjQ1Njg4MDQ1NDYsImVtYWlsIjoiYmh1c2hhbjNAZ21haWwuY29tIn0.5nD6ysJLChbte4EM1OL0rwU9hM3ZZtT2KtUcAa23KXQ`
 export function getFinanceClassData(data) {
   const API_CONFIG = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: "JWT " + data.token
+      Authorization: "JWT " + token
     }
   };
 
@@ -40,7 +41,7 @@ export function createFinanceClassTemplate(data) {
   const API_CONFIG = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: "JWT " + data.token
+      Authorization: "JWT " + token
     }
   };
 
@@ -69,7 +70,7 @@ export function getFinanceInstituteDetails(data) {
   const API_CONFIG = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: "JWT " + data.token
+      Authorization: "JWT " + token
     }
   };
   return dispatch => {
@@ -92,7 +93,7 @@ export function createFinanceInstituteDetails(data) {
   const API_CONFIG = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: "JWT " + data.token
+      Authorization: "JWT " + token
     }
   };
 
@@ -117,7 +118,7 @@ export function getInstituteBankDetails(data) {
   const API_CONFIG = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: "JWT " + data.token
+      Authorization: "JWT " + token
     }
   };
   return dispatch => {
@@ -140,7 +141,7 @@ export function createInstituteBankDetails(data) {
   const API_CONFIG = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: "JWT " + data.token
+      Authorization: "JWT " + token
     }
   };
 
@@ -165,7 +166,7 @@ export function getIncomeExpenseDetails(data) {
   const API_CONFIG = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: "JWT " + data.token
+      Authorization: "JWT " + token
     }
   };
   return dispatch => {
@@ -188,7 +189,7 @@ export function createInstituteIncome(data) {
   const API_CONFIG = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: "JWT " + data.token
+      Authorization: "JWT " + token
     }
   };
 
@@ -214,7 +215,7 @@ export function createInstituteExpence(data) {
   const API_CONFIG = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: "JWT " + data.token
+      Authorization: "JWT " + token
     }
   };
 
@@ -240,7 +241,7 @@ export function getFinanceTemplateData(data) {
   const API_CONFIG = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: "JWT " + data.token
+      Authorization: "JWT " + token
     }
   };
   let payload = data.payload;
@@ -264,7 +265,7 @@ export function uploadInvoicePrint(data) {
   const API_CONFIG = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: "JWT " + data.token
+      Authorization: "JWT " + token
     }
   };
 
@@ -287,7 +288,7 @@ export function getIncomeExpenceList(data) {
   const API_CONFIG = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: "JWT " + data.token
+      Authorization: "JWT " + token
     }
   };
 

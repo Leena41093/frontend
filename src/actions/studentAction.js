@@ -54,12 +54,13 @@ export const GET_STUDENTDETAILSBYSUBJECT = 'GET_STUDENTDETAILSBYSUBJECT';
 export const GET_STUDENTDETAILS = 'GET_STUDENTDETAILS';
 export const GET_STUDENTBATCHATTENDACEDETAILS = 'GET_STUDENTBATCHATTENDACEDETAILS';
 export const DOWNLOAD_QUIZFILE_MOBILE = 'DOWNLOAD_QUIZFILE_MOBILE';
+let token =`JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozMCwidXNlcm5hbWUiOiJiaHVzaGFuM0BnbWFpbC5jb20iLCJleHAiOjQ1Njg4MDQ1NDYsImVtYWlsIjoiYmh1c2hhbjNAZ21haWwuY29tIn0.5nD6ysJLChbte4EM1OL0rwU9hM3ZZtT2KtUcAa23KXQ`
 export function getStudentClassesData(data) {
 
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
   let URL = `${BASE_URL}institude/${data.institute_id}/branch/${data.branch_id}/student/studentDashboard_ClassDetails/ `;
@@ -84,7 +85,7 @@ export function getStudentDashboardDetail(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
   let URL = `${BASE_URL}institude/${data.institute_id}/branch/${data.branch_id}/student/studentDashboardDetail/`;
@@ -109,7 +110,7 @@ export function getStudentHomeworkList(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -132,7 +133,7 @@ export function getStudentBatchDetailDashBoard(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -159,7 +160,7 @@ export function getStudentHomeworkDetails(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -185,7 +186,7 @@ export function submitHomeworkDate(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -214,7 +215,7 @@ export function getStudentNoteList(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -236,7 +237,7 @@ export function getStudentNoteDetail(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token,
+      'Authorization': "JWT " + token,
     }
   };
 
@@ -264,7 +265,7 @@ export function submitHomeworkFile(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
   let URL = `${BASE_URL}institude/${data.institute_id}/branch/${data.branch_id}/studentHomeworkUpload/`;
@@ -290,7 +291,7 @@ export function getStudentQuizList(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -312,7 +313,7 @@ export function getStudentQuizDetail(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -340,7 +341,7 @@ export function getStudentQuizExam(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -367,7 +368,7 @@ export function submitQuizTypeQuestion(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
   // http://127.0.0.1:7000/institude/2/branch/2/student/SubmissionQuestionType/
@@ -394,7 +395,7 @@ export function submitQuizTypePDF(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -421,7 +422,7 @@ export function submitQuizResult(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token,
+      'Authorization': "JWT " + token,
 
     }
   };
@@ -449,7 +450,7 @@ export function downloadStudentHomeworkFile(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
 
   };
@@ -478,7 +479,7 @@ export function downloadStudentHomeworkDrivefile(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -506,7 +507,7 @@ export function updateStudentLastSeen(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -534,7 +535,7 @@ export function quizStartExamStatusChange(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -561,7 +562,7 @@ export function getResumeQuizData(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -589,7 +590,7 @@ export function resumeQuestionQuiz(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
   let URL = `${BASE_URL}institude/${data.institute_id}/branch/${data.branch_id}/student/resumeQuiz/`;
@@ -615,7 +616,7 @@ export function resumePdfQuiz(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
   let URL = `${BASE_URL}institude/${data.institute_id}/branch/${data.branch_id}/student/resumeQuiz/ `;
@@ -641,7 +642,7 @@ export function getCommentList(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -668,7 +669,7 @@ export function addComment(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
   // http://127.0.0.1:7000/institude/2/branch/2/student/comment/ 
@@ -695,7 +696,7 @@ export function commentLikeDislike(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
   // http://127.0.0.1:7000/institude/2/branch/2/student/commentAction/ 
@@ -722,7 +723,7 @@ export function downloadStudentQuizFile(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -750,7 +751,7 @@ export function downloadStudentQuizFileFromMobile(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -778,7 +779,7 @@ export function downloadStudentNotesFile(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
 
   };
@@ -807,7 +808,7 @@ export function studentTimeTable(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
   // http://127.0.0.1:7000/institude/2/branch/2/student/TimetableInfo 
@@ -835,7 +836,7 @@ export function getStudentProfile(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -861,7 +862,7 @@ export function updateStudentProfile(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -888,7 +889,7 @@ export function getStudentDeadlineNotifications(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
   let payload = data.payload;
@@ -914,7 +915,7 @@ export function updateStudentNoticeLastseen(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -941,7 +942,7 @@ export function getStudentClasses(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -966,7 +967,7 @@ export function getStudentSubjects(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
   let URL = `${BASE_URL}institude/${data.institute_id}/branch/${data.branch_id}/student/getClasses/`;
@@ -990,7 +991,7 @@ export function getStudentBatch(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -1015,7 +1016,7 @@ export function getStudentNotiSubmissionList(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -1040,7 +1041,7 @@ export function updateCommentLastSeen(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -1066,7 +1067,7 @@ export function deleteComment(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -1092,7 +1093,7 @@ export function getStudentAttendanceBatches(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -1117,7 +1118,7 @@ export function getStudentBatchAttendanceData(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -1143,7 +1144,7 @@ export function getStudentCommentActivities(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -1170,7 +1171,7 @@ export function getStudentBatchNotices(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -1195,7 +1196,7 @@ export function getStudentTimetableDeadlineInfo(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -1221,7 +1222,7 @@ export function getStudentTimetableNoticeInfo(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -1247,7 +1248,7 @@ export function getStudentExpiredBatchData(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -1273,7 +1274,7 @@ export function getstudentDashboardBatchDetailsNotices(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -1299,7 +1300,7 @@ export function getstudentDashboardBatchDetailsRecentSubmission(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -1325,7 +1326,7 @@ export function getStudentMonthAttendanceAverage(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -1351,7 +1352,7 @@ export function getStudentSubjectQuizPercentage(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -1377,7 +1378,7 @@ export function getStudentSubjectHomeworkPercentage(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -1403,7 +1404,7 @@ export function getStudentBatchSubmission(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -1429,7 +1430,7 @@ export function getStudentDetailsBySubject(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -1455,7 +1456,7 @@ export function getStudentDetails(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -1480,7 +1481,7 @@ export function studentBatchAttendanceDetails(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 

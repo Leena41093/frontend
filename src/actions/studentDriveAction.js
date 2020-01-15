@@ -6,13 +6,13 @@ export const GET_STUDENTDRIVEFOLDER = 'GET_STUDENTDRIVEFOLDER';
 export const GET_STUDENTDRIVEFILE = 'GET_STUDENTDRIVEFILE';
 export const RENAME_DRIVEFILENAME = 'RENAME_DRIVEFILENAME';
 export const DELETE_DRIVEFILE = 'DELETE_DRIVEFILE';
-
+let token = `JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozMCwidXNlcm5hbWUiOiJiaHVzaGFuM0BnbWFpbC5jb20iLCJleHAiOjQ1Njg4MDQ1NDYsImVtYWlsIjoiYmh1c2hhbjNAZ21haWwuY29tIn0.5nD6ysJLChbte4EM1OL0rwU9hM3ZZtT2KtUcAa23KXQ`
 export function getStudentDriveClassList(data) {
     
     const API_CONFIG = {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'JWT '+ data.token,
+          'Authorization': 'JWT '+ token,
         }
       };
    
@@ -37,7 +37,7 @@ export function getStudentDriveClassList(data) {
     const API_CONFIG = {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'JWT '+ data.token,
+          'Authorization': 'JWT '+ token,
         }
       };
       let payload =data.payload;
@@ -63,7 +63,7 @@ export function getStudentDriveClassList(data) {
     const API_CONFIG = {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'JWT '+ data.token,
+          'Authorization': 'JWT '+ token,
         }
       };
       let payload =data.payload;
@@ -89,7 +89,7 @@ export function getStudentDriveClassList(data) {
     const API_CONFIG = {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'JWT '+ data.token,
+          'Authorization': 'JWT '+ token,
         }
       };
       let payload =data.payload;
@@ -115,7 +115,7 @@ export function getStudentDriveClassList(data) {
     const API_CONFIG = {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'JWT '+ data.token,
+          'Authorization': 'JWT '+ token,
         }
       };
       let payload = data.payload;
@@ -140,7 +140,7 @@ export function getStudentDriveClassList(data) {
     const API_CONFIG = {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'JWT '+ data.token,
+        'Authorization': 'JWT '+ token,
       }
     };
     

@@ -13,13 +13,14 @@ export const CREATE_PROFESSORDRIVENEWFOLDER = 'CREATE_PROFESSORDRIVENEWFOLDER';
 export const CREATE_PERSONALDRIVEFILE = 'CREATE_PERSONALDRIVEFILE';
 export const GET_PROFESSORDRIVEFOLDERANDFILES = 'GET_PROFESSORDRIVEFOLDERANDFILES';
 export const DOWNLOAD_PERSONALDRIVEFILE = 'DOWNLOAD_PERSONALDRIVEFILE';
+let token = `JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozMCwidXNlcm5hbWUiOiJiaHVzaGFuM0BnbWFpbC5jb20iLCJleHAiOjQ1Njg4MDQ1NDYsImVtYWlsIjoiYmh1c2hhbjNAZ21haWwuY29tIn0.5nD6ysJLChbte4EM1OL0rwU9hM3ZZtT2KtUcAa23KXQ`
 export const QUIZLISTFORDRIVE = 'QUIZLISTFORDRIVE'
 export function getProfessorDriveClassList(data) {
 
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institute_id}/branch/${data.branch_id}/professorDrive/classes/`;
@@ -42,7 +43,7 @@ export function getProfessorDriveSubjectList(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institute_id}/branch/${data.branch_id}/professorDrive/subject/`;
@@ -66,7 +67,7 @@ export function getProfessorDriveSubjectFolderList(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   // http://127.0.0.1:7000/institude/2/branch/2/professorDrive/subejctFolder/ 
@@ -92,7 +93,7 @@ export function getProfessorFolderFileList(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   // http://127.0.0.1:7000/institude/2/branch/2/professorDrive/files/
@@ -118,7 +119,7 @@ export function renameProfessorFileName(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institute_id}/branch/${data.branch_id}/professorDrive/renameFile/`;
@@ -143,7 +144,7 @@ export function deleteProfessorDriveFile(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institute_id}/branch/${data.branch_id}/professorDrive/deleteFile/`;
@@ -170,7 +171,7 @@ export function getFolderQuizList(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
 
@@ -196,7 +197,7 @@ export function createDriveFolder(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
 
@@ -222,7 +223,7 @@ export function getFilesOfDriveFolder(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institute_id}/branch/${data.branch_id}/myDriveFolder/ `;
@@ -249,7 +250,7 @@ export function addPersonalDriveFiles(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
 
@@ -275,7 +276,7 @@ export function getDriveFolderAndFiles(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institute_id}/branch/${data.branch_id}/personalFiles/  `;
@@ -302,7 +303,7 @@ export function downloadPersonalDriveFiles(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
 
@@ -328,7 +329,7 @@ export function quizListDrive(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
 

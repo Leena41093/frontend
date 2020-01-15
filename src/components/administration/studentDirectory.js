@@ -192,9 +192,7 @@ class StudentDirectory extends Component {
               </div>
             </div>
           </div>
-
           <div className=" no-round">
-           
             <div className="card-container for--table">
               <div className="c-table">
                 <table id="accessoriesList" className="table data--table">
@@ -214,7 +212,6 @@ class StudentDirectory extends Component {
             </div>
           </div>
         </div>
-
       </div>
     )
   }

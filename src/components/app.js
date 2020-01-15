@@ -86,7 +86,7 @@ import NewProjectDetail from '../components/professor/newproject'
 // import StudentFinanceDashboard from '../components/finance/financeDashboard/studentFinanceDashboard'
 export const App = ({ match, history }) => {
   let localData = localStorage.getItem("persist:root");
-  if (JSON.parse(localData) && JSON.parse(localData).auth && JSON.parse(JSON.parse(localData).auth) && JSON.parse(JSON.parse(localData).auth).token != null) {
+  if (JSON.parse(localData) && JSON.parse(localData).auth && JSON.parse(JSON.parse(localData).auth) && JSON.parse(JSON.parse(localData).auth).inventoryToken != null) {
     return (
       <div>
         <Header history={history} />

@@ -102,14 +102,14 @@ export const GET_STUDENTBATCHWISEATTENDANCEREPORT = "GET_STUDENTBATCHWISEATTENDA
 export const GET_PROFESSOREMAILCHECK = "GET_PROFESSOREMAILCHECK";
 export const GET_STUDENTEMAILCHECK = "GET_STUDENTEMAILCHECK";
 export const CLASSMANAGERFLOW = 'CLASSMANAGERFLOW'
-
+let token = `JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozMCwidXNlcm5hbWUiOiJiaHVzaGFuM0BnbWFpbC5jb20iLCJleHAiOjQ1Njg4MDQ1NDYsImVtYWlsIjoiYmh1c2hhbjNAZ21haWwuY29tIn0.5nD6ysJLChbte4EM1OL0rwU9hM3ZZtT2KtUcAa23KXQ`
 export function getClasses(branch) {
 
   let URL = `${BASE_URL}institude/${branch.institude_id}/branch/${branch.branch_id}/classes`;
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + branch.token,
+      'Authorization': 'JWT ' +token,
     }
   };
   return dispatch => {
@@ -133,7 +133,7 @@ export function addClass(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/class/`;
@@ -168,7 +168,7 @@ export function updateClass(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/class/${data.payload.class_id}/`;
@@ -193,7 +193,7 @@ export function deleteClass(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.payload.branch_id}/class/${data.payload.class_id}/`;
@@ -217,7 +217,7 @@ export function deleteSubject(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/class/${data.class_id}/subject/${data.payload.subject_id}/`;
@@ -241,7 +241,7 @@ export function deleteBatch(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/batch/${data.batch_id}/batchDelete/`;
@@ -266,7 +266,7 @@ export function getSubjects(cls) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + cls.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${cls.institude_id}/branch/${cls.branch_id}/class/${cls.class_id}/subjects`;
@@ -289,7 +289,7 @@ export function addSubject(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   // http://127.0.0.1:7000/institude/2/branch/1/class/1/batch/subjects/
@@ -313,7 +313,7 @@ export function updateSubject(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/class/${data.class_id}/subject/${data.subject_id}/`;
@@ -345,7 +345,7 @@ export function getBatches(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/subject/${data.subject_id}/batchDetail/`;
@@ -371,7 +371,7 @@ export function addBatches(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   // http://35.154.43.111:7000/institude/2/branch/2/class/6/batch/subjects/
@@ -397,7 +397,7 @@ export function updateBatch(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/batch/${data.payload.batch_id}/subjects/`;
@@ -421,7 +421,7 @@ export function getBatchDetail(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institute_id}/branch/${data.branch_id}/class/${data.class_id}/batch/${data.batch_id}/subject/${data.subject_id}/batchDetails/`;
@@ -445,7 +445,7 @@ export function updateBatchDetails(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   // http://127.0.0.1:7000/institude/2/branch/2/class/1/batchIdDetails/1/
@@ -469,7 +469,7 @@ export function saveAssistantProfessor(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
 
@@ -504,7 +504,7 @@ export function getStudentList(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
   let URL = `${BASE_URL}institude/${data.instituteId}/branch/${data.branchId}/studentPagination/`;
@@ -523,7 +523,7 @@ export function serachStudentsDetails(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
 
@@ -548,7 +548,7 @@ export function getStudentDetail(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/student/${data.student_id}/studentDetail/`;
@@ -572,7 +572,7 @@ export function getProfessorDetail(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
 
@@ -596,7 +596,7 @@ export function getProfessorsList(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
 
@@ -617,7 +617,7 @@ export function searchProfessorsDetails(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
 
@@ -643,7 +643,7 @@ export function addStudentBatches(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
 
@@ -667,7 +667,7 @@ export function addProfessorBatches(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
 
@@ -691,7 +691,7 @@ export function updateStudentDetails(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
 
@@ -716,7 +716,7 @@ export function UpdateProfessorDetails(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
 
@@ -742,7 +742,7 @@ export function AddProfessor(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/professor/`
@@ -766,7 +766,7 @@ export function AddStudent(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/addStudent/`
@@ -792,7 +792,7 @@ export function deleteStudentBatch(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
 
@@ -816,7 +816,7 @@ export function updateProfessorDetails(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
 
@@ -841,7 +841,7 @@ export function deleteProfessorBatch(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   // DELETE_PROFESSOR_BATCH
@@ -868,7 +868,7 @@ export function getEnquiryList(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
 
@@ -889,7 +889,7 @@ export function addEnquiry(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
 
@@ -916,7 +916,7 @@ export function deleteEnquiry(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/enquiry/${data.enquiry_id}/`;
@@ -941,7 +941,7 @@ export function updateEnquiryStatus(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
 
@@ -966,7 +966,7 @@ export function updateEnquiry(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
 
@@ -992,7 +992,7 @@ export function addStudentCopy(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/classId/${data.class_id}/subjectId/${data.subject_id}/batchId/${data.batch_id}/studentCopy/`;
@@ -1017,7 +1017,7 @@ export function getClassesOnSelectedYear(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/selectedYear/${data.selectedYear}/classList/`;
@@ -1041,7 +1041,7 @@ export function getYearListForStudentCopy(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/yearList/  `;
@@ -1065,7 +1065,7 @@ export function uploadCsvFile(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/csvUpload/ `;
@@ -1091,7 +1091,7 @@ export function getAllStudent(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   // http://35.154.43.111:7000/institude/2/branch/2/studentsList/ === GET
@@ -1116,7 +1116,7 @@ export function getAllProfessor(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   // http://35.154.43.111:7000/institude/2/branch/2/studentsList/ === GET
@@ -1142,7 +1142,7 @@ export function updateUserRole(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   // http://127.0.0.1:7000/institudes/2/branch/2/adminAccessDetails/ 
@@ -1165,7 +1165,7 @@ export function getInstitudes(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
 
@@ -1192,7 +1192,7 @@ export function addFinance(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/createFinanceTemplate/ `;
@@ -1217,7 +1217,7 @@ export function getFinancelist(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/listFinanceTemplate/`;
@@ -1242,7 +1242,7 @@ export function getEditFinanceData(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/financeTemplate/${data.finance_template_id}/ `;
@@ -1267,7 +1267,7 @@ export function updateFinance(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
 
@@ -1292,7 +1292,7 @@ export function deleteFinance(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/financeTemplate/${data.finance_template_id}/ `;
@@ -1316,7 +1316,7 @@ export function createStudentPaymentSchedule(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/createStudentPaymentSchedule/ `;
@@ -1341,7 +1341,7 @@ export function createStudentPaymentDetail(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/studentPaymentScheduleDetail/ `;
@@ -1366,7 +1366,7 @@ export function updateStudentPaymentDetail(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/studentPaymentScheduleDetail/ `;
@@ -1391,7 +1391,7 @@ export function deleteStudentPaymentDetail(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let payload = {
@@ -1419,7 +1419,7 @@ export function createStudentPayment(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/addPayment/`;
@@ -1444,7 +1444,7 @@ export function createStudentPaymentList(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/studentPaymentList/ `;
@@ -1467,7 +1467,7 @@ export function FinanceListPagination(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
 
@@ -1490,7 +1490,7 @@ export function addStudentProfessorRegistration(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/addstudentProfessor/`;
@@ -1514,7 +1514,7 @@ export function getAdminProfileData(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/adminDetail/ `;
@@ -1538,7 +1538,7 @@ export function updateAdminProfileData(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/adminDetail/ `;
@@ -1563,7 +1563,7 @@ export function invitationSend(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/sendInvitation/`;
@@ -1588,7 +1588,7 @@ export function checkingPassword(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL2}institude/user/checkingPassword/ `;
@@ -1613,7 +1613,7 @@ export function updatePassword(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
 
@@ -1640,7 +1640,7 @@ export function deleteStudentProfessor(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -1667,7 +1667,7 @@ export function autoAssignHomeworkQuizNotes(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -1693,7 +1693,7 @@ export function getReportData(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/report/ `;
@@ -1716,7 +1716,7 @@ export function getRestoreId(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institude_id}/branch/${data.branch_id}/freshChat/`;
@@ -1740,7 +1740,7 @@ export function storeRestoreId(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -1766,7 +1766,7 @@ export function getProfilePic(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institudeId}/branch/${data.branchId}/profileDownload/ `;
@@ -1790,7 +1790,7 @@ export function checkProfileSelectedOrNot(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -1817,7 +1817,7 @@ export function profilePicUpload(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -1844,7 +1844,7 @@ export function getSubjectBatchList(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -1871,7 +1871,7 @@ export function batchAutoCreation(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -1895,7 +1895,7 @@ export function getStudentStatus(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let URL = `${BASE_URL}institude/${data.institudeId}/branch/${data.branchId}/studentStatus/ `;
@@ -1920,7 +1920,7 @@ export function getAdminAttendanceDetails(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': data.token,
+      'Authorization': token,
     }
   };
 
@@ -1945,7 +1945,7 @@ export function getAttendanceListModel(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token,
+      'Authorization': 'JWT ' + token,
     }
   };
 
@@ -1970,7 +1970,7 @@ export function getIsProfessorAdmin(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
   let URL = `${BASE_URL}institude/${data.institudeId}/branch/${data.branchId}/getRole/ `;
@@ -1994,7 +1994,7 @@ export function submitAttendance(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -2019,7 +2019,7 @@ export function getProfessorAttendanceBatchesData(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "JWT " + data.token
+      'Authorization': "JWT " + token
     }
   };
 
@@ -2046,7 +2046,7 @@ export function getProfessorAttendanceBatches(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -2071,7 +2071,7 @@ export function getAttendanceListOnDate(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': data.token
+      'Authorization': token
     }
   };
 
@@ -2096,7 +2096,7 @@ export function updateAttendanceList(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': data.token
+      'Authorization': token
     }
   };
 
@@ -2121,7 +2121,7 @@ export function getAttendanceStudentReport(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -2146,7 +2146,7 @@ export function searchForAttendanceStudent(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -2173,7 +2173,7 @@ export function downloadStudentReport(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': data.token
+      'Authorization': token
     }
   };
 
@@ -2198,7 +2198,7 @@ export function getAttendanceAdminDashboardStudentList(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -2223,7 +2223,7 @@ export function getAdminAttendanceBatches(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -2248,7 +2248,7 @@ export function getAdminAttendanceProfessorList(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -2273,7 +2273,7 @@ export function getAdminAttendanceGraphdata(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -2299,7 +2299,7 @@ export function getStudentDetails(branch) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + branch.token,
+      'Authorization': 'JWT ' + token,
     }
   };
   let payload = branch.payload;
@@ -2324,7 +2324,7 @@ export function getEmailOfFacultyDirectory(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -2349,7 +2349,7 @@ export function getStudentBatchWiseAttendanceReport(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
 
@@ -2373,7 +2373,7 @@ export function getEmailOfStudentDirectory(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
   let URL = `${BASE_URL}institude/${data.institudeId}/branch/${data.branchId}/studentEmailCheck/ `;
@@ -2396,7 +2396,7 @@ export function getClassManagerFlow(data) {
   const API_CONFIG = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'JWT ' + data.token
+      'Authorization': 'JWT ' + token
     }
   };
   let URL = `${BASE_URL}institude/${data.institudeId}/branch/${data.branchId}/classManagerFlow/`;

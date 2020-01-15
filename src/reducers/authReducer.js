@@ -1,5 +1,5 @@
 import {
-    LOGIN_STUDENT, STORE_STUDENTTOKEN, LOGOUT,FORGOT_PASSWORD,VERIFY_PASSWORDOTP,CHANGE_PASSWORDFORGOTPAGE,AUTH_CHECK,UPDATE_FORGOTPASSWORD
+    LOGIN_STUDENT, STORE_STUDENTTOKEN, LOGOUT,FORGOT_PASSWORD,VERIFY_PASSWORDOTP,CHANGE_PASSWORDFORGOTPAGE,AUTH_CHECK,UPDATE_FORGOTPASSWORD,LOGIN_USER
 } from '../actions/authAction';
 
 const initialState = {
@@ -13,7 +13,12 @@ const initialState = {
     passwordVerify:null,
     forgotPasswordUpdate:null,
     authCheck:null,
-    changePassword:null,    
+    changePassword:null,
+    inventoryUserType:null,
+    inventoryToken:null,
+    company_id:null,
+    inventoryBranch_id:null,
+    inventoryLogin:null,    
 }
 
 
@@ -70,6 +75,16 @@ export default function auth(state = initialState, action) {
         return{
             ...state,
             changePassword:action.payload
+        }
+        case LOGIN_USER :{
+            return{
+                ...state,
+                inventoryUserType:action.usertype,
+                inventoryToken:action.token,
+                company_id:action.company_id,
+                inventoryBranch_id:action.branch_id,
+                inventoryLogin:action.payload,
+            }   
         }
         default:
             return state

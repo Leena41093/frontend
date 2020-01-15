@@ -17,6 +17,7 @@ export const VERIFY_PASSWORDOTP = 'VERIFY_PASSWORDOTP';
 export const UPDATE_FORGOTPASSWORD = 'UPDATE_FORGOTPASSWORD';
 export const AUTH_CHECK = 'AUTH_CHECK';
 export const CHANGE_PASSWORDFORGOTPAGE = 'CHANGE_PASSWORDFORGOTPAGE';
+export const LOGIN_USER = 'LOGIN_USER';
 
 export function loginStudent(data) {
   
@@ -172,6 +173,33 @@ export function changePasswordForgotPage(data) {
         dispatch({
           type: CHANGE_PASSWORDFORGOTPAGE,
           payload: response
+        })
+      })
+      .catch(function (error) {
+        
+      });
+  }
+}
+
+export function loginUser(data) {
+    
+  let URL = `http://35.154.43.111:9000/login/`;
+  let payload = data.payload
+  return dispatch => {
+    return axios.post(URL, payload,{
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+      .then(function (response) {
+        
+        dispatch({
+          type: LOGIN_USER,
+          payload: response.data.response,
+          usertype:response.data.response.user_type,
+          token:response.data.response.token,
+          company_id:response.data.response.company_id,
+          branch_id:response.data.response.branch_id
         })
       })
       .catch(function (error) {
