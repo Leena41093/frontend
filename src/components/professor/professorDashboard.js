@@ -371,8 +371,8 @@ const mapStateToProps = ({
   userType: auth.userType,
   token: auth.token, 
   admindashboarddetailsData: inventoryAdmin.adminDashboardDetail,
-  companyId: app.companyId,
-  BranchId: app.AdminbranchId
+  companyId: auth.companyId,
+  BranchId: auth.AdminbranchId
 });
 
 const mapDispatchToProps = dispatch =>

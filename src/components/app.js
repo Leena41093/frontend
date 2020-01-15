@@ -5,7 +5,6 @@ import Sidebar from '../components/common/sidebar';
 import StudentDirectory from '../components/administration/studentDirectory';
 import FacultyDirectory from '../components/administration/facultyMgrDirectory';
 import FacultyDetail from '../components/administration/facultyDetail';
-import EnquiryDetails from '../components/administration/enquiryDetails';
 import addNewFaculty from '../components/administration/addNewFaculty';
 import addNewStudent from '../components/administration//addNewStudent';
 import Dashboard from '../components/main/dashboard';
@@ -29,7 +28,7 @@ export const App = ({ match, history }) => {
           <Route path={`${match.url}/faculty-detail`} component={FacultyDetail} />
           <Route path={`${match.url}/new-faculty`} component={addNewFaculty} />
           <Route path={`${match.url}/student-directory`} component={StudentDirectory} />
-          <Route path={`${match.url}/enquiry-detail`} component={EnquiryDetails} />
+          
           <Route path={`${match.url}/new-student`} component={addNewStudent} />
           <Route path={`${match.url}/dashboard`} component={Dashboard} />
           <Route path={`${match.url}/get-professorProfile`} component={GetProfile} />

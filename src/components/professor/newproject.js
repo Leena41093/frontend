@@ -275,10 +275,10 @@ class NewProjectDetail extends Component {
   }
 }
 
-const mapStateToProps = ({ app, auth, inventoryAdmin }) => ({
+const mapStateToProps = ({ auth, inventoryAdmin }) => ({
   addprojectdata: inventoryAdmin.addprojectdata,
-  company_id: app.companyId,
-  branch_id: app.AdminbranchId
+  company_id: auth.companyId,
+  branch_id: auth.AdminbranchId
 });
 
 const mapDispatchToProps = dispatch =>

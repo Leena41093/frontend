@@ -318,10 +318,10 @@ class ProjectDetails extends Component {
   }
 }
 
-const mapStateToProps = ({ app,  inventoryAdmin }) => ({
+const mapStateToProps = ({ auth,  inventoryAdmin }) => ({
   employeeDetail: inventoryAdmin.employeeDetail,
-  company_id:app.companyId,
-  branch_id:app.AdminbranchId,
+  company_id:auth.companyId,
+  branch_id:auth.AdminbranchId,
   projectEmployeeDetailsData: inventoryAdmin.projectEmployeeData,
   allEmplyees:inventoryAdmin.getAllEmployees,
   projectEmployeeDetailsDatas:inventoryAdmin.projectEmployeeDetailss,

@@ -16,9 +16,10 @@ const initialState = {
     changePassword:null,
     inventoryUserType:null,
     inventoryToken:null,
-    company_id:null,
     inventoryBranch_id:null,
-    inventoryLogin:null,    
+    inventoryLogin:null,  
+    companyId:null,
+    AdminbranchId:null,
 }
 
 
@@ -81,8 +82,8 @@ export default function auth(state = initialState, action) {
                 ...state,
                 inventoryUserType:action.usertype,
                 inventoryToken:action.token,
-                company_id:action.company_id,
-                inventoryBranch_id:action.branch_id,
+                companyId:action.company_id,
+                AdminbranchId:action.branch_id,
                 inventoryLogin:action.payload,
             }   
         }

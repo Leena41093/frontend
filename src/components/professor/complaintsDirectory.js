@@ -205,8 +205,8 @@ class ComplaintsDirectory extends Component {
 }
 
 const mapStateToProps = ({ app, auth,inventoryAdmin }) => ({
-  company_id: app.companyId,
-  branch_id: app.AdminbranchId,
+  company_id: auth.companyId,
+  branch_id: auth.AdminbranchId,
   updateComplaintsdatas : inventoryAdmin.updateComplaintData
 })
 

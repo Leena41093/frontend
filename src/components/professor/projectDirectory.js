@@ -200,10 +200,10 @@ class ProjectDirectory extends Component {
   }
 }
 
-const mapStateToProps = ({ app, auth}) => ({
+const mapStateToProps = ({  auth}) => ({
   token: auth.token,
-  companyId:app.companyId,
-  BranchId:app.AdminbranchId,
+  companyId:auth.companyId,
+  BranchId:auth.AdminbranchId,
 })
 
 const mapDispatchToProps = dispatch =>

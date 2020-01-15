@@ -235,10 +235,10 @@ class FacultyDetail extends Component {
   }
 }
 
-const mapStateToProps = ({ app, auth, inventoryAdmin }) => ({
+const mapStateToProps = ({  auth, inventoryAdmin }) => ({
   createEmp: inventoryAdmin.createEmp,
-  company_id:app.companyId,
-  branch_id:app.AdminbranchId
+  company_id:auth.companyId,
+  branch_id:auth.AdminbranchId
 })
 
 const mapDispatchToProps = dispatch =>

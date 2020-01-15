@@ -316,7 +316,7 @@ class FacultyDetail extends Component {
               </div>
               {this.renderBatchDetail()}
               <div className="c-card__btnCont">
-                {pro.designation == "INSTITUTE" ? "" : <button className="c-btn-large primary" data-toggle="modal" data-target="#addBatch">+ Add Batches</button>}
+                {pro.designation == "INSTITUTE" ? "" : <button className="c-btn-large primary" data-toggle="modal" data-target="#addBatch">+ Add Project & Accessories</button>}
               </div>
               <AddStudentBatchModel emp_id={pro && pro.emp_id ? pro.emp_id : 0} onAddStudentBatch={(data) => { this.onProfessorBatchAdd(data) }} {...this.props} />
             </div> : ""}
@@ -327,12 +327,12 @@ class FacultyDetail extends Component {
   }
 }
 
-const mapStateToProps = ({ app, auth, inventoryAdmin }) => ({
+const mapStateToProps = ({  auth, inventoryAdmin }) => ({
   employeeDetail: inventoryAdmin.employeeDetail,
   accessories: inventoryAdmin.accessories,
   projectes: inventoryAdmin.projectes,
-  company_id: app.companyId,
-  branch_id: app.AdminbranchId,
+  company_id: auth.companyId,
+  branch_id: auth.AdminbranchId,
   assignProjectAccessories: inventoryAdmin.assignProjectAccessories,
   deleteProject: inventoryAdmin.deleteProject,
   deleteAccessories: inventoryAdmin.deleteAccessories,

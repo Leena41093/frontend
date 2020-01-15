@@ -19,7 +19,7 @@ class FacultyDirectory extends Component {
 
 
   componentDidMount() {
-    
+
     this.initDataTable();
   }
 
@@ -43,7 +43,7 @@ class FacultyDirectory extends Component {
 
             let rowhtml;
             let rowData = row[6];
-              return rowhtml = `<button class="link--btn" id="view">View Profile</button>`
+            return rowhtml = `<button class="link--btn" id="view">View Profile</button>`
 
           }
         }, { orderable: false, targets: [2, 3, 4, 5] },
@@ -85,7 +85,7 @@ class FacultyDirectory extends Component {
 
   getProfessors(data, callback, setting) {
     let order_column
-    
+
     let order_type;
     if (data.order[0].dir == "asc") {
       order_type = 0
@@ -93,13 +93,13 @@ class FacultyDirectory extends Component {
       order_type = 1;
     }
     let empdata = {
-      companyId:this.props.companyId,
-      branch_id:this.props.BranchId,
+      companyId: this.props.companyId,
+      branch_id: this.props.BranchId,
       payload: {
         "searchText": this.state.searchText,
         "record_per_page": data.length,
-        "page_number":  data.start / data.length + 1,
-        "order_column":  "created_at",
+        "page_number": data.start / data.length + 1,
+        "order_column": "created_at",
         "order_type": order_type
       }
     }
@@ -208,15 +208,14 @@ class FacultyDirectory extends Component {
   }
 }
 
-const mapStateToProps = ({ app, auth}) => ({
-  companyId:app.companyId,
-  BranchId:app.AdminbranchId,
+const mapStateToProps = ({ auth }) => ({
+  companyId: auth.companyId,
+  BranchId: auth.AdminbranchId,
 })
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-
     }, dispatch
   )
 
