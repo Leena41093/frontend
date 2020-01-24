@@ -10,6 +10,7 @@ import { validateFormField } from '../../helpers/validate';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ToastContainer } from 'react-toastify';
 import { successToste, errorToste, infoToste } from '../../constant/util';
+import 'react-toastify/dist/ReactToastify.css';
 import { Scrollbars } from 'react-custom-scrollbars';
 // import { DeleteModal } from '../common/deleteModal';
 
