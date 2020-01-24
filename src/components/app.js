@@ -24,10 +24,10 @@ export const App = ({ match, history }) => {
         <div className="c-body">
           <Sidebar history={history} />
           <Route exact path={match.url} component={Dashboard} />
-          <Route path={`${match.url}/faculty-directory`} component={FacultyDirectory} />
+          <Route path={`${match.url}/employee-directory`} component={FacultyDirectory} />
           <Route path={`${match.url}/faculty-detail`} component={FacultyDetail} />
           <Route path={`${match.url}/new-faculty`} component={addNewFaculty} />
-          <Route path={`${match.url}/student-directory`} component={StudentDirectory} />
+          <Route path={`${match.url}/accessory-directory`} component={StudentDirectory} />
           
           <Route path={`${match.url}/new-student`} component={addNewStudent} />
           <Route path={`${match.url}/dashboard`} component={Dashboard} />

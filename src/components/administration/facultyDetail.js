@@ -72,7 +72,7 @@ class FacultyDetail extends Component {
 
   
   backButton(event) {
-    this.props.history.push('/app/faculty-directory')
+    this.props.history.push('/app/employee-directory')
   }
 
   onProfessorBatchAdd(payload) {
@@ -154,7 +154,7 @@ class FacultyDetail extends Component {
     this.props.deleteEmployee(data).then(()=>{
       let res = this.props.deleteEmp;
       if(res && res.data.status == 200 ){
-        this.props.history.push('/app/faculty-directory');
+        this.props.history.push('/app/employee-directory');
         successToste("Employee Deleted Successfully")
       }else{
         errorToste("Something Went Wrong");

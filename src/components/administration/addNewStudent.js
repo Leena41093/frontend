@@ -75,14 +75,14 @@ class StudentDetail extends Component {
         this.props.addAccessories(data).then(() => {
             let res = this.props.addAccessorie;
             if(res && res.data.status == 200){
-                this.props.history.push('/app/student-directory')
+                this.props.history.push('/app/accessory-directory')
             }
             
         })
     }
 
     backButton() {
-        this.props.history.push('/app/student-directory')
+        this.props.history.push('/app/accessory-directory')
     }
 
     renderPersonalDetails() {

@@ -15,7 +15,7 @@ class Sidebar extends Component {
 
     switch (route) {
       case 'facultyDirectory': {
-        this.props.history.push('/app/faculty-directory');
+        this.props.history.push('/app/employee-directory');
         break;
       }
       case 'complaints': {
@@ -23,7 +23,7 @@ class Sidebar extends Component {
         break;
       }
       case 'studentDirectory': {
-        this.props.history.push('/app/student-directory');
+        this.props.history.push('/app/accessory-directory');
         break;
       }
       case 'dashboard': {

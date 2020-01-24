@@ -71,10 +71,10 @@ class ProfessorDashboard extends Component {
     if (employeeData != {}) {
       return (
         <div className="row">
-          <div className="col-sm-4">
+          <div onClick={()=>{this.props.history.push("/app/employee-directory")}} className="col-sm-4">
             <div className="card">
               <div className="row">
-                <div className="cardgrid--item">
+                <div  className="cardgrid--item">
                   <div className="col-sm-4" style={{ paddingLeft: "0px" }}>
                     <img
                       src="./../images/employee.png"
@@ -82,7 +82,7 @@ class ProfessorDashboard extends Component {
                       height="60px"
                     />
                   </div>
-                  <div className="col-sm-8">
+                  <div  className="col-sm-8">
                     <div className="cardgrid--item-header pull-right">
                       <h2 className="c-heading-sm card--title">Employees</h2>
                       <h1
@@ -100,10 +100,10 @@ class ProfessorDashboard extends Component {
               </div>
             </div>
           </div>
-          <div className="col-sm-4">
+          <div onClick={()=>{this.props.history.push("/app/projects-directory")}} className="col-sm-4">
             <div className="card">
               <div className="row">
-                <div className="cardgrid--item">
+                <div  className="cardgrid--item">
                   <div className="col-sm-4" style={{ paddingLeft: "0px" }}>
                     <img
                       src="./../images/analytics.png"
@@ -111,7 +111,7 @@ class ProfessorDashboard extends Component {
                       height="60px"
                     />
                   </div>
-                  <div className="col-sm-8">
+                  <div  className="col-sm-8">
                     <div className="cardgrid--item-header pull-right">
                       <h2 className="c-heading-sm card--title">Projects</h2>
                       <h1
@@ -129,11 +129,10 @@ class ProfessorDashboard extends Component {
               </div>
             </div>
           </div>
-
-          <div className="col-sm-4">
+          <div onClick={()=>{this.props.history.push("/app/complaints")}} className="col-sm-4">
             <div className="card">
               <div className="row">
-                <div className="cardgrid--item">
+                <div  className="cardgrid--item">
                   <div className="col-sm-4" style={{ paddingLeft: "0px" }}>
                     <img
                       src="./../images/complaints.png"
@@ -141,7 +140,7 @@ class ProfessorDashboard extends Component {
                       height="60px"
                     />
                   </div>
-                  <div className="col-sm-8">
+                  <div  className="col-sm-8">
                     <div className="cardgrid--item-header pull-right">
                       <h2 className="c-heading-sm card--title">Complaints</h2>
                       <h1

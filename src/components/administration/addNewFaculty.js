@@ -65,12 +65,12 @@ class FacultyDetail extends Component {
     }    
     this.props.createEmployeeDetail(data).then(()=>{
       let res = this.props.createEmp;
-      this.props.history.push('/app/faculty-directory')
+      this.props.history.push('/app/employee-directory')
     })
   }
 
   backButton() {
-    this.props.history.push('/app/faculty-directory')
+    this.props.history.push('/app/employee-directory')
   }
 
   handleChange(date) {
