@@ -35,30 +35,30 @@ class FinanceDashboard extends Component {
     };
   }
   componentDidMount() {
-    this.getIncomeExpenseData();
+    // this.getIncomeExpenseData();
     this.initDataTable();
     this.getAdminData();
   }
 
-  getIncomeExpenseData() {
-    let self = this;
-    let data = {
-      institude_id: this.props.instituteId,
-      branch_id: this.props.branchId,
-      token: this.props.token
-    };
-    this.props.getIncomeExpenseDetails(data).then(() => {
-      let resIncomeandExpense = this.props.incomeExpenseDetailsDatas;
-      if (resIncomeandExpense && resIncomeandExpense.data.status == 200) {
-        self.setState(
-          { barGraphData: resIncomeandExpense.data.response },
-          () => {
-            self.renderIncomeExpenceGraph();
-          }
-        );
-      }
-    });
-  }
+  // getIncomeExpenseData() {
+  //   let self = this;
+  //   let data = {
+  //     institude_id: this.props.company_id,
+  //     branch_id: this.props.branch_id,
+  //     token: this.props.token
+  //   };
+  //   this.props.getIncomeExpenseDetails(data).then(() => {
+  //     let resIncomeandExpense = this.props.incomeExpenseDetailsDatas;
+  //     if (resIncomeandExpense && resIncomeandExpense.data.status == 200) {
+  //       self.setState(
+  //         { barGraphData: resIncomeandExpense.data.response },
+  //         () => {
+  //           self.renderIncomeExpenceGraph();
+  //         }
+  //       );
+  //     }
+  //   });
+  // }
 
   initDataTable() {
     table = $("#Finance").dataTable({
@@ -124,12 +124,18 @@ class FinanceDashboard extends Component {
   }
 
   getAdminData() {
+    let data = {
+      companyId: this.props.company_id,
+      branch_id: this.props.branch_id
+    };
+    this.props.getAdminDashboardData(data).then(() => {
       let res = this.props.admindashboarddetailsData;
       if (res && res.data.status == 200) {
         this.setState({ barGraphData: res.data.response },()=>{
           this.renderIncomeExpenceGraph();
-        })
+        })    
       }
+    });
   }
 
   deleteIncomeExpenseData(data) {
@@ -144,6 +150,7 @@ class FinanceDashboard extends Component {
       let res = this.props.deleteIncomeDetails;
       if (res && res.data.status == 200) {
         successToste("Record Deleted Successfully");
+        this.getAdminData();
         table.fnDraw();
       } else if (res && res.data.status == 500) {
         errorToste(res.data.message);
@@ -162,6 +169,7 @@ class FinanceDashboard extends Component {
      let res = this.props.deleteExpenseDetails;
      if (res && res.data.status == 200) {
        successToste("Record Deleted Successfully");
+       this.getAdminData();
        table.fnDraw();
      } else if (res && res.data.status == 500) {
        errorToste(res.data.message);
@@ -214,6 +222,7 @@ class FinanceDashboard extends Component {
       branch_id: this.props.branch_id
     };
 
+    
     getFinanceList(apiData).then(res => {
       this.handleResponse(res, callback);
     });
@@ -222,6 +231,7 @@ class FinanceDashboard extends Component {
   handleResponse(res, callback) {
     if (res && res.data.status == 200 && res.data.response) {
       var columnData = [];
+     
       console.log("institutelist:", res.data.response);
       let financeList = res.data.response.projectDetails;
       this.setState({count:res.data.response.totalCount},()=>{
@@ -306,6 +316,7 @@ class FinanceDashboard extends Component {
           }
         );
       }
+      this.getAdminData();
       table.fnDraw();
     });
   }
@@ -334,6 +345,7 @@ class FinanceDashboard extends Component {
             income_details_id: res.data.response.income_details_id
           },
           () => {
+            this.getAdminData();
             table.fnDraw();
             // let data = {
             //   payload: {
