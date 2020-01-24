@@ -30,7 +30,8 @@ class FinanceDashboard extends Component {
     super(props);
     this.state = {
       barGraphData: {},
-      income_details_id: ""
+      income_details_id: "",
+      count:0
     };
   }
   componentDidMount() {
@@ -223,27 +224,30 @@ class FinanceDashboard extends Component {
       var columnData = [];
       console.log("institutelist:", res.data.response);
       let financeList = res.data.response.projectDetails;
-      if (financeList && financeList.length > 0) {
-        financeList.map((data, index) => {
-          var arr = [];
-          // arr[0] = data.sr_no;
-          console.log("-=-===>",data.payment_date)
-          arr[0] = moment(data.payment_date).format("DD-MM-YYYY");
-          arr[1] = data.description;
-          arr[2] =data.payment_to_from
-             
-          arr[3] = data.pay_type;
-          arr[4] = data.amount;
-          arr[5] = data;
-
-          columnData.push(arr);
+      this.setState({count:res.data.response.totalCount},()=>{
+        if (financeList && financeList.length > 0) {
+        
+          financeList.map((data, index) => {
+            var arr = [];
+            // arr[0] = data.sr_no;
+            console.log("-=-===>",data.payment_date)
+            arr[0] = moment(data.payment_date).format("DD-MM-YYYY");
+            arr[1] = data.description;
+            arr[2] =data.payment_to_from
+               
+            arr[3] = data.pay_type;
+            arr[4] = data.amount;
+            arr[5] = data;
+  
+            columnData.push(arr);
+          });
+        }
+        callback({
+          recordsTotal: this.state.count,
+          recordsFiltered: this.state.count,
+          data: columnData
         });
-      }
-      callback({
-        recordsTotal: this.state.count,
-        recordsFiltered: this.state.count,
-        data: columnData
-      });
+      })
     } else if (res && res.data.status == 500) {
       this.setState({ count: 0 });
     }
@@ -272,7 +276,7 @@ class FinanceDashboard extends Component {
         recurring_date: expenceModelData.recurring_date,
         total_recurring_no: expenceModelData.total_recurring_no,
         recurring: expenceModelData.recurring,
-        pay_types: expenceModelData.pay_type
+        pay_types: "EXPENSE"
       },
       company_id: this.props.company_id,
       branch_id: this.props.branch_id
@@ -302,6 +306,7 @@ class FinanceDashboard extends Component {
           }
         );
       }
+      table.fnDraw();
     });
   }
 
@@ -313,7 +318,7 @@ class FinanceDashboard extends Component {
         amount: incomeModelData.amount,
         attachment_url: incomeModelData.attachment_url,
         pay_types: incomeModelData.pay_types,
-        payment_date: incomeModelData.payment_date,
+        payment_date: moment(incomeModelData.payment_date),
         payment_method: incomeModelData.payment_method
       },
       company_id: this.props.company_id,
@@ -329,6 +334,7 @@ class FinanceDashboard extends Component {
             income_details_id: res.data.response.income_details_id
           },
           () => {
+            table.fnDraw();
             // let data = {
             //   payload: {
             //     uploadType: "income",
