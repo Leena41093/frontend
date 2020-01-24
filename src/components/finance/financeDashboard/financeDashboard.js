@@ -514,25 +514,6 @@ class FinanceDashboard extends Component {
                 />
               </div>
             </div>
-            {/* <div className="flexGrid_sect grow-5">
-              <div className="divider-container valign-top nomargin">
-                <div className="divider-block text--left">
-                  <div className="c-infoBlock">
-                    <span className="c-heading">TOTAL FEES</span>
-                    <span className="c-number col-red">Rs. 120,000</span>
-                  </div>
-                  <div className="c-infoBlock">
-                    <span className="c-heading">Received</span>
-                    <span className="c-number col-green">Rs. 86,400</span>
-                  </div>
-                  <div className="c-infoBlock">
-                    <span className="c-heading">PENDING</span>
-                    <span className="c-number col-yellow">Rs. 33,600</span>
-                  </div>
-                </div>
-                <div className="divider-block" id="pieGraph" />
-              </div>
-            </div> */}
           </div>
         </div>
         <div className="clearfix c-searchStrip">
@@ -581,56 +562,7 @@ class FinanceDashboard extends Component {
         <div className="clearfix financeBlockHead type2">
           <div className="divider-container nomargin">
             <div className="divider-block text--left">
-              {/* <div className="form-group cust-fld childSect left margin10-top">
-                  <label
-                    htmlFor="check-all"
-                    className="custome-field field-checkbox heightAuto"
-                  >
-                    <input
-                      type="checkbox"
-                      name="check-one"
-                      id="check-all"
-                      value="checkone"
-                    />
-                    <i /> <span>Select All</span>
-                  </label>
-                </div> */}
-
-              {/* <div className="form-group cust-fld md childSect left">
-                  <div className="dropdown">
-                    <button
-                      id="dLabel"
-                      type="button"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      Action
-                    </button>
-                    <ul className="dropdown-menu" aria-labelledby="dLabel">
-                      <li>
-                        <a href="javascript:void(0);" className="dd-option">
-                          Option 1
-                        </a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0);" className="dd-option">
-                          Option 1
-                        </a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0);" className="dd-option">
-                          Option 1
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div> */}
-
-              {/* <button className="c-btn prime childSect left">
-                  <i className="icon cg-download" />
-                  Export
-                </button> */}
+              
             </div>
             <div className="divider-block text--right">
               <div className="form-group cust-fld childSect right">
@@ -640,12 +572,6 @@ class FinanceDashboard extends Component {
                   placeholder="Search..."
                 />
               </div>
-              {/* <div className="clearfix childSect right margin10-top">
-                  <button className="link--btn">
-                    <i className="icon cg-filter" />
-                    Filter
-                  </button>
-                </div> */}
             </div>
           </div>
         </div>
@@ -654,7 +580,6 @@ class FinanceDashboard extends Component {
             <table id="Finance" className="table data--table">
               <thead>
                 <tr>
-                  {/* <th style={{ width: "15%" }}>sr. No</th> */}
                   <th style={{ width: "12%" }}>Date</th>
                   <th style={{ width: "15%" }}>Description</th>
                   <th style={{ width: "18%" }}>To/From</th>

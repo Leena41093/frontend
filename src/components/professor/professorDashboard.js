@@ -48,7 +48,7 @@ class ProfessorDashboard extends Component {
       console.log("complaintArray:", complaintArray);
       return employeeData.complaintsDetails[0].map((complaint, index) => {
         return (
-          <li>
+          <li key={"com"+index}>
             <img
               src="./../images/avatars/user_avatar.png"
               className="user-img"
@@ -167,7 +167,7 @@ class ProfessorDashboard extends Component {
   renderPieGraph() {
     let { employeeData } = this.state;
     // Make monochrome colors
-    var pieColors = (function() {
+    var pieColors = (function () {
       var colors = [],
         base = Highcharts.getOptions().colors[0],
         i;
@@ -367,9 +367,9 @@ const mapStateToProps = ({
   app,
   auth,
   inventoryAdmin
-}) => ({  
+}) => ({
   userType: auth.userType,
-  token: auth.token, 
+  token: auth.token,
   admindashboarddetailsData: inventoryAdmin.adminDashboardDetail,
   companyId: auth.companyId,
   BranchId: auth.AdminbranchId
