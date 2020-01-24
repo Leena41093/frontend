@@ -18,9 +18,10 @@ export class AddStudentBatchModel extends Component {
 			projects: [],
 			Accessories: [],
 			selectedProjectId: [],
+			selectedProject: {},
 			selectedAccessoriesId: [],
 			selectedAccessorie: {},
-			selectedProject: {},
+
 		}
 	}
 
@@ -45,15 +46,6 @@ export class AddStudentBatchModel extends Component {
 		})
 
 	}
-
-	// classDropDownChange(classe, event) {
-	// 	classe.token = this.props.token,
-	// 		classe.institude_id = this.props.instituteId;
-	// 	this.props.getSubjects(classe).then(() => {
-
-	// 		this.setState({ batch_student: [], classname: classe.class_name, subjects: this.props.subjects, selectedSubjectArray: [] });
-	// 	})
-	// }
 
 	onSelectedSubjectChange(sub, event) {
 		sub.token = this.props.token,
@@ -141,59 +133,22 @@ export class AddStudentBatchModel extends Component {
 				"emp_id": this.props.emp_id
 			}
 		}
-		
+
 		this.props.assignProjectAndAccessories(data).then(() => {
 			let res = this.props.assignProjectAccessories;
 			console.log("res", res);
-			if(res && res.data.status == 200){
+			if (res && res.data.status == 200) {
 				this.props.onAddStudentBatch(res);
-			}else{
+				this.setState({
+					selectedProjectId: [],
+					selectedProject: {},
+					selectedAccessoriesId: [],
+					selectedAccessorie: {},
+				})
+			} else {
 				errorToste('Project not Added SuccessFully')
 			}
 		})
-	}
-
-	selectAll(event) {
-		let { selectAll, subjects, selectedSubjects, selectedSubjectArray, batch, batch_student } = this.state;
-		selectedSubjects = {}, selectedSubjectArray = [], batch_student = [], batch = {};
-		selectAll = !selectAll;
-		this.setState({ selectAll, selectedSubjects, selectedSubjectArray, batch, batch_student }, () => {
-			if (selectAll) {
-				selectedSubjects = {}, selectedSubjectArray = [], batch_student = [], batch = {};
-				subjects.map((sub, index) => {
-					let newSelectedSubjects = this.state.selectedSubjects;
-					let newSelectedSubjectArray = this.state.selectedSubjectArray;
-					let newBatch = this.state.batch;
-					let newBatch_student = this.state.batch_student;
-					sub.token = this.props.token,
-						this.props.getBatches(sub).then(() => {
-							let res = this.props.batches;
-
-							let newRes = [];
-							this.props.batches.map((ele) => {
-								if (ele.isExpired == "ACTIVE" && ele.inComplete == false) {
-									newRes.push(ele)
-								}
-							});
-							let Res = newRes;
-
-							if (Res.length > 0) {
-								newSelectedSubjects[sub.subject_id] = true;
-								newSelectedSubjectArray.push(sub);
-								newBatch_student.push({ "batch_id": Number(Res[0].batch_id) })
-								newBatch[sub.subject_id] = Res;
-								this.setState({
-									selectedSubjects: newSelectedSubjects,
-									selectedSubjectArray: newSelectedSubjectArray,
-									batch: newBatch,
-									batch_student: newBatch_student
-								})
-							}
-						})
-				})
-			}
-		});
-
 	}
 
 	selectedProject(project) {
@@ -217,8 +172,8 @@ export class AddStudentBatchModel extends Component {
 		let { selectedAccessorie, selectedAccessoriesId } = this.state;
 		if (selectedAccessorie && selectedAccessorie[item.accessory_id]) {
 			selectedAccessorie[item.accessory_id] = false
-			selectedAccessoriesId.forEach((item, index) => {
-				if (item.accessory_id === item) {
+			selectedAccessoriesId.forEach((value, index) => {
+				if (item.accessory_id === value) {
 					selectedAccessoriesId.splice(index, 1);
 				}
 			})
@@ -260,16 +215,6 @@ export class AddStudentBatchModel extends Component {
 		}
 	}
 
-	// renderClassDropDown() {
-	// 	if (this.state.classes && this.state.classes.length > 0) {
-	// 		return this.state.classes.map((data, index) => {
-	// 			return (
-	// 				<li key={"class" + index}><a onClick={this.classDropDownChange.bind(this, data)} className="dd-option">{data.class_name}</a></li>
-	// 			)
-	// 		})
-	// 	}
-	// }
-
 	renderBatchOption(id) {
 
 		if (this.state.batch[id]) {
@@ -288,8 +233,6 @@ export class AddStudentBatchModel extends Component {
 	renderSelectedBatchSubject() {
 
 		return this.state.selectedSubjectArray.map((sub, index) => {
-
-
 			return (
 				<div key={"subject" + index} className="form-group cust-fld">
 					<label>{sub.subject_name}</label>
@@ -325,16 +268,7 @@ export class AddStudentBatchModel extends Component {
 
 											<div className="subjectHeader clearfix" style={{ marginTop: "20px" }}>
 												<div className="pull-left"><div className="cust-m-info nomargin">Projectes</div></div>
-												<div className="pull-right">
-													{/* <div className="form-group nomargin">
-														<label htmlFor="check-all" className="custome-field field-checkbox">
-															<input type="checkbox" onClick={this.selectAll.bind(this)} name="check-one" id="check-all" value="checkone" checked={this.state.selectAll} />
-															<i></i><span>Select All</span>
-														</label>
-													</div> */}
-												</div>
 											</div>
-
 											<div className="subjectBody" style={{ overflowY: "auto" }}>
 												<ul>
 													{this.renderProjectes()}
@@ -354,14 +288,6 @@ export class AddStudentBatchModel extends Component {
 
 											<div className="subjectHeader clearfix" style={{ marginTop: "20px" }}>
 												<div className="pull-left"><div className="cust-m-info nomargin">Accessories</div></div>
-												<div className="pull-right">
-													{/* <div className="form-group nomargin">
-														<label htmlFor="check-all" className="custome-field field-checkbox">
-															<input type="checkbox" onClick={this.selectAll.bind(this)} name="check-one" id="check-all" value="checkone" checked={this.state.selectAll} />
-															<i></i><span>Select All</span>
-														</label>
-													</div> */}
-												</div>
 											</div>
 
 											<div className="subjectBody" style={{ overflowY: "auto" }}>
