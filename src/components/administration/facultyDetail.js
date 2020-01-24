@@ -279,11 +279,11 @@ class FacultyDetail extends Component {
         <ToastContainer />
         <div className="clearfix">
           <div className="c-brdcrum">
-            <a className="linkbtn hover-pointer" onClick={this.backButton.bind(this)} >Back to Staff Directory</a>
+            <a className="linkbtn hover-pointer" onClick={this.backButton.bind(this)} >Back to Employee Directory</a>
           </div>
           <div className="divider-container">
             <div className="divider-block text--left">
-              <span className="c-heading-lg nomargin">Staff Details</span>
+              <span className="c-heading-lg nomargin">Employee Details</span>
             </div>
           </div>
         </div>
