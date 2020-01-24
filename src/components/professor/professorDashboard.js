@@ -71,7 +71,7 @@ class ProfessorDashboard extends Component {
     if (employeeData != {}) {
       return (
         <div className="row">
-          <div onClick={()=>{this.props.history.push("/app/employee-directory")}} className="col-sm-4">
+          <div onClick={()=>{this.props.history.push("/app/employee-directory")}} style={{"cursor":"pointer"}} className="col-sm-4">
             <div className="card">
               <div className="row">
                 <div  className="cardgrid--item">
@@ -100,7 +100,7 @@ class ProfessorDashboard extends Component {
               </div>
             </div>
           </div>
-          <div onClick={()=>{this.props.history.push("/app/projects-directory")}} className="col-sm-4">
+          <div onClick={()=>{this.props.history.push("/app/projects-directory")}} style={{"cursor":"pointer"}} className="col-sm-4">
             <div className="card">
               <div className="row">
                 <div  className="cardgrid--item">
@@ -129,7 +129,7 @@ class ProfessorDashboard extends Component {
               </div>
             </div>
           </div>
-          <div onClick={()=>{this.props.history.push("/app/complaints")}} className="col-sm-4">
+          <div onClick={()=>{this.props.history.push("/app/complaints")}} style={{"cursor":"pointer"}} className="col-sm-4">
             <div className="card">
               <div className="row">
                 <div  className="cardgrid--item">
