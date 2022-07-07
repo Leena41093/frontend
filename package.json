@@ -25,7 +25,7 @@
         "highcharts-data": "^0.1.7",
         "highcharts-drilldown": "^0.1.7",
         "js-file-download": "^0.4.3",
-        "moment": "^2.22.2",
+        "moment": "^2.29.4",
         "qs": "^6.5.2",
         "react": "16.4.2",
         "react-bootstrap-typeahead": "^3.2.2",
